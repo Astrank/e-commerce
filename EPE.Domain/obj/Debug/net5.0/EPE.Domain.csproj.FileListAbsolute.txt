@@ -1,0 +1,12 @@
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.csprojAssemblyReference.cache
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.AssemblyInfoInputs.cache
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.AssemblyInfo.cs
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.csproj.CoreCompileInputs.cache
+C:\Users\marti\projects\EPE\EPE.Domain\bin\Debug\net5.0\EPE.Domain.deps.json
+C:\Users\marti\projects\EPE\EPE.Domain\bin\Debug\net5.0\EPE.Domain.dll
+C:\Users\marti\projects\EPE\EPE.Domain\bin\Debug\net5.0\ref\EPE.Domain.dll
+C:\Users\marti\projects\EPE\EPE.Domain\bin\Debug\net5.0\EPE.Domain.pdb
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.dll
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\ref\EPE.Domain.dll
+C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\net5.0\EPE.Domain.pdb

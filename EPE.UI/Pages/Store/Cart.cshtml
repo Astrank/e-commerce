@@ -1,0 +1,18 @@
+﻿@page
+@model EPE.UI.Pages.Store.CartModel
+@{
+}
+
+<div class="container">
+    @foreach (var product in Model.Cart)
+    {
+        <hr/>
+        <p>@product.Name</p>
+        <p>@product.Value</p>
+        <p>@product.Qty</p>
+        <p>@product.StockId</p>
+        <hr/>
+    }
+</div>
+
+<a class="button" asp-page="/Checkout/Payment">Checkout</a>

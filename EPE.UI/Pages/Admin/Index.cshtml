@@ -1,0 +1,115 @@
+﻿@page
+@model EPE.UI.Pages.Admin.IndexModel
+@{
+}
+
+<div class="admin-container">
+    <aside class="admin-side-bar">
+        <div class="menu">
+            <p class="menu-label">STORE</p>
+            <ul class="menu-list">
+                <li><a asp-page="/Admin/Index">Products</a></li>
+                <li><a asp-page="/Admin/Orders">Orders</a></li>
+                <li><a asp-page="/Admin/Stock">Stock</a></li>
+            </ul>
+            <p class="menu-label">PROJECTS</p>
+            <ul class="menu-list">
+                <li><a asp-page="/Admin/Index">Projects</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div id="app" style="width: 100%">
+        <div v-if="!editing" class="product-container-main">    
+            <div class="admin-product-container">
+                <button class="admin-btn button is-success" @@click="newProduct">Add product</button>
+                <table class="table products-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Total stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(product, index) in products" @@click="editProduct(product.id, index)">
+                            <td>{{product.id}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.value}}</td>
+                            <td>{{getStock(product.stock)}}</td>
+                            <!--<td><a @@click="editProduct(product.id, index)">Edit</a></td>
+                            <td><a @@click="deleteProduct(product.id, index)">Remove</a></td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box admin-box" v-else>
+            <button class="button is-primary" @@click="cancel">
+                <i class="fas fa-long-arrow-alt-left"></i>
+            </button>
+            <div class="product-form">
+                <div class="admin-data-form">
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input class="input" v-model="productModel.name">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <div class="control">
+                            <input class="input" v-model="productModel.description">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Value</label>
+                        <div class="control">
+                            <input class="input" v-model="productModel.value">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Image</label>
+                        <div class="control">
+                            <input type="file" class="input" @@change="getFile($event)">
+                        </div>
+                    </div>
+                    <button @@click="createProduct" v-if="!productModel.id" class="button is-success">Create product</button>
+                    <button @@click="updateProduct" v-else="" class="button is-success">Update product</button>
+                </div>
+
+                <div class="admin-stock-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="productModel.stock.length > 0">
+                            <tr v-for="(stock, index) in productModel.stock">
+                                <td><input class="input" v-model="stock.description" /></td>
+                                <td><input class="input" v-model="stock.qty" /></td>
+                                <td><a class="has-text-danger" @@click="deleteStock(stock.id, index)">
+                                    <i class="fas fa-times is-danger"></i>
+                                </a></td>
+                            </tr>
+                        </tbody>
+                        <tbody  >
+                            <tr>
+                                <td><input class="input" v-model="newStock.description" /></td>
+                                <td><input class="input" v-model="newStock.qty" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/js/admin/products.js"></script>
+}

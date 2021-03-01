@@ -1,0 +1,95 @@
+﻿@page "{name}"
+@model EPE.UI.Pages.Store.ProductModel
+@{
+}
+
+<main>
+    <nav class="breadcrumb product-breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="#">Bulma</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+        </ul>
+    </nav>
+    <div class="product-main-container">
+        <div class="side-carousel">
+            <ul>
+                <li>
+                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
+                </li>
+                <li>
+                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
+                </li>
+                <li>
+                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
+                </li>
+                <li>
+                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <div class="product-image-container">
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <img src="~/media/buchanan-roll-arm-upholstered-sofa-o.jpg" alt="">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="~/media/andreas-strandman-82-Zph7BWyY-unsplash.jpg" alt="">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="~/media/buchanan-roll-arm-upholstered-sofa-o.jpg" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="product-options-container">
+            <h1 class="product-name">@Model.Product.Name</h1>
+            <p class="product-description">@Model.Product.Description</p>
+            <h1 class="product-price">@Model.Product.Value</h1>
+            
+            <form method="POST">
+                <div class="product-spec">
+                    <p>Tamaño: </p>
+                    <div class="select">
+                        <select asp-for="CartViewModel.StockId">
+                            @foreach (var s in Model.Product.Stock)
+                            {
+                                <option value="@s.Id">@s.Description</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="product-qty">
+                    <p>Cantidad: </p>
+                    <div class="select">
+                        <select asp-for="CartViewModel.Qty">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button class="product-btn button" type="submit">
+                        <i class="fas fa-cart-arrow-down"></i>
+                        Agregar al carrito</button>
+                    <button class="product-btn button is-success">
+                        <i class="fas fa-credit-card"></i>
+                        Comprar ahora</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/@@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <script>
+        new Splide( '.splide' ).mount();
+    </script>
+}

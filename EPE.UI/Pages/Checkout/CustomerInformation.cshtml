@@ -1,0 +1,57 @@
+﻿@page
+@model EPE.UI.Pages.Checkout.CustomerInformationModel
+@{
+}
+
+<div class="container">
+    <form method="POST">
+        <div>
+            <span asp-validation-for="CustomerInfo.FirstName"></span>
+            <label asp.for="CustomerInfo.FirstName"></label>
+            <input asp-for="CustomerInfo.FirstName">
+        </div>
+
+        <div>
+            <span asp-validation-for="CustomerInfo.LastName"></span>
+            <label asp.for="CustomerInfo.LastName"></label>
+            <input asp-for="CustomerInfo.LastName">
+        </div>
+
+        <div>
+            <span asp-validation-for="CustomerInfo.Email"></span>
+            <label asp.for="CustomerInfo.Email"></label>
+            <input asp-for="CustomerInfo.Email">
+        </div>
+
+        <div>
+            <span asp-validation-for="CustomerInfo.PhoneNumber"></span>
+            <label asp.for="CustomerInfo.PhoneNumber"></label>
+            <input asp-for="CustomerInfo.PhoneNumber">
+        </div>
+
+        <div>
+            <span asp-validation-for="CustomerInfo.Address1"></span>
+            <label asp.for="CustomerInfo.Address1"></label>
+            <input asp-for="CustomerInfo.Address1">
+        </div>
+
+        <div>
+            <label asp.for="CustomerInfo.Address2"></label>
+            <input asp-for="CustomerInfo.Address2">
+        </div>
+
+        <div>
+            <span asp-validation-for="CustomerInfo.City"></span>
+            <label asp.for="CustomerInfo.City"></label>
+            <input asp-for="CustomerInfo.City">
+        </div>
+
+        <div>
+            <span asp-validation-for="CustomerInfo.PostCode"></span>
+            <label asp.for="CustomerInfo.PostCode"></label>
+            <input asp-for="CustomerInfo.PostCode">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

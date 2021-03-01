@@ -1,0 +1,36 @@
+﻿@page
+@model Projects.CreateModel
+@{
+    ViewData["Title"] = "Crear proyecto | ";
+}
+
+<div class="section-header">
+    <h1 class="section-title">CREAR PROYECTO</h1>
+</div>
+<form method="POST" enctype="multipart/form-data" class="project-form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Project.Title"></label>
+        <input type="text" asp-for="Project.Title" class="form-control">
+        <span asp-validation-for="Project.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Project.Description"></label>
+        <input type="text" asp-for="Project.Description" class="form-control">
+        <span asp-validation-for="Project.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Project.Tags"></label>
+        <select asp-for="Project.Tags" class="form-select" aria-label="Select tag">
+            <option value="null" disabled selected hidden></option>
+            <option value="Interiores">Interiores</option>
+            <option value="Arquitectura">Arquitectura</option>
+        </select>
+        <span asp-validation-for="Project.Tags" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Project.Image"></label>
+        <input asp-for="Project.Image" class="form-control">
+    </div>
+    <input type="submit" value="Save project" class="btn-epe" style="margin: 15px auto; display: block;">
+</form>

@@ -1,0 +1,14 @@
+﻿@page "{reference}"
+@model EPE.UI.Pages.Store.OrderModel
+@{
+}
+
+<h1>@Model.Order.FirstName @Model.Order.LastName</h1>
+<h2>Order reference: @Model.Order.OrderRef</h2>
+
+@foreach (var product in Model.Order.Products)
+{
+    <div>
+        @product.Name - @product.StockDescription - @product.Value - @product.Qty
+    </div>
+}

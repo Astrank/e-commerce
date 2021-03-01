@@ -1,0 +1,77 @@
+@inject IAuthorizationService authService;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]Espacio por Espacio</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href ="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab|Roboto:300,400,500,700" rel = "stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="~/lib/bulma/css/bulma.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <header class="main-layout-header">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a asp-page="/index" id="navbar-logo" class="navbar-item">
+                        <img src="~/media/logo.png" alt="" width="124">
+                    </a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div class="navbar-menu" id="navbarBasicExample">
+                    <div class="navbar-start">
+                        <a asp-page="/projects/projects" class="navbar-item">Proyectos</a>
+                        <a asp-page="/home/about" class="navbar-item">Estudio</a>
+                        <a class="navbar-item">Contacto</a>
+                        <a asp-page="/store/index" class="navbar-item">Tienda</a>
+                    </div>
+                    <div class="navbar-end">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                    @User.Identity.Name
+                                </a>
+                                <div class="navbar-dropdown">
+                                    @if ((await authService.AuthorizeAsync(User, "Manager")).Succeeded)
+                                    {
+                                        <a class="navbar-item" asp-page="/Admin/Index">Admin panel</a>
+                                    }
+                                    <a class="navbar-item">Account settings</a>
+                                    <a class="navbar-item" asp-controller="Account" asp-action="Logout">Log out</a>
+                                </div>
+                            </div>
+                        }
+                        else{
+                            <a asp-page="/account/signup" class="navbar-item">Crear cuenta</a>
+                            <a asp-page="/account/login" class="navbar-item">Entrar</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="banner-wrapper">
+            <div class="banner-desc">
+                <h1>
+
+                </h1>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    
+
+     @RenderSection("Scripts", required: false)
+    <script src="~/js/site.js"></script>
+</body>
+</html>

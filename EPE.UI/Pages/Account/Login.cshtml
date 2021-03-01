@@ -1,0 +1,44 @@
+﻿@page
+@model LoginModel
+
+@{ 
+    ViewData["Title"] = "Ingresar | ";
+}
+
+<body>
+    <div class="login-container">
+        <section class="login-section">
+            <form class="login-form" method="POST">
+                <a asp-page="/Index" class="login-logo">
+                    <img src="~/media/logo1.png" alt="">
+                </a>    
+                <div class="field">
+                    <label asp-for="Usuario.Username">Usuario o Email</label>
+                    <div class="control">
+                        <input type="text" asp-for="Usuario.Username" class="input" autofocus>
+                        <span asp-validation-for="Usuario.Username" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="field">
+                    <label asp-for="Usuario.Password">Contraseña</label>
+                    <div class="control">
+                        <input type="password" asp-for="Usuario.Password" class="input">
+                        <span asp-validation-for="Usuario.Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="field">
+                        <label asp-for="Usuario.RememberMe" class="checkbox">
+                            <input type="checkbox" asp-for="Usuario.RememberMe" class="checkbox"> Remember me
+                        </label>
+                </div>
+                <div class="form-footer">
+                    <a href="#" class="forgot-psw">¿Olvidaste tu contraseña?</a>
+                    <input type="submit" value="Entrar" class="account-btn">
+                </div>
+            </form>
+        </section>
+        <section class="img-section">
+            <div class="login-image"></div>
+        </section>
+    </div>
+</body>

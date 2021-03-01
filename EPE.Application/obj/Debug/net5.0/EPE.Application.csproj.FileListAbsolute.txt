@@ -1,0 +1,17 @@
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.csprojAssemblyReference.cache
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.AssemblyInfoInputs.cache
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.AssemblyInfo.cs
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.csproj.CoreCompileInputs.cache
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Application.deps.json
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Application.dll
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\ref\EPE.Application.dll
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Application.pdb
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Database.dll
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Domain.dll
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Database.pdb
+C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\net5.0\EPE.Domain.pdb
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.csproj.CopyComplete
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.dll
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\ref\EPE.Application.dll
+C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\net5.0\EPE.Application.pdb
