@@ -30,7 +30,7 @@ namespace EPE.Application.ProductsAdmin
                 Name = request.Name,
                 Description = request.Description,
                 Value = request.Value,
-                Image = imagePath
+                Image = imagePath,
             };
             _context.Products.Add(product);
 
@@ -42,7 +42,7 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
-                Image = product.Image
+                Image = product.Image,
             };
         }
             

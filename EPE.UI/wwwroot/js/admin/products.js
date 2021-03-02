@@ -1,57 +1,35 @@
 var app = new Vue({
     el: '#app',
     data: {
-        editing: false,
+        showList: false,
+        showProduct: false,
+        showStock: false,
         loading: false,
         objectIndex: 0,
+        
         products: [],
-        stock: [],
         productModel: {
             id: 0,
-            name: "asd",
-            description: "dsa",
-            value: 1.77,
-            stock: []
+            name: "",
+            description: "",
+            value: 0,
+            stock: [],
         },
         file: "",
 
         selectedStock: null,
-        newStock: {
+        
+        stock: [],
+        stockModel: {
             productId: 0,
             description: "",
             qty: ""
         },
-        totalStock: []
     },
     mounted(){
         this.getProducts();
-        //this.getStock();
-
-        console.log(this.products);
     },
     methods: {
-        getFile(event) {
-            this.file = event.target.files[0];
-            console.log(this.file);
-            console.log(this.productModel);
-        },
-        submitForm(event){
-            event.preventDefault();
-            let formData = new FormData();
-            formData.append("file", this.file);
-
-            axios.post('/Products', formData)
-            .then(res => {
-                console.log(res.data);
-                this.products.push(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            .then(() => {
-                this.editing = false;
-            });
-        },
         getProducts(){
             this.loading = true;
             axios.get('/Products')
@@ -64,15 +42,31 @@ var app = new Vue({
                 .then(() => {
                     this.loading = false;
                 });
+
+            this.toggleList();
+        },
+        newProduct() {
+            this.productModel = {
+              id: 0,
+              name: "",
+              description: "",
+              value: 0,
+              stock: []
+            }
+
+            this.toggleProduct();
+        },
+        getFile(event) {
+            this.file = event.target.files[0];
         },
         createProduct(){
             var formData = new FormData();
 
             formData.append("image", this.file);
-            formData.append("id", this.productModel.id)
-            formData.append("name", this.productModel.name)
-            formData.append("description", this.productModel.description)
-            formData.append("value", this.productModel.value)
+            formData.append("id", this.productModel.id);
+            formData.append("name", this.productModel.name);
+            formData.append("description", this.productModel.description);
+            formData.append("value", this.productModel.value);
 
             this.loading = true;
             axios.post('/Products', formData,
@@ -90,23 +84,21 @@ var app = new Vue({
                 })
                 .then(() => {
                     this.loading = false;
-                    this.editing = false;
                 });
+            
+            this.toggleList();
         },
         updateProduct(){
-            console.log(this.productModel);
             var formData = new FormData();
 
             if (this.file != null || this.file == "") {
                 formData.append("image", this.file);
-            }
+            };
 
-            formData.append("id", this.productModel.id)
-            formData.append("name", this.productModel.name)
-            formData.append("description", this.productModel.description)
-            formData.append("value", this.productModel.value)
-
-            console.log(formData);
+            formData.append("id", this.productModel.id);
+            formData.append("name", this.productModel.name);
+            formData.append("description", this.productModel.description);
+            formData.append("value", this.productModel.value);
 
             this.loading = true;
             axios.put('/Products', formData,
@@ -124,15 +116,16 @@ var app = new Vue({
                 })
                 .then(() => {
                     this.loading = false;
-                    this.editing = false;
                 });
+
+            this.toggleList();
         },
-        deleteProduct(id, index){
+        deleteProduct(id){
             this.loading = true;
             axios.delete('/products/' + id)
                 .then(res => {
                     console.log(res.data);
-                    this.products.splice(index, 1);
+                    this.products.splice(this.objectIndex, 1);
                 })
                 .catch(err => {
                     console.log(err);
@@ -140,55 +133,38 @@ var app = new Vue({
                 .then(() => {
                     this.loading = false;
                 });
+
+            this.toggleList();
         },
-        newProduct() {
-          this.editing = true;  
-          this.productModel = {
-            id: 0,
-            name: "",
-            description: "",
-            value: 0,
-            stock: []
-          }
-        },
-        editProduct(id, index){
+        editProduct(product, index){
             this.objectIndex = index;
+            this.selectedProduct = product;
 
             this.products.forEach(x => {
-                if (x.id == id) {
+                if (x.id == product.id) {
                     this.productModel = {
-                        id: x.id,
-                        name: x.name,
-                        description: x.description,
-                        value: x.value,
-                        stock: x.stock
+                        id: product.id,
+                        name: product.name,
+                        description: product.description,
+                        value: product.value,
+                        stock: product.stock,                                        
                     }
                 }
             });
 
-            this.editing = true;
+            this.toggleProduct();
         },
-        cancel() {
-            this.editing = false;
-        },
+
+        /* ---- */
 
         getStock(stock) {
             var totalS = 0;
-            stock.forEach(s => {
-                totalS += s.qty;
-            });
+            if (stock != null) {
+                stock.forEach(s => {
+                    totalS += s.qty;
+                });
+            }
             return totalS;
-            /*this.loading = true;
-            axios.get('/stocks')
-                .then(res => {
-                    this.stock = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                .then(() => {
-                    this.loading = false;
-                });*/
         },
         productStock(id){
             this.stock.forEach(x => {
@@ -198,8 +174,24 @@ var app = new Vue({
             });
         },
         addStock() {
-            this.loading = true;
-            axios.post('/stocks', this.newStock)
+            console.log(this.productModel.id);
+            this.productModel.stock.push({
+                productId: this.selectedProduct.id,
+                description: this.stockModel.description,
+                qty: this.stockModel.qty
+            });
+            console.log(this.productModel.stock);
+
+            this.stockModel = {
+                productId: 0,
+                description: "",
+                qty: ""
+            };
+
+            //console.log(this.productModel);
+
+            /*this.loading = true;
+            axios.post('/stocks', this.stockModel)
                 .then(res => {
                     this.selectedProduct.stock.push(res.data);
                 })
@@ -208,33 +200,64 @@ var app = new Vue({
                 })
                 .then(() => {
                     this.loading = false;
+                });*/
+        },
+        updateStock() {
+            this.loading = true;
+            axios.put('/stocks', {
+                stock: this.productModel.stock.map(x => {
+                    return {
+                        id: x.id,
+                        description: x.description,
+                        qty: x.qty,
+                        productId: this.productModel.id
+                    };
+                })
+            })
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
+                });
+            
+            this.toggleProduct();
+        },
+        deleteStock(id, index) {
+            this.loading = true;
+            axios.delete('/stocks/' + id)
+                .then(res => {
+                    console.log(res);
+                    this.selectedProduct.stock.splice(index, 1);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
                 });
         },
-        
-        /*
-        
-        getProduct(id){
-        this.loading = true;
-        axios.get('/Products/' + id)
-            .then(res => {
-                console.log(res);
-                var product = res.data;
-                this.productModel = {
-                    id: product.id,
-                    name: product.name,
-                    description: product.description,
-                    value: product.value
-                }; 
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            .then(() => {
-                this.loading = false;
-            });
+
+        toggleList(){
+            this.showStock = false;
+            this.showProduct = false;
+            this.showList = true;
         },
-        
-        */
+
+        toggleProduct(){
+            this.showStock = false;
+            this.showList = false;
+            this.showProduct = true;
+        },
+
+        toggleStock(){
+            this.showProduct = false;
+            this.showList = false;
+            this.showStock = true;
+        },
     },
     computed: {
     }

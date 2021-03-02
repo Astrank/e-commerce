@@ -149,6 +149,7 @@
 
 .admin-product-container {
   max-width: 700px;
+  margin: auto;
 }
 
 .admin-btn {
@@ -179,6 +180,26 @@
 .product-form {
   display: flex;
   flex-direction: row;
+}
+
+.stock-back-btn {
+  margin: 7px 10px;
+}
+
+.stock-form {
+  margin-top: 20px;
+}
+
+.add-stock-form {
+  margin-top: 40px;
+}
+
+.delete-product-btn {
+  float: right;
+}
+
+.stock-save-btn {
+  margin: 0 13px;
 }
 
 /* ---- Index ---- */

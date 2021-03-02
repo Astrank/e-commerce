@@ -23,7 +23,7 @@ namespace EPE.Application.StockAdmin
                         .Select(x => new ProductViewModel
                         {
                             Id = x.Id,
-                            Description = x.Description,
+                            Name = x.Name,
                             Stock = x.Stock.Select(y =>new StockViewModel
                             {
                                 Id = y.Id,
@@ -46,7 +46,7 @@ namespace EPE.Application.StockAdmin
         public class ProductViewModel 
         {
             public int Id { get; set; }
-            public string Description { get; set; }
+            public string Name { get; set; }
             public IEnumerable<StockViewModel> Stock { get; set; }
         }
     }

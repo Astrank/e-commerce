@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EPE.Database;
 using EPE.Database.FileManager;
+using EPE.Domain.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace EPE.Application.ProductsAdmin
@@ -56,6 +57,8 @@ namespace EPE.Application.ProductsAdmin
             public string Description { get; set; }
             public decimal Value { get; set; }
             public IFormFile Image { get; set; }
+
+            public IList<Stock> Stock { get; set; }
         }
 
         public class Response
@@ -65,6 +68,8 @@ namespace EPE.Application.ProductsAdmin
             public string Description { get; set; }
             public decimal Value { get; set; }
             public string Image { get; set; }
+
+            public IList<Stock> Stock { get; set; }
         }
     }
 }
