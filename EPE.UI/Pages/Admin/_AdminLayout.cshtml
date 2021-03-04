@@ -60,7 +60,22 @@
         </nav>
     </header>
     
-    @RenderBody()
+    <div id="app" class="admin-container">
+        <aside class="admin-side-bar">
+            <div class="menu">
+                <p class="menu-label">STORE</p>
+                <ul class="menu-list">
+                    <li><a asp-page="/Admin/Index">Products</a></li>
+                    <li><a asp-page="/Admin/Orders">Orders</a></li>
+                </ul>
+                <p class="menu-label">PROJECTS</p>
+                <ul class="menu-list">
+                    <li><a asp-page="/Admin/Index">Projects</a></li>
+                </ul>
+            </div>
+        </aside>
+        @RenderBody()
+    </div>
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

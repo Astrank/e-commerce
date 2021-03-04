@@ -139,7 +139,7 @@ var app = new Vue({
         editProduct(product, index){
             this.objectIndex = index;
             this.selectedProduct = product;
-
+            console.log(product);
             this.products.forEach(x => {
                 if (x.id == product.id) {
                     this.productModel = {
@@ -155,9 +155,7 @@ var app = new Vue({
             this.toggleProduct();
         },
 
-        /* ---- */
-
-        getStock(stock) {
+        /*getStock(stock) {
             var totalS = 0;
             if (stock != null) {
                 stock.forEach(s => {
@@ -172,7 +170,7 @@ var app = new Vue({
                     this.selectedStock = x;
                 }
             });
-        },
+        },*/
         addStock() {
             console.log(this.productModel.id);
             this.productModel.stock.push({

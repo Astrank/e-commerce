@@ -23,3 +23,16 @@
     }
   
   });
+
+var toggleStock = function (stock) {
+  var stockLeft = document.getElementById("product-stock-left");
+  
+  if (stock < 4) {
+    stockLeft.style.color = "#f14668"; 
+    stockLeft.innerHTML = "Quedan solo " + stock;
+  }
+  else {
+    stockLeft.innerHTML = stock + " disponibles";
+    stockLeft.style.color = "inherit";
+  }
+}

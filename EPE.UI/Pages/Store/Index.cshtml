@@ -2,7 +2,6 @@
 @model EPE.UI.Pages.Store.IndexModel
 @{
     Layout = "_Layout";
-    ViewBag.Section = "SILLONES";
 }
 
 
@@ -77,9 +76,9 @@
                 </div>
             <div class="sort-container">
                 <select id="sort-select">
-                    <option value="">Menor precio</option>
-                    <option value="">Mayor precio</option>
-                    <option value="">Mas popular</option>
+                    <option hidden selected disabled>Ordenar productos</option>
+                    <option>Menor precio</option>
+                    <option>Mayor precio</option>
                 </select>
             </div>
         </div>
@@ -88,6 +87,29 @@
             {
                 <a asp-page="/Store/Product" asp-route-name="@p.Name.Replace(' ', '-')" class="product-card">
                     <div class="product-img">
+                        @{
+                            string cssClass = "";
+                            string message = "";
+
+                            if (p.StockCount == 0)
+                            {
+                                cssClass = "is-danger";
+                                message = "Out of stock";
+                            }
+                            else if (p.StockCount <= 10) 
+                            {
+                                cssClass = "is-warning";
+                                message = "Low stock";
+                            }
+                        }
+                        @{
+                            if (p.StockCount <= 10)
+                            {
+                                <div class="notification @cssClass products-stock-notification">
+                                    @message
+                                </div>
+                            }
+                        }
                         <img src="~/media/products/@p.Image" alt="">
                     </div>
                     <div class="product-info">

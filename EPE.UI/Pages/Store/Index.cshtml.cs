@@ -21,9 +21,9 @@ namespace EPE.UI.Pages.Store
         public CreateProduct.Request Request { get; set; }*/
         public IEnumerable<GetProducts.ProductViewModel> Products { get; set; }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            Products = new GetProducts(_context).Do();
+            Products = await new GetProducts(_context).Do();
         }
 
         /*public async Task<IActionResult> OnPost()

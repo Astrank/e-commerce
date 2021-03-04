@@ -20,6 +20,8 @@ namespace EPE.Domain.Models
         public string City { get; set; }
         public string PostCode { get; set; }
 
+        public OrderStatus Status { get; set; }
+
         public ICollection<OrderStock> OrderStocks { get; set; }
     }
 }

@@ -2,5 +2,47 @@
 @model EPE.UI.Pages.Admin.OrdersModel
 @{
 }
+    
+<div class="orders-list-container" v-if="selectedOrder === null">
 
-<h1>Orders</h1>
+    <div class="tabs is-centered">
+        <ul>
+            <li v-bind:class="{'is-active' : status === 0}"><a @@click="status = 0">Pendientes</a></li>
+            <li v-bind:class="{'is-active' : status === 1}"><a @@click="status = 1">Embaladas</a></li>
+            <li v-bind:class="{'is-active' : status === 2}"><a @@click="status = 2">Entregadas</a></li>
+        </ul>
+    </div>
+
+    <div class="orders-list" v-if="orders.length > 0">
+        <table class="table orders-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Order reference</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="order in orders" @@click="selectOrder(order.id)">
+                    <td>{{order.id}}</td>
+                    <td>{{order.orderRef}}</td>
+                    <td>{{order.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="order-container" v-else>
+    <p>{{selectedOrder.firstName}} {{selectedOrder.lastName}}</p>
+    <p>{{selectedOrder.email}}</p>
+    <div>
+        <button class="button" @@click="updateOrder()">Packaged</button>
+        <button class="button" @@click="exitOrder()">Back</button>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/js/admin/orders.js"></script>
+}

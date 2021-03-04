@@ -21,7 +21,9 @@ namespace EPE.Application.ProductsAdmin
                 Name = x.Name,
                 Value = x.Value,
                 Description = x.Description,
-                Stock = x.Stock
+                
+                Stock = x.Stock,
+                StockCount = x.Stock.Sum(y => y.Qty)
             });
 
             return asd;
@@ -35,6 +37,7 @@ namespace EPE.Application.ProductsAdmin
             public string Description { get; set; }
 
             public ICollection<Stock> Stock { get; set; }
+            public int StockCount { get; set; }
         }
     }
 }   

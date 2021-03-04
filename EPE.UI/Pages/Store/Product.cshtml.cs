@@ -24,9 +24,9 @@ namespace EPE.UI.Pages.Store
 
         public GetProduct.ProductViewModel Product { get; set; }
 
-        public async Task<IActionResult> OnGet(string name)
+        public IActionResult OnGet(string name)
         {
-            Product = await new GetProduct(_context).Do(name.Replace("-", " "));
+            Product = new GetProduct(_context).Do(name.Replace("-", " "));
 
             if(Product == null)
                 return RedirectToPage("Index");

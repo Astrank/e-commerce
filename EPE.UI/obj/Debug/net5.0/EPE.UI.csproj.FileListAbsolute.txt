@@ -403,7 +403,6 @@ C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Store\Index.csht
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Admin\_AdminLayout.cshtml.g.cs
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Admin\_ViewStart.cshtml.g.cs
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Admin\Orders.cshtml.g.cs
-C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Admin\Stock.cshtml.g.cs
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Store\Product.cshtml.g.cs
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Shared\_CookieConsentPartial.cshtml.g.cs
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Store\Cart.cshtml.g.cs

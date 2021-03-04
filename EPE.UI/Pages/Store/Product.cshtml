@@ -55,12 +55,17 @@
                     <p>Tamaño: </p>
                     <div class="select">
                         <select asp-for="CartViewModel.StockId">
+                            <option value="null" disabled hidden selected>Elige un tamaño</option>
                             @foreach (var s in Model.Product.Stock)
                             {
-                                <option value="@s.Id">@s.Description</option>
+                                bool disabled = s.Qty <= 0;
+                                
+                                
+                                <option onclick="toggleStock(@s.Qty)" value="@s.Id" disabled="@disabled" hidden="@disabled">@s.Description</option>
                             }
                         </select>
                     </div>
+                    <p id="product-stock-left"></p>
                 </div>
                 <div class="product-qty">
                     <p>Cantidad: </p>

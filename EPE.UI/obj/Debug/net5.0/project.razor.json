@@ -15635,11 +15635,6 @@
   "RootNamespace": "EPE.UI",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\marti\\projects\\epe\\EPE.UI\\Pages\\Admin\\Stock.cshtml",
-      "TargetPath": "Pages\\Admin\\Stock.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\EPE.UI\\Pages\\Admin\\Orders.cshtml",
       "TargetPath": "Pages\\Admin\\Orders.cshtml",
       "FileKind": "mvc"
