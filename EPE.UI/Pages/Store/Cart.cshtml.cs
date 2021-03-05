@@ -12,33 +12,13 @@ namespace EPE.UI.Pages.Store
 {
     public class CartModel : PageModel
     {
-        private ApplicationDbContext _ctx;
-        private IConfiguration _config;
-        public CartModel(ApplicationDbContext ctx, IConfiguration config)
-        {
-            _ctx = ctx;
-            _config = config;
-        }
-
         public IEnumerable<GetCart.Response> Cart { get; set; }
 
-        public IActionResult OnGet()
-        {
-            Cart = new GetCart(HttpContext.Session, _ctx).Do();
+        public IActionResult OnGet([FromServices] GetCart getCart)
+        { 
+            Cart = getCart.Do();
             
             return Page();
         }
-
-        /*public IActionResult OnPost()
-        {
-            Cart = new GetCart(HttpContext.Session, _ctx).Do();
-
-            double total = 1;
-
-            var payPalAPI = new PayPalAPI(_config);
-            string url = payPalAPI.getRedirectURLToPayPal(total, "USD");
-
-            return Redirect(url);
-        }*/
     }
 }

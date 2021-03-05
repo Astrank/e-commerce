@@ -7,6 +7,7 @@ using EPE.Application.Orders;
 using EPE.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using GetOrderCart = EPE.Application.Cart.GetOrder;
 
 namespace EPE.UI.Pages.Checkout
 {
@@ -19,9 +20,9 @@ namespace EPE.UI.Pages.Checkout
             _ctx = ctx;    
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet([FromServices] GetCustomerInformation getCustomerInformation)
         {
-            var info = new GetCustomerInformation(HttpContext.Session).Do();
+            var info = getCustomerInformation.Do();
 
             if (info == null)
             {
@@ -31,11 +32,11 @@ namespace EPE.UI.Pages.Checkout
             return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost([FromServices] GetOrderCart getOrder)
         {
             // Stripe
 
-            var cartOrder = new EPE.Application.Cart.GetOrder(HttpContext.Session, _ctx).Do();
+            var cartOrder = getOrder.Do();
 
             var sessionId = HttpContext.Session.Id;
 

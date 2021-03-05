@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using EPE.Application.Cart;
-using EPE.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -23,9 +18,9 @@ namespace EPE.UI.Pages.Checkout
         [BindProperty]
         public AddCustomerInformation.Request CustomerInfo { get; set; } 
 
-        public IActionResult OnGet()
+        public IActionResult OnGet([FromServices] GetCustomerInformation getCustomerInformation)
         {
-            var info = new GetCustomerInformation(HttpContext.Session).Do();
+            var info = getCustomerInformation.Do();
 
             if (info == null)
             {
@@ -51,14 +46,14 @@ namespace EPE.UI.Pages.Checkout
             }
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost([FromServices] AddCustomerInformation addCustomerInformation)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            new AddCustomerInformation(HttpContext.Session).Do(CustomerInfo);
+            addCustomerInformation.Do(CustomerInfo);
 
             return RedirectToPage("/Checkout/Payment");
         }

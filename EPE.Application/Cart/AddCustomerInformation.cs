@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using EPE.Application.Infrastructure;
 using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace EPE.Application.Cart
 {
     public class AddCustomerInformation
     {
-        private ISession _session;
-        public AddCustomerInformation(ISession session)
+        private ISessionManager _sessionManager;
+        public AddCustomerInformation(ISessionManager sessionManager)
         {
-            _session = session;
+            _sessionManager = sessionManager;
         }
 
         public class Request
@@ -40,7 +37,7 @@ namespace EPE.Application.Cart
 
         public void Do(Request request)
         {
-            var customerInfo = new CustomerInformation
+            _sessionManager.AddCustomerInformation(new CustomerInformation
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
@@ -50,11 +47,7 @@ namespace EPE.Application.Cart
                 Address2 = request.Address2,
                 City = request.City,
                 PostCode = request.PostCode
-            };
-            
-            var stringObject = JsonConvert.SerializeObject(customerInfo);
-
-            _session.SetString("customer-info", stringObject);
+            });
         }
     }
 }

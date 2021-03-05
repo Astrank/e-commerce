@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using EPE.Application.Cart;
-using EPE.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPE.UI.Controllers
@@ -8,23 +7,14 @@ namespace EPE.UI.Controllers
     [Route("[controller]/[action]")]
     public class CartController : Controller
     {
-        private ApplicationDbContext _ctx;
-
-        public CartController(ApplicationDbContext ctx)
-        {
-            _ctx = ctx;
-        }
-
         [HttpPost("{stockId}")]
-        public async Task<IActionResult> AddOne(int stockId) 
+        public async Task<IActionResult> AddOne(int stockId, [FromServices] AddToCart addToCart) 
         {
             var request = new AddToCart.Request
             {
                 StockId = stockId,
                 Qty = 1
             };
-
-            var addToCart = new AddToCart(HttpContext.Session, _ctx);
 
             var success = await addToCart.Do(request);
             
@@ -37,15 +27,13 @@ namespace EPE.UI.Controllers
         }
 
         [HttpPost("{stockId}")]
-        public async Task<IActionResult> RestOne(int stockId) 
+        public async Task<IActionResult> RestOne(int stockId, [FromServices] RemoveFromCart removeFromCart) 
         {
             var request = new RemoveFromCart.Request
             {
                 StockId = stockId,
                 Qty = 1
             };
-
-            var removeFromCart = new RemoveFromCart(HttpContext.Session, _ctx);
 
             var success = await removeFromCart.Do(request);
             
@@ -58,10 +46,8 @@ namespace EPE.UI.Controllers
         }
 
         [HttpPost("{stockId}")]
-        public async Task<IActionResult> DeleteProduct(int stockId)
+        public async Task<IActionResult> DeleteProduct(int stockId, [FromServices] DeleteAllFromCart deleteAllFromCart)
         {
-            var deleteAllFromCart = new DeleteAllFromCart(HttpContext.Session, _ctx);
-
             var success = await deleteAllFromCart.Do(stockId);
             
             if (success)

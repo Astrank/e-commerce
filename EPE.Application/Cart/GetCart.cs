@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EPE.Application.Infrastructure;
 using EPE.Database;
 using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -12,10 +12,10 @@ namespace EPE.Application.Cart
     public class GetCart
     {
         private ApplicationDbContext _ctx;
-        private ISession _session;
-        public GetCart(ISession session, ApplicationDbContext ctx)
+        private ISessionManager _sessionManager;
+        public GetCart(ISessionManager sessionManager, ApplicationDbContext ctx)
         {
-            _session = session;
+            _sessionManager = sessionManager;
             _ctx = ctx;
         }
 
@@ -31,14 +31,12 @@ namespace EPE.Application.Cart
 
         public IEnumerable<Response> Do()
         {
-            var stringObject = _session.GetString("cart");
+            var cartList = _sessionManager.GetCart();
 
-            if (String.IsNullOrEmpty(stringObject))
+            if (cartList == null)
             {
-                return new List<Response>();
+                return new List<Response>(); 
             }
-
-            var cartList = JsonConvert.DeserializeObject<List<CartProduct>>(stringObject);
 
             var response = _ctx.Stock
                 .Include(x => x.Product).AsEnumerable()

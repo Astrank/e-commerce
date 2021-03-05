@@ -60,7 +60,6 @@
                             {
                                 bool disabled = s.Qty <= 0;
                                 
-                                
                                 <option onclick="toggleStock(@s.Qty)" value="@s.Id" disabled="@disabled" hidden="@disabled">@s.Description</option>
                             }
                         </select>

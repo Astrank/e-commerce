@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using EPE.Application.Cart;
 using EPE.Application.Products;
 using EPE.Database;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -34,9 +30,9 @@ namespace EPE.UI.Pages.Store
                 return Page();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost([FromServices] AddToCart addToCart)
         {
-            var stockAdded = await new AddToCart(HttpContext.Session, _context).Do(CartViewModel);
+            var stockAdded = await addToCart.Do(CartViewModel);
 
             if (stockAdded)
                 return RedirectToPage("Cart");

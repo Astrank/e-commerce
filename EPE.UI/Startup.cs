@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +11,8 @@ using EPE.Database.FileManager;
 using EPE.Application.Projects;
 using Microsoft.AspNetCore.Http;
 using EPE.Application.AuthorizedUsers;
+using EPE.Application.Infrastructure;
+using EPE.UI.Infrastructure;
 
 namespace EPE.UI
 {
@@ -29,6 +27,8 @@ namespace EPE.UI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -78,7 +78,9 @@ namespace EPE.UI
                 options.Cookie.MaxAge = TimeSpan.FromMinutes(20);
             });
 
-            services.AddTransient<CreateUser>();
+            services.AddScoped<ISessionManager, SessionManager>();
+
+            services.AddApplicationServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

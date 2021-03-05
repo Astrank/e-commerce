@@ -1,21 +1,19 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using EPE.Application.Infrastructure;
 using EPE.Database;
 using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace EPE.Application.Cart
 {
     public class GetOrder
     {
         private ApplicationDbContext _ctx;
-        private ISession _session;
-        public GetOrder(ISession session, ApplicationDbContext ctx)
+        private ISessionManager _sessionManager;
+        public GetOrder(ISessionManager sessionManager, ApplicationDbContext ctx)
         {
-            _session = session;
+            _sessionManager = sessionManager;
             _ctx = ctx;
         }
 
@@ -37,24 +35,20 @@ namespace EPE.Application.Cart
 
         public Response Do()
         {
-            var cart = _session.GetString("cart");
-
-            var cartList = JsonConvert.DeserializeObject<List<CartProduct>>(cart);
+            var cart = _sessionManager.GetCart();
 
             var productsList = _ctx.Stock
                 .Include(x => x.Product).ToList()
-                .Where(x => cartList.Any(y => y.StockId == x.Id))
+                .Where(x => cart.Any(y => y.StockId == x.Id))
                 .Select(x => new Product
                 {
                     ProductId = x.ProductId,
                     StockId = x.Id,
                     Value = (int) x.Product.Value, // Stripe
-                    Qty = cartList.FirstOrDefault(y => y.StockId == x.Id).Qty
+                    Qty = cart.FirstOrDefault(y => y.StockId == x.Id).Qty
                 }).ToList();
 
-            var customerInfoString = _session.GetString("customer-info");
-
-            var customerInfo = JsonConvert.DeserializeObject<CustomerInformation>(customerInfoString);
+            var customerInfo = _sessionManager.GetCustomerInformation();
 
             return new Response
             {

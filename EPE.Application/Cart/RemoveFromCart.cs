@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EPE.Application.Infrastructure;
 using EPE.Database;
 using EPE.Domain.Models;
 using Microsoft.AspNetCore.Http;
@@ -11,12 +12,12 @@ namespace EPE.Application.Cart
 {
     public class RemoveFromCart
     {
-        private ISession _session;
+        private ISessionManager _sessionManager;
         private ApplicationDbContext _ctx;
 
-        public RemoveFromCart(ISession session, ApplicationDbContext ctx)
+        public RemoveFromCart(ISessionManager sessionManager, ApplicationDbContext ctx)
         {
-            _session = session;
+            _sessionManager = sessionManager;
             _ctx = ctx;
         }
 
@@ -28,34 +29,10 @@ namespace EPE.Application.Cart
 
         public async Task<bool> Do(Request request)
         {
-            var cartList = new List<CartProduct>();
-            var stringObject = _session.GetString("cart");
-
-            if (String.IsNullOrEmpty(stringObject))
-            {
-                return true;
-            }
-
-            cartList = JsonConvert.DeserializeObject<List<CartProduct>>(stringObject);
-
-            if (!cartList.Any(x => x.StockId == request.StockId))
-            {
-                return true;
-            }
-
-            var product = cartList.Find(x => x.StockId == request.StockId);
-
-            if (product.Qty > request.Qty)
-            {
-                product.Qty -= request.Qty;
-            }
-
-            stringObject = JsonConvert.SerializeObject(cartList);
-
-            _session.SetString("cart", stringObject);
+            _sessionManager.RemoveProduct(request.StockId, request.Qty);
 
             var stockOnHold = _ctx.StockOnHold
-                .FirstOrDefault(x => x.StockId == request.StockId && x.SessionId == _session.Id);
+                .FirstOrDefault(x => x.StockId == request.StockId && x.SessionId == _sessionManager.GetId());
 
             var stock = _ctx.Stock.FirstOrDefault(x => x.Id == request.StockId);
             
@@ -63,7 +40,6 @@ namespace EPE.Application.Cart
             {
                 stockOnHold.Qty -= request.Qty;
                 stock.Qty += request.Qty;
-
             }
 
             await _ctx.SaveChangesAsync();

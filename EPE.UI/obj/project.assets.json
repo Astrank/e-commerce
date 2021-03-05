@@ -1980,7 +1980,7 @@
       },
       "EPE.Application/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "EPE.Database": "1.0.0"
         },
@@ -1993,7 +1993,7 @@
       },
       "EPE.Database/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "EPE.Domain": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -2012,7 +2012,7 @@
       },
       "EPE.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETStandard,Version=v2.1",
         "compile": {
           "bin/placeholder/EPE.Domain.dll": {}
         },
@@ -6990,11 +6990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\epe.ui\\EPE.UI.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\EPE.UI\\EPE.UI.csproj",
       "projectName": "EPE.UI",
-      "projectPath": "C:\\Users\\marti\\projects\\epe\\epe.ui\\EPE.UI.csproj",
+      "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.UI\\EPE.UI.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\projects\\epe\\epe.ui\\obj\\",
+      "outputPath": "C:\\Users\\marti\\projects\\epe\\EPE.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",

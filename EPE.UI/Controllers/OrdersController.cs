@@ -10,20 +10,16 @@ namespace EPE.UI.Controllers
     [Authorize(Policy = "Manager")]
     public class OrdersController : Controller
     {
-        private ApplicationDbContext _context;
-
-        public OrdersController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         [HttpGet("")]
-        public IActionResult GetOrders(int status) => Ok(new GetOrders(_context).Do(status));
+        public IActionResult GetOrders([FromServices] GetOrders getOrders,int status) => 
+            Ok(getOrders.Do(status));
 
         [HttpGet("{id}")]
-        public IActionResult GetOrder(int id) => Ok(new GetOrder(_context).Do(id));
+        public IActionResult GetOrder([FromServices] GetOrder getOrder, int id) => 
+            Ok(getOrder.Do(id));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(int id) => Ok(await new UpdateOrder(_context).Do(id));
+        public async Task<IActionResult> UpdateOrder([FromServices] UpdateOrder updateOrder, int id) => 
+            Ok(await updateOrder.Do(id));
     }
 }

@@ -6,15 +6,14 @@ namespace EPE.UI.ViewComponenets
 {
     public class CartViewComponent : ViewComponent
     {
-        private ApplicationDbContext _ctx;
-        public CartViewComponent(ApplicationDbContext ctx)
+        private GetCart _getCart;
+        public CartViewComponent([FromServices] GetCart getCart)
         {
-            _ctx = ctx;
+            _getCart = getCart;
         }
-
         public IViewComponentResult Invoke(string view = "Default")
         {
-            return View(view, new GetCart(HttpContext.Session, _ctx).Do());
+            return View(view, _getCart.Do());
         }
     }
 }

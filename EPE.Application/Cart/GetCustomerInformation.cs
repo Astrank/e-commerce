@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+using EPE.Application.Infrastructure;
 
 namespace EPE.Application.Cart
 {
     public class GetCustomerInformation
     {
-        private ISession _session;
-        public GetCustomerInformation(ISession session)
+        private readonly ISessionManager _sessionManager;
+        public GetCustomerInformation(ISessionManager sessionManager)
         {
-            _session = session;
+            _sessionManager = sessionManager;
         }
 
         public class Response
@@ -31,14 +25,12 @@ namespace EPE.Application.Cart
 
         public Response Do()
         {
-            var stringObject = _session.GetString("customer-info");
+            var customerInfo = _sessionManager.GetCustomerInformation();
 
-            if (String.IsNullOrEmpty(stringObject))
+            if (customerInfo == null)
             {
                 return null;
             }
-
-            var customerInfo = JsonConvert.DeserializeObject<CustomerInformation>(stringObject);
 
             return new Response
             {
