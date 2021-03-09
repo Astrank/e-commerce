@@ -1,5 +1,4 @@
 using EPE.Application.Cart;
-using EPE.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EPE.UI.ViewComponenets

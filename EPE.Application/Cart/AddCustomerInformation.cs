@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using EPE.Application.Infrastructure;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
-using Newtonsoft.Json;
 
 namespace EPE.Application.Cart
 {
+    [Service]
     public class AddCustomerInformation
     {
         private ISessionManager _sessionManager;

@@ -1,24 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using EPE.Application.Infrastructure;
-using EPE.Database;
-using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+using EPE.Domain.Infrastructure;
 
 namespace EPE.Application.Cart
 {
+    [Service]
     public class RemoveFromCart
     {
         private ISessionManager _sessionManager;
-        private ApplicationDbContext _ctx;
+        private IStockManager _stockManager;
 
-        public RemoveFromCart(ISessionManager sessionManager, ApplicationDbContext ctx)
+        public RemoveFromCart(ISessionManager sessionManager, IStockManager stockManager)
         {
             _sessionManager = sessionManager;
-            _ctx = ctx;
+            _stockManager = stockManager;
         }
 
         public class Request
@@ -29,20 +23,14 @@ namespace EPE.Application.Cart
 
         public async Task<bool> Do(Request request)
         {
-            _sessionManager.RemoveProduct(request.StockId, request.Qty);
-
-            var stockOnHold = _ctx.StockOnHold
-                .FirstOrDefault(x => x.StockId == request.StockId && x.SessionId == _sessionManager.GetId());
-
-            var stock = _ctx.Stock.FirstOrDefault(x => x.Id == request.StockId);
-            
-            if (stockOnHold.Qty > request.Qty)
+            if (request.Qty <= 0)
             {
-                stockOnHold.Qty -= request.Qty;
-                stock.Qty += request.Qty;
+                return false;
             }
 
-            await _ctx.SaveChangesAsync();
+            await _stockManager.RemoveStockFromHold(request.StockId, request.Qty, _sessionManager.GetId());
+
+            _sessionManager.RemoveProduct(request.StockId, request.Qty);
 
             return true;
         }

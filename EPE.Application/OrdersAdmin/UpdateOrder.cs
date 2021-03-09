@@ -1,25 +1,21 @@
-using System.Linq;
 using System.Threading.Tasks;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 
 namespace EPE.Application.OrdersAdmin
 {
+    [Service]
     public class UpdateOrder
     {
-        private ApplicationDbContext _ctx;
+        private readonly IOrderManager _orderManager;
 
-        public UpdateOrder(ApplicationDbContext ctx)
+        public UpdateOrder(IOrderManager orderManager)
         {
-            _ctx = ctx;    
+            _orderManager = orderManager;
         }
 
-        public async Task<bool> Do(int id)
+        public Task<int> Do(int id)
         {
-            var order = _ctx.Orders.FirstOrDefault(x => x.Id == id);
-
-            order.Status += 1;
-
-            return await _ctx.SaveChangesAsync() > 0; 
+            return _orderManager.AdvanceOrderStatus(id);
         }
     }
 }

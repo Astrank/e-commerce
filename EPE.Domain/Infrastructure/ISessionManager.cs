@@ -1,15 +1,17 @@
 ﻿using EPE.Domain.Models;
 using System.Collections.Generic;
 
-namespace EPE.Application.Infrastructure
+namespace EPE.Domain.Infrastructure
 {
     public interface ISessionManager
     {
         string GetId();
-        void AddProduct(int stockId, int qty);
+        IEnumerable<CartProduct> GetCart();
+        void AddProduct(CartProduct cartProduct);
         void RemoveProduct(int stockId, int qty);
         void DeleteAllFromCart(int stockId);
-        List<CartProduct> GetCart();
+        void ClearCart();
+        
         void AddCustomerInformation(CustomerInformation customer);
         CustomerInformation GetCustomerInformation();
     }

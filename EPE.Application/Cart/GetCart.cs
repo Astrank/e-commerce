@@ -1,28 +1,23 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using EPE.Application.Infrastructure;
-using EPE.Database;
-using EPE.Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using EPE.Domain.Infrastructure;
 
 namespace EPE.Application.Cart
 {
+    [Service]
     public class GetCart
     {
-        private ApplicationDbContext _ctx;
         private ISessionManager _sessionManager;
-        public GetCart(ISessionManager sessionManager, ApplicationDbContext ctx)
+        public GetCart(ISessionManager sessionManager)
         {
             _sessionManager = sessionManager;
-            _ctx = ctx;
         }
 
         public class Response
         {
             public string Name { get; set; }
             public string Value { get; set; }
+            public decimal RealValue { get; set; }
             public string Description { get; set; }
             public int StockId { get; set; }
             public int Qty { get; set; }
@@ -31,28 +26,18 @@ namespace EPE.Application.Cart
 
         public IEnumerable<Response> Do()
         {
-            var cartList = _sessionManager.GetCart();
-
-            if (cartList == null)
-            {
-                return new List<Response>(); 
-            }
-
-            var response = _ctx.Stock
-                .Include(x => x.Product).AsEnumerable()
-                .Where(x => cartList.Any(y => y.StockId == x.Id))
+            return _sessionManager
+                .GetCart()
                 .Select(x => new Response
                 {
-                    Name = x.Product.Name,
-                    Value = $"$ {x.Product.Value.ToString("N2")}",
-                    Image = x.Product.Image,
+                    Name = x.ProductName,
+                    Value = x.Value.ValueToString(),
+                    RealValue = x.Value,
+                    Image = x.Image,
                     Description = x.Description,
-                    StockId = x.Id,
-                    Qty = cartList.FirstOrDefault(y => y.StockId == x.Id).Qty
-                })
-                .ToList();
-
-            return response;
+                    StockId = x.StockId,
+                    Qty = x.Qty
+                });
         }
     }
 }

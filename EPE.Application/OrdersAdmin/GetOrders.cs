@@ -1,17 +1,20 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using EPE.Database;
 using EPE.Domain;
+using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
 
 namespace EPE.Application.OrdersAdmin
 {
+    [Service]
     public class GetOrders
     {
-        private ApplicationDbContext _ctx;
+        private readonly IOrderManager _orderManager;
 
-        public GetOrders(ApplicationDbContext ctx)
+        public GetOrders(IOrderManager orderManager)
         {
-            _ctx = ctx;    
+            _orderManager = orderManager;
         }
 
         public class Response 
@@ -22,14 +25,14 @@ namespace EPE.Application.OrdersAdmin
         }
 
         public IEnumerable<Response> Do(int status) =>
-            _ctx.Orders
-                .Where(x => x.Status == (OrderStatus) status)
-                .Select(x => new Response
-                {
-                    Id = x.Id,
-                    OrderRef = x.OrderRef,
-                    Email = x.Email
-                })
-                .ToList();
+            _orderManager.GetOrdersByStatus((OrderStatus) status, Projection);
+
+        private static Func<Order, Response> Projection = (order) =>
+            new Response
+            {
+                Id = order.Id,
+                OrderRef = order.OrderRef,
+                Email = order.Email
+            };
     }
 }

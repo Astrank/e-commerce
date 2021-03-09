@@ -2,18 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 
 namespace EPE.Application.Orders
 {
+    [Service]
     public class CreateOrder
     {
-        private ApplicationDbContext _ctx;
+        private readonly IOrderManager _orderManager;
+        private readonly IStockManager _stockManager;
 
-        public CreateOrder(ApplicationDbContext ctx)
+        public CreateOrder(IOrderManager orderManager, IStockManager stockManager)
         {   
-            _ctx = ctx;
+            _orderManager = orderManager;
+            _stockManager = stockManager;
         }
 
         public class Request
@@ -42,14 +45,8 @@ namespace EPE.Application.Orders
 
         public async Task<bool> Do(Request request)
         {
-            var stockList = _ctx.StockOnHold.ToList();
-            var stockOnHold = stockList.Where(x => x.SessionId == request.SessionId).ToList();
-            
-            _ctx.StockOnHold.RemoveRange(stockOnHold);
-
             var order = new Order
             {
-
                 OrderRef = CreateOrderRef(),
                 //Stripe ref
 
@@ -69,9 +66,16 @@ namespace EPE.Application.Orders
                 }).ToList()
             };
 
-            _ctx.Orders.Add(order);
+            var success = await _orderManager.CreateOrder(order) > 0;
 
-            return await _ctx.SaveChangesAsync() > 0;
+            if (success)
+            {
+                await _stockManager.RemoveStockFromHold(request.SessionId);
+
+                return true;
+            }
+
+            return false;
         }
 
         public string CreateOrderRef()
@@ -86,7 +90,7 @@ namespace EPE.Application.Orders
                 {
                     result[i] = chars[random.Next(chars.Length)];
                 }
-            } while (_ctx.Orders.Any(x => x.OrderRef == new string(result)));
+            } while (_orderManager.OrderReferenceExists(new string(result)));
 
             return new string(result);
         }

@@ -415,3 +415,4 @@ C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\EPE.UI.dll
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\ref\EPE.UI.dll
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\EPE.UI.pdb
 C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\EPE.UI.genruntimeconfig.cache
+C:\Users\marti\projects\EPE\EPE.UI\obj\Debug\net5.0\Razor\Pages\Admin\Projects.cshtml.g.cs

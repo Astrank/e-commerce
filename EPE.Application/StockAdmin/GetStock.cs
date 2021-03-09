@@ -1,46 +1,53 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace EPE.Application.StockAdmin
 {
+    [Service]
     public class GetStock
     {
-        private ApplicationDbContext _ctx;
-        public GetStock(ApplicationDbContext ctx)
+        private readonly IStockManager _stockManager;
+
+        public GetStock(IStockManager stockManager)
         {
-            _ctx = ctx;
+            _stockManager = stockManager;
         }
 
-        public IEnumerable<ProductViewModel> Do()
+        public List<StockViewModel> Do(int id)
         {
-            var stock = _ctx.Products
-                        .Include(x => x.Stock)
-                        .Select(x => new ProductViewModel
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            Stock = x.Stock.Select(y =>new StockViewModel
-                            {
-                                Id = y.Id,
-                                Description = y.Description,
-                                Qty = y.Qty
-                            })
-                        })
-                        .ToList();
-            
-            return stock;
+            return _stockManager.GetStockById(id, Projection);
         }
+
+        private static Func<Stock, StockViewModel> Projection = (stock) =>
+            new StockViewModel
+            {
+                Id = stock.Id,
+                Description = stock.Description,
+                Qty = stock.Qty,
+                ProductId = stock.ProductId
+            };
+
+        /*private static Func<Product, ProductViewModel> Projection = (product) =>
+            new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Stock = product.Stock.Select(y => new StockViewModel
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    Qty = y.Qty
+                })
+            };*/
 
         public class StockViewModel
         {
             public int Id { get; set; }
             public string Description { get; set; }
             public int Qty { get; set; }
+            public int ProductId { get; set; }
         }
 
         public class ProductViewModel 

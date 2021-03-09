@@ -1,0 +1,68 @@
+﻿@page
+@model EPE.UI.Pages.Admin.ProjectsModel
+@{
+}
+
+<div class="projects-list" v-if="showList">
+    <button class="add-product-btn button is-success" @@click="">Add product</button>
+    <table class="table products-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(project, index) in projects" @@click="">
+                <td>{{project.id}}</td>
+                <td>{{project.title}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="admin-project" v-else="">
+    <button class="button is-primary back-btn" @@click="toggleList">
+        <i class="fas fa-long-arrow-alt-left"></i>
+    </button>
+    <button class="button is-danger delete-product-btn" v-if="productModel.id"
+            @@click="deleteProduct(productModel.id, productModel.image)">
+        Delete product
+    </button>
+    <div class="product-form">
+        <div class="admin-data-form">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.name">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.description">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Tags</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.tags">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Image</label>
+                <div class="control">
+                    <input type="file" class="input" @@change="getFile($event)">
+                </div>
+            </div>
+
+            <!--<button @@click="createProduct" v-if="!productModel.id" class="button is-success">Create product</button>
+            <button @@click="updateProduct" v-else="" class="button is-success">Update product</button>-->
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/js/admin/projects.js"></script>
+}

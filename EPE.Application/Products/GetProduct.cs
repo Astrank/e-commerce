@@ -2,38 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EPE.Database;
-using Microsoft.EntityFrameworkCore;
+using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
 
 namespace EPE.Application.Products
 {
+    [Service]
     public class GetProduct
     {
-        private ApplicationDbContext _context;
-        
-        public GetProduct(ApplicationDbContext context)
+        private readonly IProductManager _productManager;
+        private readonly IStockManager _stockManager;
+
+        public GetProduct(IProductManager productManager, IStockManager stockManager)
         {
-            _context = context;
+            _productManager = productManager;
+            _stockManager = stockManager;
         }
-
-        public ProductViewModel Do(string name) =>
-            _context.Products
-                .Include(x => x.Stock)
-                .Where(x => x.Name == name)
-                .Select(x => new ProductViewModel
-                {
-                    Name = x.Name,
-                    Description = x.Description,
-                    Value = $"$ {x.Value.ToString("N2")}",
-
-                    Stock = x.Stock.Select(y => new StockViewModel
-                    {
-                        Id = y.Id,
-                        Description = y.Description,
-                        Qty = y.Qty
-                    })
-                })
-                .FirstOrDefault();
 
         public class ProductViewModel
         {
@@ -49,5 +33,26 @@ namespace EPE.Application.Products
             public string Description { get; set; }
             public int Qty { get; set; }
         }
+        public async Task<ProductViewModel> Do(string name)
+        {
+            await _stockManager.RetrieveExpiredStockOnHold();
+
+            return _productManager.GetProductByName(name, Projection);
+        }
+        
+        private static Func<Product, ProductViewModel> Projection = (product) =>
+            new ProductViewModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Value = product.Value.ValueToString(),
+
+                Stock = product.Stock.Select(y => new StockViewModel
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    Qty = y.Qty
+                })
+            };
     }
 }

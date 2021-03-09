@@ -1,20 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using EPE.Application.Infrastructure;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace EPE.Application.Cart
 {
+    [Service]
     public class GetOrder
     {
-        private ApplicationDbContext _ctx;
         private ISessionManager _sessionManager;
-        public GetOrder(ISessionManager sessionManager, ApplicationDbContext ctx)
+        public GetOrder(ISessionManager sessionManager)
         {
             _sessionManager = sessionManager;
-            _ctx = ctx;
         }
 
         public class Response
@@ -35,24 +32,21 @@ namespace EPE.Application.Cart
 
         public Response Do()
         {
-            var cart = _sessionManager.GetCart();
-
-            var productsList = _ctx.Stock
-                .Include(x => x.Product).ToList()
-                .Where(x => cart.Any(y => y.StockId == x.Id))
+            var products = _sessionManager
+                .GetCart()
                 .Select(x => new Product
                 {
                     ProductId = x.ProductId,
-                    StockId = x.Id,
-                    Value = (int) x.Product.Value, // Stripe
-                    Qty = cart.FirstOrDefault(y => y.StockId == x.Id).Qty
-                }).ToList();
+                    StockId = x.StockId,
+                    Value = (int)x.Value, // Stripe
+                    Qty = x.Qty
+                });
 
             var customerInfo = _sessionManager.GetCustomerInformation();
 
             return new Response
             {
-                Products = productsList,
+                Products = products,
                 CustomerInformation = new CustomerInformation
                 {
                     FirstName = customerInfo.FirstName,

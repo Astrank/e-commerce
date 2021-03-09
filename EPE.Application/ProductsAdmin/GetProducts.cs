@@ -1,32 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace EPE.Application.ProductsAdmin
 {
+    [Service]
     public class GetProducts
     {
-        private ApplicationDbContext _context;
-        public GetProducts(ApplicationDbContext context)
+        private readonly IProductManager _productManager;
+
+        public GetProducts(IProductManager productManager)
         {
-            _context = context;
-        }
-
-        public IEnumerable<ProductViewModel> Do(){ 
-            var asd = _context.Products.Include(x => x.Stock).Select(x => new ProductViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Value = x.Value,
-                Description = x.Description,
-                
-                Stock = x.Stock,
-                StockCount = x.Stock.Sum(y => y.Qty)
-            });
-
-            return asd;
+            _productManager = productManager;
         }
 
         public class ProductViewModel
@@ -34,10 +21,20 @@ namespace EPE.Application.ProductsAdmin
             public int Id { get; set; }
             public string Name { get; set; }
             public decimal Value { get; set; }
-            public string Description { get; set; }
-
-            public ICollection<Stock> Stock { get; set; }
             public int StockCount { get; set; }
         }
+
+        public IEnumerable<ProductViewModel> Do(){
+            return _productManager.GetProductsWithStock(Projection);
+        }
+
+        private static Func<Product, ProductViewModel> Projection = (product) =>
+            new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Value = product.Value,
+                StockCount = product.Stock.Sum(y => y.Qty)
+            };
     }
 }   

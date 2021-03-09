@@ -1,7 +1,8 @@
-using EPE.Application.Infrastructure;
+using EPE.Domain.Infrastructure;
 
 namespace EPE.Application.Cart
 {
+    [Service]
     public class GetCustomerInformation
     {
         private readonly ISessionManager _sessionManager;

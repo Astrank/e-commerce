@@ -1,9 +1,7 @@
 C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Application.deps.json
 C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Application.dll
 C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Application.pdb
-C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Database.dll
 C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Domain.dll
-C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Database.pdb
 C:\Users\marti\projects\EPE\EPE.Application\bin\Debug\netstandard2.1\EPE.Domain.pdb
 C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\netstandard2.1\EPE.Application.csprojAssemblyReference.cache
 C:\Users\marti\projects\EPE\EPE.Application\obj\Debug\netstandard2.1\EPE.Application.AssemblyInfoInputs.cache

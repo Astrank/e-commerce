@@ -1,17 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using EPE.Database;
-using Microsoft.EntityFrameworkCore;
+using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
 
 namespace EPE.Application.OrdersAdmin
 {
+    [Service]
     public class GetOrder
     {
-        private ApplicationDbContext _ctx;
+        private readonly IOrderManager _orderManager;
 
-        public GetOrder(ApplicationDbContext ctx)
+        public GetOrder(IOrderManager orderManager)
         {
-            _ctx = ctx;    
+            _orderManager = orderManager;
         }
 
         public class Response
@@ -44,32 +46,29 @@ namespace EPE.Application.OrdersAdmin
         }
 
         public Response Do(int id) =>
-            _ctx.Orders
-                .Where(x => x.Id == id)
-                .Include(x => x.OrderStocks)
-                .ThenInclude(x => x.Stock)
-                .ThenInclude(x => x.Product)
-                .Select(x => new Response
-                {
-                    Id = x.Id,
-                    OrderRef = x.OrderRef,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Email = x.Email,
-                    PhoneNumber = x.PhoneNumber,
-                    Address1 = x.Address1,
-                    Address2 = x.Address2,
-                    City = x.City,
-                    PostCode = x.PostCode,
+            _orderManager.GetOrderById(id, Projection);
 
-                    Products = x.OrderStocks.Select(y => new Product
-                    {
-                        Name = y.Stock.Product.Name,
-                        Description = y.Stock.Product.Description,
-                        Qty = y.Qty,
-                        StockDescription = y.Stock.Description
-                    })
+        private static Func<Order, Response> Projection = (order) =>
+            new Response
+            {
+                Id = order.Id,
+                OrderRef = order.OrderRef,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                Email = order.Email,
+                PhoneNumber = order.PhoneNumber,
+                Address1 = order.Address1,
+                Address2 = order.Address2,
+                City = order.City,
+                PostCode = order.PostCode,
+
+                Products = order.OrderStocks.Select(y => new Product
+                {
+                    Name = y.Stock.Product.Name,
+                    Description = y.Stock.Product.Description,
+                    Qty = y.Qty,
+                    StockDescription = y.Stock.Description
                 })
-                .FirstOrDefault();
+            };
     }
 }

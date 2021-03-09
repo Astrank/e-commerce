@@ -1,15 +1,17 @@
 using System.Threading.Tasks;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 
 namespace EPE.Application.StockAdmin
 {
+    [Service]
     public class CreateStock
     {
-        private ApplicationDbContext _ctx;
-        public CreateStock(ApplicationDbContext ctx)
+        private readonly IStockManager _stockManager;
+
+        public CreateStock(IStockManager stockManager)
         {
-            _ctx = ctx;
+            _stockManager = stockManager;
         }
 
         public async Task<Response> Do(Request request)
@@ -21,9 +23,7 @@ namespace EPE.Application.StockAdmin
                 Description = request.Description
             };
 
-            _ctx.Stock.Add(stock);
-
-            await _ctx.SaveChangesAsync();
+            await _stockManager.CreateStock(stock);
             
             return new Response
             {

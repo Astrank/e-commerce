@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(product, index) in products" @@click="editProduct(product, index)">
+            <tr v-for="(product, index) in products" @@click="getProduct(product.id)">    <!-- editProduct(product, index) -->
                 <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.value}}</td>
@@ -30,7 +30,7 @@
         <i class="fas fa-long-arrow-alt-left"></i>
     </button>
     <button class="button is-danger delete-product-btn" v-if="productModel.id"
-        @@click="deleteProduct(productModel.id)">Delete product</button>
+        @@click="deleteProduct(productModel.id, productModel.image)">Delete product</button>
     <div class="product-form">
         <div class="admin-data-form">
             <div class="field">
@@ -57,8 +57,8 @@
                     <input type="file" class="input" @@change="getFile($event)">
                 </div>
             </div>
-            
-            <button class="button is-primary" @@click="toggleStock" v-if="productModel.id">Manage stock</button>
+            <!-- toggleStock -->
+            <button class="button is-primary" @@click="getStock(productModel.id)" v-if="productModel.id">Manage stock</button>
             <button @@click="createProduct" v-if="!productModel.id" class="button is-success">Create product</button>
             <button @@click="updateProduct" v-else="" class="button is-success">Update product</button>
         </div>
@@ -79,11 +79,11 @@
             </tr>
         </thead>
 
-        <tbody v-if="productModel.stock.length > 0">
-            <tr v-for="(stock, index) in productModel.stock">
-                <td><input class="input" v-model="stock.description" /></td>
-                <td><input class="input" v-model="stock.qty" /></td>
-                <td><a class="has-text-danger" @@click="deleteStock(stock.id, index)">
+        <tbody v-if="stock.length > 0">
+            <tr v-for="(s, index) in stock">
+                <td><input class="input" v-model="s.description" /></td>
+                <td><input class="input" v-model="s.qty" /></td>
+                <td><a class="has-text-danger" @@click="deleteStock(s.id, index)">
                     <i class="fas fa-times is-danger"></i>
                 </a></td>
             </tr>

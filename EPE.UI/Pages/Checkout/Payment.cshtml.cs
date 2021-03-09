@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EPE.Application.Cart;
 using EPE.Application.Orders;
-using EPE.Database;
+using EPE.Domain.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using GetOrderCart = EPE.Application.Cart.GetOrder;
@@ -13,13 +11,6 @@ namespace EPE.UI.Pages.Checkout
 {
     public class PaymentModel : PageModel
     {
-        private ApplicationDbContext _ctx;
-
-        public PaymentModel(ApplicationDbContext ctx)
-        {
-            _ctx = ctx;    
-        }
-
         public IActionResult OnGet([FromServices] GetCustomerInformation getCustomerInformation)
         {
             var info = getCustomerInformation.Do();
@@ -32,7 +23,10 @@ namespace EPE.UI.Pages.Checkout
             return Page();
         }
 
-        public async Task<IActionResult> OnPost([FromServices] GetOrderCart getOrder)
+        public async Task<IActionResult> OnPost(
+            [FromServices] GetOrderCart getOrder, 
+            [FromServices] CreateOrder createOrder,
+            [FromServices] ISessionManager sessionManager)
         {
             // Stripe
 
@@ -40,7 +34,7 @@ namespace EPE.UI.Pages.Checkout
 
             var sessionId = HttpContext.Session.Id;
 
-            await new CreateOrder(_ctx).Do(new CreateOrder.Request
+            await createOrder.Do(new CreateOrder.Request
             {
                 SessionId = sessionId,
 
@@ -59,6 +53,8 @@ namespace EPE.UI.Pages.Checkout
                     Qty = x.Qty
                 }).ToList()
             });
+
+            sessionManager.ClearCart();
 
             return RedirectToPage("/Index");  
         }

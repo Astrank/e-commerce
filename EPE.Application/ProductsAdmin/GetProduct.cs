@@ -1,29 +1,18 @@
-using System.Collections.Generic;
-using System.Linq;
-using EPE.Database;
+using System;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 
 namespace EPE.Application.ProductsAdmin
 {
+    [Service]
     public class GetProduct
     {
-        private ApplicationDbContext _context;
-        public GetProduct(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IProductManager _productManager;
 
-        public ProductViewModel Do(int id) => 
-            _context.Products.ToList()
-                .Where(x => x.Id == id)
-                .Select(x => new ProductViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Value = x.Value,
-                })
-                .FirstOrDefault();
+        public GetProduct(IProductManager productManager)
+        {
+            _productManager = productManager;
+        }
 
         public class ProductViewModel
         {
@@ -31,6 +20,20 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
+            public string Image { get; set; }
         }
+
+        public ProductViewModel Do(int id) =>
+            _productManager.GetProductById(id, Projection);
+
+        private static Func<Product, ProductViewModel> Projection = (product) =>
+            new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Value = product.Value,
+                Image = product.Image,
+            };
     }
 }

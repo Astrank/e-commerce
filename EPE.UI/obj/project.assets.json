@@ -1982,7 +1982,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
-          "EPE.Database": "1.0.0"
+          "EPE.Domain": "1.0.0",
+          "System.ComponentModel.Annotations": "5.0.0"
         },
         "compile": {
           "bin/placeholder/EPE.Application.dll": {}
@@ -6979,6 +6980,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "EPE.Application >= 1.0.0",
+      "EPE.Database >= 1.0.0",
       "Microsoft.AspNetCore.HttpsPolicy >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.2",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.3"
@@ -7013,6 +7015,9 @@
           "projectReferences": {
             "C:\\Users\\marti\\projects\\epe\\EPE.Application\\EPE.Application.csproj": {
               "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.Application\\EPE.Application.csproj"
+            },
+            "C:\\Users\\marti\\projects\\epe\\EPE.Database\\EPE.Database.csproj": {
+              "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.Database\\EPE.Database.csproj"
             }
           }
         }

@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EPE.Application\EPE.Application.csproj" />
+    <ProjectReference Include="..\EPE.Database\EPE.Database.csproj" />
   </ItemGroup>
 
   <ItemGroup>

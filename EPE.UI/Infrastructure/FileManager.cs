@@ -1,10 +1,10 @@
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 
-namespace EPE.Database.FileManager
+namespace EPE.UI.Infrastructure
 {
     public class FileManager : IFileManager
     {
@@ -19,11 +19,6 @@ namespace EPE.Database.FileManager
         {
             var imgPath = $"{_config[rootPath]}/{image}";
             File.Delete(imgPath);
-        }
-
-        public FileStream ImageStream(string rootPath, string image)
-        {
-            return new FileStream(Path.Combine(_config[rootPath], image), FileMode.Open, FileAccess.Read);
         }
 
         public async Task<string> SaveImage(string rootPath, IFormFile image)

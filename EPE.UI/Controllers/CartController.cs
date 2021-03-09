@@ -48,7 +48,12 @@ namespace EPE.UI.Controllers
         [HttpPost("{stockId}")]
         public async Task<IActionResult> DeleteProduct(int stockId, [FromServices] DeleteAllFromCart deleteAllFromCart)
         {
-            var success = await deleteAllFromCart.Do(stockId);
+            var request = new DeleteAllFromCart.Request
+            {
+                StockId = stockId,
+            };
+
+            var success = await deleteAllFromCart.Do(request);
             
             if (success)
             {

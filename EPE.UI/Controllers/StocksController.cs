@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using EPE.Application.StockAdmin;
-using EPE.Database;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,24 +9,24 @@ namespace EPE.UI.Controllers
     [Authorize(Policy = "Manager")]
     public class StocksController : Controller
     {
-        private ApplicationDbContext _context;
-        public StocksController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        [HttpGet("")]
-        public IActionResult GetStock() => Ok(new GetStock(_context).Do());
+        [HttpGet("{id}")]
+        public IActionResult GetStock([FromServices] GetStock getStock, int id) => 
+            Ok(getStock.Do(id));
 
         [HttpPost("")]
-        public async Task<IActionResult> CreateStock([FromBody] CreateStock.Request request) => 
-            Ok((await new CreateStock(_context).Do(request)));
+        public async Task<IActionResult> CreateStock(
+            [FromBody] CreateStock.Request request,
+            [FromServices] CreateStock createStock) => 
+                Ok((await createStock.Do(request)));
 
         [HttpPut("")]
-        public async Task<IActionResult> UpdateStock([FromBody] UpdateStock.Request request) => 
-            Ok(await new UpdateStock(_context).Do(request));
+        public async Task<IActionResult> UpdateStock(
+            [FromBody] UpdateStock.Request request, 
+            [FromServices] UpdateStock updateStock) => 
+                Ok(await updateStock.Do(request));
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStock(int id) => Ok(await new DeleteStock(_context).Do(id));
+        public async Task<IActionResult> DeleteStock([FromServices] DeleteStock deleteStock, int id) =>
+            Ok(await deleteStock.Do(id));
     }
 }

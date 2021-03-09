@@ -2,51 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EPE.Database;
-using Microsoft.EntityFrameworkCore;
+using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
 
 namespace EPE.Application.Products
 {
+    [Service]
     public class GetProducts
     {
-        private ApplicationDbContext _context;
-        public GetProducts(ApplicationDbContext context)
+        private readonly IProductManager _productManager;
+        private readonly IStockManager _stockManager;
+
+        public GetProducts(IProductManager productManager, IStockManager stockManager)
         {
-            _context = context;
+            _productManager = productManager;
+            _stockManager = stockManager;
         }
-
-        public async Task<IEnumerable<ProductViewModel>> Do() {
-            var sohList = _context.StockOnHold.ToList();
-            var stockOnHold = sohList.Where(x => x.ExpiryDate < DateTime.Now).ToList();
-
-            if (stockOnHold.Count > 0)
-            {
-                var strList = _context.Stock.ToList();
-                var stockToReturn = strList.Where(x => stockOnHold.Any(y => y.StockId == x.Id)).ToList();
-
-                foreach (var stock in stockToReturn)
-                {
-                    stock.Qty += stockOnHold.FirstOrDefault(x => x.StockId == stock.Id).Qty;
-                }
-
-                _context.StockOnHold.RemoveRange(stockOnHold);
-
-                await _context.SaveChangesAsync();
-            }
-            var products = _context.Products
-                .Include(x => x.Stock)
-                .Select(x => new ProductViewModel
-                {
-                    Name = x.Name,
-                    Description = x.Description,
-                    Value = $"$ {x.Value.ToString("N2")}",
-                    Image = x.Image,
-
-                    StockCount = x.Stock.Sum(y => y.Qty)
-                }).ToList();
-
-            return products;
-        } 
 
         public class ProductViewModel
         {
@@ -57,5 +28,23 @@ namespace EPE.Application.Products
 
             public int StockCount { get; set; }
         }
+
+        public async Task<IEnumerable<ProductViewModel>> Do() 
+        {
+            await _stockManager.RetrieveExpiredStockOnHold();
+
+            return _productManager.GetProductsWithStock(Projection);
+        } 
+
+        private static Func<Product, ProductViewModel> Projection = (product) =>
+            new ProductViewModel
+            {
+                Name = product.Name,
+                    Description = product.Description,
+                    Value = product.Value.ValueToString(),
+                    Image = product.Image,
+
+                    StockCount = product.Stock.Sum(y => y.Qty)
+            };
     }
 }

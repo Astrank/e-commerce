@@ -28,8 +28,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\marti\\projects\\epe\\EPE.Database\\EPE.Database.csproj": {
-                "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.Database\\EPE.Database.csproj"
+              "C:\\Users\\marti\\projects\\epe\\EPE.Domain\\EPE.Domain.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.Domain\\EPE.Domain.csproj"
               }
             }
           }
@@ -43,6 +43,12 @@
       "frameworks": {
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -232,6 +238,9 @@
             "projectReferences": {
               "C:\\Users\\marti\\projects\\epe\\EPE.Application\\EPE.Application.csproj": {
                 "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.Application\\EPE.Application.csproj"
+              },
+              "C:\\Users\\marti\\projects\\epe\\EPE.Database\\EPE.Database.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\epe\\EPE.Database\\EPE.Database.csproj"
               }
             }
           }

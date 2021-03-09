@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using EPE.Application.OrdersAdmin;
-using EPE.Database;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +18,18 @@ namespace EPE.UI.Controllers
             Ok(getOrder.Do(id));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder([FromServices] UpdateOrder updateOrder, int id) => 
-            Ok(await updateOrder.Do(id));
+        public async Task<IActionResult> UpdateOrder([FromServices] UpdateOrder updateOrder, int id)
+        {
+            var success = await updateOrder.Do(id) > 0;
+                
+            if (success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

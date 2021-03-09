@@ -1,38 +1,21 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using EPE.Database;
-using EPE.Database.FileManager;
+using EPE.Domain.Infrastructure;
 
 namespace EPE.Application.ProductsAdmin
 {
+    [Service]
     public class DeleteProduct
     {
-        private ApplicationDbContext _context;
-        private IFileManager _fileManager;
+        private readonly IProductManager _productManager;
 
-        public DeleteProduct(ApplicationDbContext context, IFileManager fileManager)
+        public DeleteProduct(IProductManager productManager)
         {
-            _context = context;
-            _fileManager = fileManager;
+            _productManager = productManager;
         }
 
-        public string rootPath = "ProductsPath:Images";
-
-        public async Task<bool> Do(int id)
+        public Task<int> Do(int id)
         {
-            var product = _context.Products.FirstOrDefault(x => x.Id == id);
-
-            _context.Products.Remove(product);
-
-            if (product.Image != null)
-            {
-                _fileManager.DeleteImage(rootPath , product.Image);
-            }
-
-            await _context.SaveChangesAsync();
-
-            return true;
+            return _productManager.DeleteProduct(id);
         }
     }
 }

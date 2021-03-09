@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using EPE.Application.Projects;
-using EPE.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,20 +8,11 @@ namespace EPE.UI.Pages.Projects
 {
     public class ProjectsModel : PageModel
     {
-        private IProjectRepository _repository;
-        
-        public ProjectsModel(IProjectRepository repository)
-        {
-            _repository = repository;
-        }
+        public IEnumerable<GetProjects.Response> Projects { get; set; }
 
-        [BindProperty]
-        public ProjectViewModel Project { get; set; }
-        public List<ProjectViewModel> Projects { get; set; }
-
-        public void OnGet()
+        public void OnGet([FromServices] GetProjects getProducts)
         {
-            Projects = _repository.GetAllProjects().ToList();
+            Projects = getProducts.Do();
         }
 
         public void OnPost()

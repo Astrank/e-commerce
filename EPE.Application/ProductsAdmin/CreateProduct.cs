@@ -1,57 +1,26 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using EPE.Database;
-using EPE.Database.FileManager;
+using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace EPE.Application.ProductsAdmin
 {
+    [Service]
     public class CreateProduct
     {
-        private ApplicationDbContext _context;
-        private IFileManager _fileManager;
+        private readonly IProductManager _productManager;
 
-        public CreateProduct(ApplicationDbContext context, IFileManager fileManager)
+        public CreateProduct(IProductManager productManager)
         {
-            _context = context;
-            _fileManager = fileManager;
+            _productManager = productManager;
         }
         
-        public string rootPath = "ProductsPath:Images";
-
-        public async Task<Response> Do(Request request)
-        {
-            var imagePath = await _fileManager.SaveImage(rootPath, request.Image);
-
-            var product = new Product
-            {
-                Name = request.Name,
-                Description = request.Description,
-                Value = request.Value,
-                Image = imagePath,
-            };
-            _context.Products.Add(product);
-
-            await _context.SaveChangesAsync();
-
-            return new Response
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Value = product.Value,
-                Image = product.Image,
-            };
-        }
             
         public class Request
         {
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public IFormFile Image { get; set; }
+            public string Image { get; set; }
         }
 
         public class Response
@@ -61,6 +30,32 @@ namespace EPE.Application.ProductsAdmin
             public string Description { get; set; }
             public decimal Value { get; set; }
             public string Image { get; set; }
+        }
+        
+        public async Task<Response> Do(Request request)
+        {
+
+            var product = new Product
+            {
+                Name = request.Name,
+                Description = request.Description,
+                Value = request.Value,
+                Image = request.Image,
+            };
+            
+            if(await _productManager.CreateProduct(product) <= 0)
+            {
+                throw new System.Exception("Failed to create product"); //TODO: custom exceptions
+            };
+
+            return new Response
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Value = product.Value,
+                Image = product.Image,
+            };
         }
     }
 }

@@ -1,40 +1,30 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using EPE.Application.Infrastructure;
-using EPE.Database;
-using EPE.Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+using EPE.Domain.Infrastructure;
 
 namespace EPE.Application.Cart
 {
+    [Service]
     public class DeleteAllFromCart
     {
         private ISessionManager _sessionManager;
-        private ApplicationDbContext _ctx;
+        private IStockManager _stockManager;
 
-        public DeleteAllFromCart(ISessionManager sessionManager, ApplicationDbContext ctx)
+        public DeleteAllFromCart(ISessionManager sessionManager, IStockManager stockManager)
         {
             _sessionManager = sessionManager;
-            _ctx = ctx;
+            _stockManager = stockManager;
         }
 
-        public async Task<bool> Do(int stockId)
+        public class Request
         {
-            _sessionManager.DeleteAllFromCart(stockId);
+            public int StockId { get; set; }
+        }
 
-            var stockOnHold = _ctx.StockOnHold
-                .FirstOrDefault(x => x.StockId == stockId && x.SessionId == _sessionManager.GetId());
+        public async Task<bool> Do(Request request)
+        {
+            await _stockManager.DeleteAllFromHold(request.StockId, _sessionManager.GetId());
 
-            var stock = _ctx.Stock.FirstOrDefault(x => x.Id == stockId);
-
-            stock.Qty += stockOnHold.Qty;
-
-            _ctx.StockOnHold.Remove(stockOnHold);
-
-            await _ctx.SaveChangesAsync();
+            _sessionManager.DeleteAllFromCart(request.StockId);
 
             return true;
         }

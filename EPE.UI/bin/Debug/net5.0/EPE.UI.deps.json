@@ -26,6 +26,7 @@
       "EPE.UI/1.0.0": {
         "dependencies": {
           "EPE.Application": "1.0.0",
+          "EPE.Database": "1.0.0",
           "Microsoft.AspNetCore.HttpsPolicy": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.2",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.3",
@@ -1660,7 +1661,8 @@
       },
       "EPE.Application/1.0.0": {
         "dependencies": {
-          "EPE.Database": "1.0.0"
+          "EPE.Domain": "1.0.0",
+          "System.ComponentModel.Annotations": "5.0.0"
         },
         "runtime": {
           "EPE.Application.dll": {}

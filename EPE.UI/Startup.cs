@@ -4,15 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using EPE.Database;
-using EPE.Database.FileManager;
 using EPE.Application.Projects;
 using Microsoft.AspNetCore.Http;
-using EPE.Application.AuthorizedUsers;
-using EPE.Application.Infrastructure;
 using EPE.UI.Infrastructure;
+using EPE.Domain.Infrastructure;
+using EPE.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace EPE.UI
 {
@@ -70,15 +68,12 @@ namespace EPE.UI
             });
 
             services.AddTransient<IFileManager, FileManager>();
-            services.AddTransient<IProjectRepository, SQLServer_ProjectRepository>();
 
             services.AddSession(options => 
             {
                 options.Cookie.Name = "Cart";
                 options.Cookie.MaxAge = TimeSpan.FromMinutes(20);
             });
-
-            services.AddScoped<ISessionManager, SessionManager>();
 
             services.AddApplicationServices();
         }

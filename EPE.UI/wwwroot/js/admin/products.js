@@ -1,5 +1,5 @@
 var app = new Vue({
-    el: '#app',
+    el: "#app",
     data: {
         showList: false,
         showProduct: false,
@@ -14,6 +14,7 @@ var app = new Vue({
             description: "",
             value: 0,
             stock: [],
+            image: ""
         },
         file: "",
 
@@ -42,8 +43,27 @@ var app = new Vue({
                 .then(() => {
                     this.loading = false;
                 });
-
             this.toggleList();
+        },
+        getProduct(id){
+            this.loading = true;
+            axios.get('/Products/' + id)
+                .then(res => {
+                    this.productModel = {
+                        id: res.data.id,
+                        name: res.data.name,
+                        description: res.data.description,
+                        value: res.data.value,
+                        image: res.data.image
+                    };
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
+                });
+            this.toggleProduct();
         },
         newProduct() {
             this.productModel = {
@@ -92,13 +112,14 @@ var app = new Vue({
             var formData = new FormData();
 
             if (this.file != null || this.file == "") {
-                formData.append("image", this.file);
-            };
+                formData.append("imageFile", this.file);
+            }
 
             formData.append("id", this.productModel.id);
             formData.append("name", this.productModel.name);
             formData.append("description", this.productModel.description);
             formData.append("value", this.productModel.value);
+            formData.append("image", this.productModel.image);
 
             this.loading = true;
             axios.put('/Products', formData,
@@ -120,9 +141,9 @@ var app = new Vue({
 
             this.toggleList();
         },
-        deleteProduct(id){
+        deleteProduct(id, image){
             this.loading = true;
-            axios.delete('/products/' + id)
+            axios.delete('/products/' + id + '/' + image)
                 .then(res => {
                     console.log(res.data);
                     this.products.splice(this.objectIndex, 1);
@@ -136,10 +157,9 @@ var app = new Vue({
 
             this.toggleList();
         },
-        editProduct(product, index){
+        /*editProduct(product, index){
             this.objectIndex = index;
             this.selectedProduct = product;
-            console.log(product);
             this.products.forEach(x => {
                 if (x.id == product.id) {
                     this.productModel = {
@@ -147,13 +167,14 @@ var app = new Vue({
                         name: product.name,
                         description: product.description,
                         value: product.value,
-                        stock: product.stock,                                        
+                        stock: product.stock,
+                        image: product.image
                     }
                 }
             });
 
             this.toggleProduct();
-        },
+        },*/
 
         /*getStock(stock) {
             var totalS = 0;
@@ -171,39 +192,58 @@ var app = new Vue({
                 }
             });
         },*/
-        addStock() {
-            console.log(this.productModel.id);
-            this.productModel.stock.push({
-                productId: this.selectedProduct.id,
-                description: this.stockModel.description,
-                qty: this.stockModel.qty
-            });
-            console.log(this.productModel.stock);
+        
+        //console.log(this.productModel);
+        
+        /*this.loading = true;
+        axios.post('/stocks', this.stockModel)
+        .then(res => {
+            this.selectedProduct.stock.push(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        .then(() => {
+            this.loading = false;
+        });*/
 
-            this.stockModel = {
-                productId: 0,
-                description: "",
-                qty: ""
-            };
+        /* STOCK METHODS */
 
-            //console.log(this.productModel);
+        getStock(id) {
+            this.loading = true;
 
-            /*this.loading = true;
-            axios.post('/stocks', this.stockModel)
+            axios.get('/stocks/' + id)
                 .then(res => {
-                    this.selectedProduct.stock.push(res.data);
+                    this.stock = res.data;
                 })
                 .catch(err => {
                     console.log(err);
                 })
                 .then(() => {
                     this.loading = false;
-                });*/
+                });
+
+            this.toggleStock();
+        },
+        addStock() {
+            this.stock.push({
+                productId: this.productModel.id,
+                description: this.stockModel.description,
+                qty: this.stockModel.qty
+            });
+
+            console.log(this.stock);
+    
+            this.stockModel = {
+                productId: 0,
+                description: "",
+                qty: ""
+            };
         },
         updateStock() {
             this.loading = true;
             axios.put('/stocks', {
-                stock: this.productModel.stock.map(x => {
+                stock: this.stock.map(x => {
                     return {
                         id: x.id,
                         description: x.description,
@@ -229,7 +269,7 @@ var app = new Vue({
             axios.delete('/stocks/' + id)
                 .then(res => {
                     console.log(res);
-                    this.selectedProduct.stock.splice(index, 1);
+                    this.stock.splice(index, 1);
                 })
                 .catch(err => {
                     console.log(err);
