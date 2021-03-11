@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\EPE.Domain\\EPE.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj",
       "projectName": "EPE.Domain",
-      "projectPath": "C:\\Users\\marti\\projects\\EPE\\EPE.Domain\\EPE.Domain.csproj",
+      "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\projects\\EPE\\EPE.Domain\\obj\\",
+      "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",

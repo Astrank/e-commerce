@@ -10,3 +10,15 @@ C:\Users\marti\projects\EPE\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.c
 C:\Users\marti\projects\EPE\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.csproj.CopyComplete
 C:\Users\marti\projects\EPE\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.dll
 C:\Users\marti\projects\EPE\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.pdb
+C:\Users\marti\projects\EPE\src\EPE.Database\bin\Debug\netstandard2.1\EPE.Database.deps.json
+C:\Users\marti\projects\EPE\src\EPE.Database\bin\Debug\netstandard2.1\EPE.Database.dll
+C:\Users\marti\projects\EPE\src\EPE.Database\bin\Debug\netstandard2.1\EPE.Database.pdb
+C:\Users\marti\projects\EPE\src\EPE.Database\bin\Debug\netstandard2.1\EPE.Domain.dll
+C:\Users\marti\projects\EPE\src\EPE.Database\bin\Debug\netstandard2.1\EPE.Domain.pdb
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.csprojAssemblyReference.cache
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.AssemblyInfoInputs.cache
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.AssemblyInfo.cs
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.csproj.CoreCompileInputs.cache
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.csproj.CopyComplete
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.dll
+C:\Users\marti\projects\EPE\src\EPE.Database\obj\Debug\netstandard2.1\EPE.Database.pdb

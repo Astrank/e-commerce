@@ -7,3 +7,12 @@ C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.Assem
 C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.csproj.CoreCompileInputs.cache
 C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.dll
 C:\Users\marti\projects\EPE\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.pdb
+C:\Users\marti\projects\EPE\src\EPE.Domain\bin\Debug\netstandard2.1\EPE.Domain.deps.json
+C:\Users\marti\projects\EPE\src\EPE.Domain\bin\Debug\netstandard2.1\EPE.Domain.dll
+C:\Users\marti\projects\EPE\src\EPE.Domain\bin\Debug\netstandard2.1\EPE.Domain.pdb
+C:\Users\marti\projects\EPE\src\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.csprojAssemblyReference.cache
+C:\Users\marti\projects\EPE\src\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.AssemblyInfoInputs.cache
+C:\Users\marti\projects\EPE\src\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.AssemblyInfo.cs
+C:\Users\marti\projects\EPE\src\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.csproj.CoreCompileInputs.cache
+C:\Users\marti\projects\EPE\src\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.dll
+C:\Users\marti\projects\EPE\src\EPE.Domain\obj\Debug\netstandard2.1\EPE.Domain.pdb

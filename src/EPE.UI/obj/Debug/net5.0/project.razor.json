@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj",
+  "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "5.0",
@@ -15635,167 +15635,167 @@
   "RootNamespace": "EPE.UI",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Checkout\\Payment.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Checkout\\Payment.cshtml",
       "TargetPath": "Pages\\Checkout\\Payment.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\_ViewStart.cshtml",
       "TargetPath": "Pages\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Store\\_StoreLayout.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\_StoreLayout.cshtml",
       "TargetPath": "Pages\\Store\\_StoreLayout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Store\\Index.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Index.cshtml",
       "TargetPath": "Pages\\Store\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\_AdminLayout.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\_AdminLayout.cshtml",
       "TargetPath": "Pages\\Admin\\_AdminLayout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\ProjectsList.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\ProjectsList.cshtml",
       "TargetPath": "Pages\\Admin\\ProjectsList.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Store\\Product.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Product.cshtml",
       "TargetPath": "Pages\\Store\\Product.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Account\\_AccountLayout.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Account\\_AccountLayout.cshtml",
       "TargetPath": "Pages\\Account\\_AccountLayout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Store\\Order.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Order.cshtml",
       "TargetPath": "Pages\\Store\\Order.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\_ViewImports.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\_ViewImports.cshtml",
       "TargetPath": "Pages\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Home\\About.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Home\\About.cshtml",
       "TargetPath": "Pages\\Home\\About.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Components\\Cart\\Small.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Components\\Cart\\Small.cshtml",
       "TargetPath": "Pages\\Components\\Cart\\Small.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Shared\\_Layout.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Shared\\_Layout.cshtml",
       "TargetPath": "Pages\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Projects\\Project.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Projects\\Project.cshtml",
       "TargetPath": "Pages\\Projects\\Project.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Account\\Signup.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Account\\Signup.cshtml",
       "TargetPath": "Pages\\Account\\Signup.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\Orders.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Orders.cshtml",
       "TargetPath": "Pages\\Admin\\Orders.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\ProductsList.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\ProductsList.cshtml",
       "TargetPath": "Pages\\Admin\\ProductsList.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Account\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Account\\_ViewStart.cshtml",
       "TargetPath": "Pages\\Account\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\Projects.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Projects.cshtml",
       "TargetPath": "Pages\\Admin\\Projects.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\Product.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Product.cshtml",
       "TargetPath": "Pages\\Admin\\Product.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Projects\\Projects.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Projects\\Projects.cshtml",
       "TargetPath": "Pages\\Projects\\Projects.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Index.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Index.cshtml",
       "TargetPath": "Pages\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\Project.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Project.cshtml",
       "TargetPath": "Pages\\Admin\\Project.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\Index.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Index.cshtml",
       "TargetPath": "Pages\\Admin\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Account\\Login.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Account\\Login.cshtml",
       "TargetPath": "Pages\\Account\\Login.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Store\\Cart.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Cart.cshtml",
       "TargetPath": "Pages\\Store\\Cart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Checkout\\CustomerInformation.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Checkout\\CustomerInformation.cshtml",
       "TargetPath": "Pages\\Checkout\\CustomerInformation.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Components\\Cart\\Default.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Components\\Cart\\Default.cshtml",
       "TargetPath": "Pages\\Components\\Cart\\Default.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Store\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\_ViewStart.cshtml",
       "TargetPath": "Pages\\Store\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Shared\\_CookieConsentPartial.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Shared\\_CookieConsentPartial.cshtml",
       "TargetPath": "Pages\\Shared\\_CookieConsentPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Home\\Contact.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Home\\Contact.cshtml",
       "TargetPath": "Pages\\Home\\Contact.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\Pages\\Admin\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\_ViewStart.cshtml",
       "TargetPath": "Pages\\Admin\\_ViewStart.cshtml",
       "FileKind": "mvc"
     }
