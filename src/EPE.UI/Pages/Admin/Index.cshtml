@@ -1,0 +1,109 @@
+﻿@page
+@model EPE.UI.Pages.Admin.IndexModel
+@{
+}
+
+<div class="admin-list" v-if="showList">    
+    <button class="add-product-btn button is-success" @@click="newProduct">Add product</button>
+    <table class="table products-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Total stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(product, index) in products" @@click="getProduct(product.id, index)">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.value}}</td>
+                <td>{{product.stockCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="admin-element" v-else-if="showProduct">
+    <button class="button is-primary back-btn" @@click="toggleList">
+        <i class="fas fa-long-arrow-alt-left"></i>
+    </button>
+    <button class="button is-danger delete-product-btn" v-if="productModel.id"
+        @@click="deleteProduct(productModel.id, productModel.image)">Delete product</button>
+    <div class="product-form">
+        <div class="admin-data-form">
+            <div class="field">
+                <span></span>
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.name">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.description">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Value</label>
+                <div class="control">
+                    <input class="input" v-model="productModel.value">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Image</label>
+                <div class="control">
+                    <input type="file" class="input" @@change="getFile($event)">
+                </div>
+            </div>
+            <!-- toggleStock -->
+            <button class="button is-primary" @@click="getStock(productModel.id)" v-if="productModel.id">Manage stock</button>
+            <button @@click="createProduct" v-if="!productModel.id" class="button is-success">Create product</button>
+            <button @@click="updateProduct" v-else="" class="button is-success">Update product</button>
+        </div>
+    </div>
+</div>
+
+<div class="admin-stock" v-else-if="showStock">
+
+    <button class="button is-primary back-btn" @@click="toggleProduct">
+        <i class="fas fa-long-arrow-alt-left"></i>
+    </button>
+
+    <table class="table stock-form">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody v-if="stock.length > 0">
+            <tr v-for="(s, index) in stock">
+                <td><input class="input" v-model="s.description" /></td>
+                <td><input class="input" v-model="s.qty" /></td>
+                <td><a class="has-text-danger" @@click="deleteStock(s.id, index)">
+                    <i class="fas fa-times is-danger"></i>
+                </a></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table add-stock-form">
+        <tbody>
+            <tr>
+                <td><input class="input" v-model="stockModel.description" /></td>
+                <td><input class="input" v-model="stockModel.qty" /></td>
+                <td><button class="button is-success" @@click="addStock">
+                    <i class="fas fa-level-up-alt"></i>
+                </button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="button is-primary stock-save-btn" @@click="updateStock">Save changes</button>
+</div>
+
+@section scripts{
+    <script src="~/js/admin/products.js"></script>
+}

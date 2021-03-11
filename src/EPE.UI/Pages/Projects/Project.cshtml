@@ -1,0 +1,18 @@
+﻿@page
+@model Projects.ProjectModel
+
+@inject IAuthorizationService authService;
+
+@{
+    ViewBag.Title = @Model.Project.Title + " | ";
+    ViewBag.Section = @Model.Project.Title;
+}
+
+    <h1>@Model.Project.Title</h1>
+    <img src="~/media/projects/@Model.Project.ImagePath" width="100%">
+    <p>@Model.Project.Description - @Model.Project.Tags</p>
+
+@if ((await authService.AuthorizeAsync(User, "Manager")).Succeeded)
+{  
+    <a class="btn btn-primary" asp-page="/Admin/Projects">Edit</a>
+}
