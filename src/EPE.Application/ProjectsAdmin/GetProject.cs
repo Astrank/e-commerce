@@ -1,6 +1,8 @@
 ﻿using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EPE.Application.ProjectsAdmin
 {
@@ -20,7 +22,8 @@ namespace EPE.Application.ProjectsAdmin
             public string Title { get; set; }
             public string Description { get; set; }
             public string Tags { get; set; }
-            public string ImagePath { get; set; }
+            public string PrimaryImage { get; set; }
+            public IEnumerable<string> Images { get; set; }
         }
 
         public Response Do(int id) => 
@@ -33,7 +36,8 @@ namespace EPE.Application.ProjectsAdmin
                 Title = project.Title,
                 Description = project.Description,
                 Tags = project.Tags,
-                ImagePath = project.Image
+                PrimaryImage = project.PrimaryImage,
+                Images = project.Images.Select(x => x.Path)
             };
     }
 }

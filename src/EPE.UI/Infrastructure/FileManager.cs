@@ -18,7 +18,10 @@ namespace EPE.UI.Infrastructure
         public void DeleteImage(string rootPath, string image)
         {
             var imgPath = $"{_config[rootPath]}/{image}";
-            File.Delete(imgPath);
+            if (File.Exists(imgPath))
+            {
+                File.Delete(imgPath);
+            }
         }
 
         public async Task<string> SaveImage(string rootPath, IFormFile image)
@@ -33,7 +36,7 @@ namespace EPE.UI.Infrastructure
                 }
 
                 var mime = image.FileName.Substring(image.FileName.LastIndexOf("."));
-                var fileName = $"img_{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}{mime}";
+                var fileName = $"img_{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss-fff")}{mime}";
 
                 using(var fileStream = new FileStream(Path.Combine(savePath, fileName), FileMode.Create))
                 {

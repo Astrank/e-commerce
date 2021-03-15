@@ -12,9 +12,12 @@
             title: "",
             description: "",
             tags: "",
-            image: "",
+            primaryImage: "",
+            images: null
         },
-        imageFile: "",
+
+        primaryImageFile: null,
+        imageFiles: null,
     },
     mounted() {
         this.getProjects();
@@ -42,12 +45,14 @@
 
             axios.get('/Projects/' + id) 
                 .then(res => {
+                    console.log(res);
                     this.projectModel = {
                         id: res.data.id,
                         title: res.data.title,
                         description: res.data.description,
                         tags: res.data.tags,
-                        image: res.data.imagePath,
+                        primaryImage: res.data.primaryImage,
+                        images: res.data.images
                     }
                 })
                 .catch(err => {
@@ -70,8 +75,11 @@
 
             this.toggleProject();
         },
-        getFile(event) {
-            this.imageFile = event.target.files[0];
+        getPrimaryImage(event) {
+            this.primaryImageFile = event.target.files[0];
+        },
+        getImageFiles(event) {
+            this.imageFiles = event.target.files;
         },
         createProject() {
             this.loading = true;
@@ -81,7 +89,12 @@
             formData.append("title", this.projectModel.title);
             formData.append("description", this.projectModel.description);
             formData.append("tags", this.projectModel.tags);
-            formData.append("image", this.imageFile);
+            formData.append("primaryImageFile", this.primaryImageFile);
+            if (this.imageFiles != null) {
+                for (let i = 0; i < this.imageFiles.length; i++) {
+                    formData.append("imageFiles", this.imageFiles[i]);
+                }
+            };
 
             axios.post("/Projects/", formData,
             {
@@ -100,6 +113,8 @@
                 });
 
             this.getProjects();
+            this.primaryImageFile = null;
+            this.imageFiles = null;
         },
         updateProject() {
             this.loading = true;
@@ -110,8 +125,20 @@
             formData.append("title", this.projectModel.title);
             formData.append("description", this.projectModel.description);
             formData.append("tags", this.projectModel.tags);
-            formData.append("imageFile", this.imageFile);
-            formData.append("image", this.projectModel.image);
+            formData.append("primaryImage", this.projectModel.primaryImage);
+            formData.append("primaryImageFile", this.primaryImageFile);
+
+            if (this.projectModel.images != null) {
+                for (let i = 0; i < this.projectModel.images.length; i++) {
+                    formData.append("images", this.projectModel.images[i]);
+                }
+            }
+            
+            if (this.imageFiles) {
+                for (let i = 0; i < this.imageFiles.length; i++) {
+                    formData.append("imageFiles", this.imageFiles[i]);
+                }
+            }
 
             axios.put("/Projects", formData,
             {
@@ -132,6 +159,8 @@
                 });
 
             this.getProjects();
+            this.primaryImageFile = null;
+            this.imageFiles = null;
         },
         deleteProject(id) {
             this.loading = true;

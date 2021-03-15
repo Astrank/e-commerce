@@ -4,7 +4,7 @@
 }
 
 <div class="admin-list" v-if="showList">
-    <button class="add-product-btn button is-success" @@click="newProject()">Add project</button>
+    <button class="add-product-btn button is-link" @@click="newProject()">Add project</button>
     <table class="table products-table">
         <thead>
             <tr>
@@ -24,7 +24,7 @@
 </div>
 
 <div class="admin-element" v-else="">
-    <button class="button is-primary back-btn" @@click="toggleList()">
+    <button class="button back-btn" @@click="toggleList()">
         <i class="fas fa-long-arrow-alt-left"></i>
     </button>
     <button class="button is-danger delete-product-btn" v-if="projectModel.id"
@@ -52,14 +52,20 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label">Image</label>
+                <label class="label">Primary Image</label>
                 <div class="control">
-                    <input type="file" class="input" @@change="getFile($event)">
+                    <input type="file" class="input" @@change="getPrimaryImage($event)">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Images</label>
+                <div class="control">
+                    <input type="file" class="input" multiple @@change="getImageFiles($event)">
                 </div>
             </div>
 
-            <button @@click="createProject()" v-if="!projectModel.id" class="button is-success">Create product</button>
-            <button @@click="updateProject()" v-else="" class="button is-success">Update product</button>
+            <button @@click="createProject()" v-if="!projectModel.id" class="button is-link">Create product</button>
+            <button @@click="updateProject()" v-else="" class="button is-link">Update product</button>
         </div>
     </div>
 </div>

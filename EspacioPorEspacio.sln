@@ -1,21 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1550015F-8F08-48AC-8341-44825ABD2816}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPE.UI", "src\EPE.UI\EPE.UI.csproj", "{7C16A760-A74A-4192-BB9D-06B016E7141F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPE.UI", "src\EPE.UI\EPE.UI.csproj", "{7C16A760-A74A-4192-BB9D-06B016E7141F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPE.Domain", "src\EPE.Domain\EPE.Domain.csproj", "{0E87F221-9143-4981-B6CB-04C7975A7173}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPE.Domain", "src\EPE.Domain\EPE.Domain.csproj", "{0E87F221-9143-4981-B6CB-04C7975A7173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPE.Database", "src\EPE.Database\EPE.Database.csproj", "{892C3B7A-FB34-4F2A-97A3-A7BDF3A90188}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPE.Database", "src\EPE.Database\EPE.Database.csproj", "{892C3B7A-FB34-4F2A-97A3-A7BDF3A90188}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPE.Application", "src\EPE.Application\EPE.Application.csproj", "{C07FD169-4BEB-469C-9C7F-C02C517F956D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPE.Application", "src\EPE.Application\EPE.Application.csproj", "{C07FD169-4BEB-469C-9C7F-C02C517F956D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{316B096D-EAA4-4481-8475-85DA737CB51C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{F13EF8D8-099E-43CF-97F2-2FE170D76AF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{F13EF8D8-099E-43CF-97F2-2FE170D76AF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7C16A760-A74A-4192-BB9D-06B016E7141F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -91,11 +88,17 @@ Global
 		{F13EF8D8-099E-43CF-97F2-2FE170D76AF6}.Release|x86.ActiveCfg = Release|Any CPU
 		{F13EF8D8-099E-43CF-97F2-2FE170D76AF6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7C16A760-A74A-4192-BB9D-06B016E7141F} = {1550015F-8F08-48AC-8341-44825ABD2816}
 		{0E87F221-9143-4981-B6CB-04C7975A7173} = {1550015F-8F08-48AC-8341-44825ABD2816}
 		{892C3B7A-FB34-4F2A-97A3-A7BDF3A90188} = {1550015F-8F08-48AC-8341-44825ABD2816}
 		{C07FD169-4BEB-469C-9C7F-C02C517F956D} = {1550015F-8F08-48AC-8341-44825ABD2816}
 		{F13EF8D8-099E-43CF-97F2-2FE170D76AF6} = {316B096D-EAA4-4481-8475-85DA737CB51C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6042EF5-1CB5-4A73-8782-1C0DC09A8D2A}
 	EndGlobalSection
 EndGlobal

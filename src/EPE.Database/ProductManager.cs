@@ -31,10 +31,11 @@ namespace EPE.Database
                 .Select(selector)
                 .ToList();
         }
-        
+
         public TResult GetProductById<TResult>(int id, Func<Product, TResult> selector)
         {
             return _ctx.Products
+                .Include(x => x.Images)
                 .Where(x => x.Id == id)
                 .Select(selector)
                 .FirstOrDefault();
@@ -49,6 +50,12 @@ namespace EPE.Database
                 .FirstOrDefault();
         }
 
+        public Task<int> SaveProductImages(List<ProductImage> productImages)
+        {
+            _ctx.ProductImage.AddRange(productImages);
+
+            return _ctx.SaveChangesAsync();
+        }
 
         public Task<int> UpdateProduct(Product product)
         {
@@ -57,13 +64,30 @@ namespace EPE.Database
             return _ctx.SaveChangesAsync();
         }
 
-        public Task<int> DeleteProduct(int id)
+        public async Task<List<string>> DeleteProduct(int id)
         {
-            var product = _ctx.Products.FirstOrDefault(x => x.Id == id);
+            var product = _ctx.Products
+                .Include(x => x.Images)
+                .FirstOrDefault(x => x.Id == id);
 
             _ctx.Products.Remove(product);
 
-            return _ctx.SaveChangesAsync();
+            if (await _ctx.SaveChangesAsync() > 0)
+            {
+                var images = new List<string>
+                {
+                    product.PrimaryImage
+                };
+
+                foreach (var image in product.Images)
+                {
+                    images.Add(image.Path);   
+                }
+
+                return images;
+            }
+
+            throw new System.Exception("Error deleting a product");
         }
     }
 }

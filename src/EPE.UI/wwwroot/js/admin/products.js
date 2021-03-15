@@ -14,9 +14,11 @@ var app = new Vue({
             description: "",
             value: 0,
             stock: [],
-            image: ""
+            primaryImage: "",
+            images: null
         },
-        file: null,
+        primaryImageFile: null,
+        imageFiles: null,
 
         selectedStock: null,
         
@@ -48,15 +50,17 @@ var app = new Vue({
         getProduct(id, index){
             this.loading = true;
             this.objectIndex = index;
-            
+
             axios.get('/Products/' + id)
                 .then(res => {
+                    console.log(res);
                     this.productModel = {
                         id: res.data.id,
                         name: res.data.name,
                         description: res.data.description,
                         value: res.data.value,
-                        image: res.data.image
+                        primaryImage: res.data.primaryImage,
+                        images: res.data.images
                     };
                 })
                 .catch(err => {
@@ -65,6 +69,7 @@ var app = new Vue({
                 .then(() => {
                     this.loading = false;
                 });
+            
             this.toggleProduct();
         },
         newProduct() {
@@ -78,17 +83,26 @@ var app = new Vue({
 
             this.toggleProduct();
         },
-        getFile(event) {
-            this.file = event.target.files[0];
+        getPrimaryImage(event) {
+            this.primaryImageFile = event.target.files[0];
         },
-        createProduct(){
+        getImages(event) {
+            this.imageFiles = event.target.files;
+        },
+        createProduct() {
             var formData = new FormData();
 
-            formData.append("image", this.file);
             formData.append("id", this.productModel.id);
             formData.append("name", this.productModel.name);
             formData.append("description", this.productModel.description);
             formData.append("value", this.productModel.value);
+            formData.append("primaryImageFile", this.primaryImageFile);
+
+            if (this.imageFiles != null) {
+                for (let i = 0; i < this.imageFiles.length; i++) {
+                    formData.append("imageFiles", this.imageFiles[i]);
+                }
+            };
 
             this.loading = true;
             axios.post('/Products', formData,
@@ -113,15 +127,25 @@ var app = new Vue({
         updateProduct(){
             var formData = new FormData();
 
-            if (this.file != null || this.file == "") {
-                formData.append("imageFile", this.file);
-            }
-
             formData.append("id", this.productModel.id);
             formData.append("name", this.productModel.name);
             formData.append("description", this.productModel.description);
             formData.append("value", this.productModel.value);
-            formData.append("image", this.productModel.image);
+            formData.append("primaryImage", this.productModel.primaryImage);
+            formData.append("primaryImageFile", this.primaryImageFile);
+
+            if (this.productModel.images != null) {
+                for (let i = 0; i < this.productModel.images.length; i++) {
+                    formData.append("images", this.productModel.images[i]);
+                }
+            }
+            
+            if (this.imageFiles) {
+                for (let i = 0; i < this.imageFiles.length; i++) {
+                    formData.append("imageFiles", this.imageFiles[i]);
+                }
+            }
+
 
             this.loading = true;
             axios.put('/Products', formData,
@@ -143,11 +167,10 @@ var app = new Vue({
 
             this.toggleList();
         },
-        deleteProduct(id, image){
+        deleteProduct(id){
             this.loading = true;
-            axios.delete('/products/' + id + '/' + image)
+            axios.delete('/products/' + id)
                 .then(res => {
-                    console.log(res.data);
                     this.products.splice(this.objectIndex, 1);
                 })
                 .catch(err => {

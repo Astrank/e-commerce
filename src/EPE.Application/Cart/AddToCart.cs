@@ -26,8 +26,7 @@ namespace EPE.Application.Cart
         {
             if (!_stockManager.EnoughStock(request.StockId, request.Qty))
             {
-                //TODO: return not enough stock
-                return false;
+                throw new System.Exception("Not enough stock.");
             }
 
             await _stockManager.PutStockOnHold(request.StockId, request.Qty, _sessionManager.GetId());
@@ -41,7 +40,7 @@ namespace EPE.Application.Cart
                 Qty = request.Qty,
                 ProductName = stock.Product.Name,
                 Value = stock.Product.Value,
-                Image = stock.Product.Image,
+                Image = stock.Product.PrimaryImage,
                 Description = stock.Description
             };
 

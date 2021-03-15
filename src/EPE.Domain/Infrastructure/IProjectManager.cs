@@ -12,7 +12,8 @@ namespace EPE.Domain.Infrastructure
         TResult GetProjectById<TResult>(int id, Func<Project, TResult> selector);
         TResult GetProjectByName<TResult>(string title, Func<Project, TResult> selector);
         IEnumerable<TResult> GetProjects<TResult>(Func<Project, TResult> selector);
-        Task<int> DeleteProject(int id);
+        Task<int> SaveProjectImages(List<ProjectImage> projectImages);
+        Task<List<string>> DeleteProject(int id);
         Task<int> UpdateProject(Project project);
     }
 }

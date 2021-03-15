@@ -1,5 +1,6 @@
 ﻿using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace EPE.Database
         public TResult GetProjectById<TResult>(int id, Func<Project, TResult> selector)
         {
             return _ctx.Projects
+                .Include(x => x.Images)
                 .Where(x => x.Id == id)
                 .Select(selector)
                 .FirstOrDefault();
@@ -46,6 +48,13 @@ namespace EPE.Database
                 .ToList();
         }
 
+        public Task<int> SaveProjectImages(List<ProjectImage> projectImages)
+        {
+            _ctx.ProjectImage.AddRange(projectImages);
+
+            return _ctx.SaveChangesAsync();
+        }
+
         public Task<int> UpdateProject(Project project)
         {
             _ctx.Projects.Update(project);
@@ -53,13 +62,30 @@ namespace EPE.Database
             return _ctx.SaveChangesAsync();
         }
 
-        public Task<int> DeleteProject(int id)
+        public async Task<List<string>> DeleteProject(int id)
         {
-            var project = _ctx.Projects.FirstOrDefault(x => x.Id == id);
+            var project = _ctx.Projects
+                .Include(x => x.Images)
+                .FirstOrDefault(x => x.Id == id);
 
             _ctx.Projects.Remove(project);
 
-            return _ctx.SaveChangesAsync();
+            if (await _ctx.SaveChangesAsync() > 0)
+            {
+                var images = new List<string>
+                {
+                    project.PrimaryImage
+                };
+
+                foreach (var image in project.Images)
+                {
+                    images.Add(image.Path);   
+                }
+
+                return images;
+            }
+
+            throw new System.Exception("Error deleting a project");
         }
     }
 }

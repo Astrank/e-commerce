@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj": {}
+    "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj": {
+    "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj",
         "projectName": "EPE.Application",
-        "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj": {
-                "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj"
+              "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj"
               }
             }
           }
@@ -58,18 +58,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj": {
+    "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj",
         "projectName": "EPE.Database",
-        "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -86,8 +86,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj": {
-                "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj"
+              "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj"
               }
             }
           }
@@ -148,18 +148,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj": {
+    "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj",
         "projectName": "EPE.Domain",
-        "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -202,18 +202,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj": {
+    "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
         "projectName": "EPE.UI",
-        "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -230,11 +230,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj": {
-                "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj"
+              "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj"
               },
-              "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj": {
-                "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj"
+              "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj"
               }
             }
           }
@@ -284,7 +284,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

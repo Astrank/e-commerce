@@ -15660,11 +15660,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\ProjectsList.cshtml",
-      "TargetPath": "Pages\\Admin\\ProjectsList.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Product.cshtml",
       "TargetPath": "Pages\\Store\\Product.cshtml",
       "FileKind": "mvc"
@@ -15720,11 +15715,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\ProductsList.cshtml",
-      "TargetPath": "Pages\\Admin\\ProductsList.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Account\\_ViewStart.cshtml",
       "TargetPath": "Pages\\Account\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -15735,11 +15725,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Product.cshtml",
-      "TargetPath": "Pages\\Admin\\Product.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Projects\\Projects.cshtml",
       "TargetPath": "Pages\\Projects\\Projects.cshtml",
       "FileKind": "mvc"
@@ -15747,11 +15732,6 @@
     {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Index.cshtml",
       "TargetPath": "Pages\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Project.cshtml",
-      "TargetPath": "Pages\\Admin\\Project.cshtml",
       "FileKind": "mvc"
     },
     {

@@ -34,7 +34,7 @@ namespace EPE.Application.Projects
                 Title = project.Title,
                 Description = project.Description,
                 Tags = project.Tags,
-                ImagePath = project.Image
+                ImagePath = project.PrimaryImage
             };
     }
 }

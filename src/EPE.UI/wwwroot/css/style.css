@@ -202,6 +202,16 @@
 .back-btn,
 .delete-product-btn {
   margin: 10px 0;
+  color: #fff;
+  background-color: rgb(194, 194, 194);
+}
+
+.back-btn:focus,
+.back-btn:hover,
+.delete-product-btn:focus
+.delete-product-btn:hover {
+  background-color: rgb(196, 196, 196);
+  color: #fff;
 }
 
 .table td, .table th {

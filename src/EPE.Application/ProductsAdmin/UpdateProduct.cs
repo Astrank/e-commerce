@@ -22,7 +22,8 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public string Image { get; set; }
+            public string PrimaryImage { get; set; }
+            public List<string> Images { get; set; }
         }
 
         public class Response
@@ -31,7 +32,8 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public string Image { get; set; }
+            public string PrimaryImage { get; set; }
+            public IEnumerable<string> Images { get; set; }
         }
 
         public async Task<Response> Do(Request request)
@@ -41,7 +43,20 @@ namespace EPE.Application.ProductsAdmin
             product.Name = request.Name;
             product.Description = request.Description;
             product.Value = request.Value;
-            product.Image = request.Image;
+            product.PrimaryImage = request.PrimaryImage;
+
+            List<ProductImage> images = new List<ProductImage>();
+
+            foreach (var image in request.Images)
+            {
+                images.Add(new ProductImage
+                {
+                    ProductId = product.Id,
+                    Path = image,
+                });
+            };
+
+            product.Images = images;
 
             await _productManager.UpdateProduct(product);
 
@@ -51,7 +66,8 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
-                Image = product.Image
+                PrimaryImage = product.PrimaryImage,
+                Images = product.Images.Select(x => x.Path)
             };
         }
     }

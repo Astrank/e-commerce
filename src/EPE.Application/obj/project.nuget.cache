@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R/4gvq30UYto9yzlOcE9aERt44hzg7V/hLKIv+qH/FHsWjhcq/kIkmv0ghHEC/MFrKi/oGmHUTp6Fq9W+4t4Og==",
+  "dgSpecHash": "m94gKMmw0M4YcmWuw07wM7do+1FdR6350PljNd21JpvKk9HfctIkPnKTRgJ2D+XwR2wdClFRTlrnPKBtkpqiQw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj",
+  "projectFilePath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

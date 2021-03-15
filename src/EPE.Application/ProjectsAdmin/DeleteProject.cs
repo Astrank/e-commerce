@@ -1,4 +1,5 @@
 ﻿using EPE.Domain.Infrastructure;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EPE.Application.ProjectsAdmin
@@ -13,7 +14,7 @@ namespace EPE.Application.ProjectsAdmin
             _projectManager = projectManager;
         }
 
-        public Task<int> Do(int id)
+        public Task<List<string>> Do(int id)
         {
             return _projectManager.DeleteProject(id);
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EPE.Domain.Infrastructure;
 
@@ -13,7 +14,7 @@ namespace EPE.Application.ProductsAdmin
             _productManager = productManager;
         }
 
-        public Task<int> Do(int id)
+        public Task<List<string>> Do(int id)
         {
             return _productManager.DeleteProduct(id);
         }

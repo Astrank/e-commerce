@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 
@@ -20,7 +22,8 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public string Image { get; set; }
+            public string PrimaryImage { get; set; }
+            public IEnumerable<string> Images { get; set; }
         }
 
         public ProductViewModel Do(int id) =>
@@ -33,7 +36,8 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
-                Image = product.Image,
+                PrimaryImage = product.PrimaryImage,
+                Images = product.Images.Select(x => x.Path)
             };
     }
 }

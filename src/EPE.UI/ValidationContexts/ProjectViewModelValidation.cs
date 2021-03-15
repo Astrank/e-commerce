@@ -17,8 +17,6 @@ namespace EPE.UI.ValidationContexts
                 .MaximumLength(100);
             RuleFor(x => x.Tags)
                 .NotNull();
-            RuleFor(x => x.Image)
-                .NotNull();
         }
     }
 }

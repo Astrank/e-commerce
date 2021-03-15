@@ -1,5 +1,8 @@
 ﻿using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EPE.Application.ProjectsAdmin
@@ -20,7 +23,8 @@ namespace EPE.Application.ProjectsAdmin
             public string Title { get; set; }
             public string Description { get; set; }
             public string Tags { get; set; }
-            public string ImagePath { get; set; }
+            public string PrimaryImage { get; set; }
+            public IEnumerable<string> Images { get; set; }
         }
 
         public class Response
@@ -29,7 +33,8 @@ namespace EPE.Application.ProjectsAdmin
             public string Title { get; set; }
             public string Description { get; set; }
             public string Tags { get; set; }
-            public string ImagePath { get; set; }
+            public string PrimaryImage { get; set; }
+            public IEnumerable<string> Images { get; set; }
         }
 
         public async Task<Response> Do(Request request)
@@ -39,7 +44,20 @@ namespace EPE.Application.ProjectsAdmin
             project.Title = request.Title;
             project.Description = request.Description;
             project.Tags = request.Tags;
-            project.Image = request.ImagePath;
+            project.PrimaryImage = request.PrimaryImage;
+
+            List<ProjectImage> images = new List<ProjectImage>();
+
+            foreach (var image in request.Images)
+            {
+                images.Add(new ProjectImage
+                {
+                    ProjectId = project.Id,
+                    Path = image,
+                });
+            };
+
+            project.Images = images;
 
             await _projectManager.UpdateProject(project);
 
@@ -49,7 +67,8 @@ namespace EPE.Application.ProjectsAdmin
                 Title = project.Title,
                 Description = project.Description,
                 Tags = project.Tags,
-                ImagePath = project.Image
+                PrimaryImage = project.PrimaryImage,
+                Images = project.Images.Select(x => x.Path)
             };
         }
     }

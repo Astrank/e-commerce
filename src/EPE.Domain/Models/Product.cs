@@ -8,7 +8,8 @@ namespace EPE.Domain.Models
         public string  Name { get; set; }
         public string Description { get; set; }
         public decimal Value { get; set; }
-        public string Image { get; set; }
+        public string PrimaryImage { get; set; }
+        public ICollection<ProductImage> Images { get; set; }
 
         public ICollection<Stock> Stock { get; set; }
     }

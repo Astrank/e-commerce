@@ -42,7 +42,7 @@ namespace EPE.Application.Products
                 Name = product.Name,
                     Description = product.Description,
                     Value = product.Value.ValueToString(),
-                    Image = product.Image,
+                    Image = product.PrimaryImage,
 
                     StockCount = product.Stock.Sum(y => y.Qty)
             };

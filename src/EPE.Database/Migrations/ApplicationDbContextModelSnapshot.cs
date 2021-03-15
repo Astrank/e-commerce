@@ -89,10 +89,10 @@ namespace EPE.Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("PrimaryImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Value")
@@ -101,6 +101,26 @@ namespace EPE.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>
@@ -116,7 +136,7 @@ namespace EPE.Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("PrimaryImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tags")
@@ -128,6 +148,26 @@ namespace EPE.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProjectImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectImage");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Stock", b =>
@@ -394,6 +434,28 @@ namespace EPE.Database.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("EPE.Domain.Models.ProductImage", b =>
+                {
+                    b.HasOne("EPE.Domain.Models.Product", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProjectImage", b =>
+                {
+                    b.HasOne("EPE.Domain.Models.Project", "Project")
+                        .WithMany("Images")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("EPE.Domain.Models.Stock", b =>
                 {
                     b.HasOne("EPE.Domain.Models.Product", "Product")
@@ -474,7 +536,14 @@ namespace EPE.Database.Migrations
 
             modelBuilder.Entity("EPE.Domain.Models.Product", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.Project", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Stock", b =>

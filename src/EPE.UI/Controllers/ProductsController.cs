@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EPE.Application.ProductsAdmin;
 using EPE.UI.Infrastructure;
@@ -42,17 +43,28 @@ namespace EPE.UI.Controllers
                 return BadRequest();
             }
 
-            var imagePath = await _fileManager.SaveImage(rootPath, vm.ImageFile);
+            var primaryImage = await _fileManager.SaveImage(rootPath, vm.PrimaryImageFile);
+            
+            var images = new List<string>();
+
+            if (vm.ImageFiles != null)
+            {
+                foreach (var image in vm.ImageFiles)
+                {
+                    images.Add(await _fileManager.SaveImage(rootPath, image));
+                }
+            }
 
             var request = new CreateProduct.Request
             {
                 Name = vm.Name,
                 Description = vm.Description,
                 Value = vm.Value,
-                Image = imagePath
+                PrimaryImage = primaryImage,
+                Images = images
             };
 
-            return Ok(createProduct.Do(request));
+            return Ok(await createProduct.Do(request));
         }
 
         [HttpPut("")]
@@ -66,31 +78,55 @@ namespace EPE.UI.Controllers
                 Name = vm.Name,
                 Description = vm.Description,
                 Value = vm.Value,
-                Image = vm.Image,
+                PrimaryImage = vm.PrimaryImage,
+                Images = vm.Images
             };
 
-            if (vm.ImageFile != null)
+            // TODO: refactor
+            if (vm.PrimaryImageFile != null)
             {
-                if (vm.Image != null || vm.Image != "")
+                if (vm.PrimaryImage != null || vm.PrimaryImage != "")
                 {
-                    _fileManager.DeleteImage(rootPath, vm.Image);
+                    _fileManager.DeleteImage(rootPath, vm.PrimaryImage);
                 }
 
-                var imgPath = await _fileManager.SaveImage(rootPath, vm.ImageFile);
-                request.Image = imgPath.ToString();
+                var imgPath = await _fileManager.SaveImage(rootPath, vm.PrimaryImageFile);
+                request.PrimaryImage = imgPath;
             };
 
-            return Ok(updateProduct.Do(request));
+            if (vm.ImageFiles != null)
+            {
+                if (vm.Images != null)
+                {
+                    foreach (var image in vm.Images)
+                    {
+                        _fileManager.DeleteImage(rootPath, image);
+                    }
+                }
+
+                List<string> images =  new List<string>();
+
+                foreach (var image in vm.ImageFiles)
+                {
+                    var imgPath = await _fileManager.SaveImage(rootPath, vm.PrimaryImageFile);
+                    images.Add(imgPath);
+                }
+
+                request.Images = images;
+            };
+
+            return Ok(await updateProduct.Do(request));
         } 
 
-        [HttpDelete("{id}/{image}")]
-        public async Task<int> DeleteProduct([FromServices] DeleteProduct deleteProduct, int id, string image)
+        [HttpDelete("{id}")]
+        public async Task DeleteProduct([FromServices] DeleteProduct deleteProduct, int id)
         {
-            var success = await deleteProduct.Do(id);
-            
-            _fileManager.DeleteImage(rootPath, image);
+            var images = await deleteProduct.Do(id);
 
-            return success;
+            foreach (var i in images)
+            {
+                _fileManager.DeleteImage(rootPath, i);
+            }
         }
     }
 }

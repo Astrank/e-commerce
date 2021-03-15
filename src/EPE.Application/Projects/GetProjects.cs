@@ -20,7 +20,7 @@ namespace EPE.Application.Projects
             public string Title { get; set; }
             public string Desctription { get; set; }
             public string Tags { get; set; }
-            public string ImagePath { get; set; }
+            public string PrimaryImage { get; set; }
         }
 
         public IEnumerable<Response> Do()
@@ -36,7 +36,7 @@ namespace EPE.Application.Projects
                 Title = project.Title,
                 Desctription = project.Description,
                 Tags = project.Tags,
-                ImagePath = project.Image
+                PrimaryImage = project.PrimaryImage
             };
     }
 }
