@@ -24,6 +24,8 @@ namespace EPE.Application.Products
             public string Name { get; set; }
             public string Description { get; set; }
             public string Value { get; set; }
+            public string PrimaryImage { get; set; }
+            public IEnumerable<string> Images { get; set; }
             public IEnumerable<StockViewModel> Stock { get; set; }
         }
 
@@ -46,6 +48,8 @@ namespace EPE.Application.Products
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value.ValueToString(),
+                PrimaryImage = product.PrimaryImage,
+                Images = product.Images.Select(x => x.Path),
 
                 Stock = product.Stock.Select(y => new StockViewModel
                 {

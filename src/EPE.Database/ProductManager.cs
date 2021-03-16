@@ -44,6 +44,7 @@ namespace EPE.Database
         public TResult GetProductByName<TResult>(string name, Func<Product, TResult> selector)
         {
             return _ctx.Products
+                .Include(x => x.Images)
                 .Include(x => x.Stock)
                 .Where(x => x.Name == name)
                 .Select(selector)

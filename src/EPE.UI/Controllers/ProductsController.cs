@@ -108,7 +108,7 @@ namespace EPE.UI.Controllers
 
                 foreach (var image in vm.ImageFiles)
                 {
-                    var imgPath = await _fileManager.SaveImage(rootPath, vm.PrimaryImageFile);
+                    var imgPath = await _fileManager.SaveImage(rootPath, image);
                     images.Add(imgPath);
                 }
 

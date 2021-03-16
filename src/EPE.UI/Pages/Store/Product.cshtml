@@ -15,23 +15,33 @@
         <div class="side-carousel">
             <ul>
                 <li>
-                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
+                    <img class="side-carousel-image" src="~/media/products/@Model.Product.PrimaryImage" alt="">
                 </li>
-                <li>
-                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
-                </li>
-                <li>
-                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
-                </li>
-                <li>
-                    <img class="side-carousel-image" src="~/media/products/img_25-02-2021-19-20-31.jpg" alt="">
-                </li>
+                @{
+                    foreach (var image in Model.Product.Images)
+                    {
+                        <li>
+                            <img class="side-carousel-image" src="~/media/products/@image" alt="">
+                        </li>
+                    }
+                }
             </ul>
         </div>
         <div class="product-image-container">
             <div class="splide">
                 <div class="splide__track">
                     <ul class="splide__list">
+                        <li class="splide__slide">
+                            <img src="~/media/products/@Model.Product.PrimaryImage" alt="">
+                        </li>
+                        @{
+                            foreach (var image in Model.Product.Images)
+                            {
+                                <li class="splide__slide">
+                                    <img src="~/media/products/@image" alt="">
+                                </li>
+                            }
+                        }
                         <li class="splide__slide">
                             <img src="~/media/buchanan-roll-arm-upholstered-sofa-o.jpg" alt="">
                         </li>
@@ -45,6 +55,7 @@
                 </div>
             </div>
         </div>
+
         <div class="product-options-container">
             <h1 class="product-name">@Model.Product.Name</h1>
             <p class="product-description">@Model.Product.Description</p>
