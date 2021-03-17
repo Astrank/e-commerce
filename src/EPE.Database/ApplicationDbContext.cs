@@ -13,9 +13,12 @@ namespace EPE.Database
         }
 
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectImage> ProjectImage { get; set; }
+        public DbSet<ProjectImage> ProjectImages { get; set; }
+
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductImage> ProductImage { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductSubcategory> ProductSubcategories { get; set; }
         public DbSet<Stock> Stock { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderStock> OrderStocks { get; set; }

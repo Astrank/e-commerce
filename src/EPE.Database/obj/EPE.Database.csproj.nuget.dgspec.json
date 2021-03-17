@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj": {}
+    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj": {
+    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj",
         "projectName": "EPE.Database",
-        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj": {
-                "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj"
+              "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj": {
+                "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj"
               }
             }
           }
@@ -94,14 +94,14 @@
         }
       }
     },
-    "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj": {
+    "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj",
         "projectName": "EPE.Domain",
-        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",

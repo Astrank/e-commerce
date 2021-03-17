@@ -15680,6 +15680,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Category.cshtml",
+      "TargetPath": "Pages\\Store\\Category.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Home\\About.cshtml",
       "TargetPath": "Pages\\Home\\About.cshtml",
       "FileKind": "mvc"
@@ -15722,6 +15727,11 @@
     {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Projects.cshtml",
       "TargetPath": "Pages\\Admin\\Projects.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Admin\\Categories.cshtml",
+      "TargetPath": "Pages\\Admin\\Categories.cshtml",
       "FileKind": "mvc"
     },
     {

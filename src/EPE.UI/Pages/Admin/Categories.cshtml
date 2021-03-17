@@ -1,0 +1,103 @@
+﻿@page
+@model EPE.UI.Pages.Admin.CategoriesModel
+@{
+}
+
+<div class="admin-list" v-if="showList">
+    <button v-if="isCategory" class="add-category-btn button is-link" @@click="newCategory()">Agregar categoría</button>
+    <button v-if="isSubcategory" class="add-subcategory-btn button is-link" @@click="newSubcategory()">Agregar subcategoría</button>
+
+    <div class="tabs is-centered">
+        <ul>
+            <li v-bind:class="{'is-active' : status === 0}"><a @@click="status = 0">Categorias</a></li>
+            <li v-bind:class="{'is-active' : status === 1}"><a @@click="status = 1">Subcategorias</a></li>
+        </ul>
+    </div>
+    
+    <div class="categories-list" v-if="isCategory">
+        <table class="table orders-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="c in categories">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="subcategories-list" v-if="isSubcategory">
+        <table class="table orders-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="sc in subcategories">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="admin-category" v-if="showElement">
+    <button class="button back-btn" @@click="toggleList()">
+        <i class="fas fa-long-arrow-alt-left"></i>
+    </button>
+    <button class="button is-danger delete-product-btn" v-if="projectModel.id"
+            @@click="deleteProject(projectModel.id, projectModel.image)">
+        Delete project
+    </button>
+    <div class="product-form">
+        <div class="admin-data-form">
+            <div class="field">
+                <label class="label">Nombre</label>
+                <div class="control">
+                    <input class="input" v-model="projectModel.title">
+                </div>
+            </div>
+
+            <button @@click="createProject()" v-if="!projectModel.id" class="button is-link">Create product</button>
+            <button @@click="updateProject()" v-else="" class="button is-link">Update product</button>
+        </div>
+    </div>
+</div>
+
+<div class="admin-subcategory" v-else="">
+    <button class="button back-btn" @@click="toggleList()">
+        <i class="fas fa-long-arrow-alt-left"></i>
+    </button>
+    <button class="button is-danger delete-product-btn" v-if="projectModel.id"
+            @@click="deleteProject(projectModel.id, projectModel.image)">
+        Delete project
+    </button>
+    <div class="product-form">
+        <div class="admin-data-form">
+            <div class="field">
+                <label class="label">Nombre</label>
+                <div class="control">
+                    <input class="input" v-model="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Categoría</label>
+                <select>
+                    <option v-for="c in categories" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </div>
+
+            <button @@click="createProject()" v-if="!projectModel.id" class="button is-link">Create product</button>
+            <button @@click="updateProject()" v-else="" class="button is-link">Update product</button>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/js/admin/categories.js"></script>
+}

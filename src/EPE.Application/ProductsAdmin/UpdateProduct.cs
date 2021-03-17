@@ -47,14 +47,17 @@ namespace EPE.Application.ProductsAdmin
 
             List<ProductImage> images = new List<ProductImage>();
 
-            foreach (var image in request.Images)
+            if (request.Images != null)
             {
-                images.Add(new ProductImage
+                foreach (var image in request.Images)
                 {
-                    ProductId = product.Id,
-                    Path = image,
-                });
-            };
+                    images.Add(new ProductImage
+                    {
+                        ProductId = product.Id,
+                        Path = image,
+                    });
+                };
+            }
 
             product.Images = images;
 

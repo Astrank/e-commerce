@@ -10,7 +10,7 @@ namespace EPE.UI.Controllers
     public class OrdersController : Controller
     {
         [HttpGet("")]
-        public IActionResult GetOrders([FromServices] GetOrders getOrders,int status) => 
+        public IActionResult GetOrders([FromServices] GetOrders getOrders, int status) => 
             Ok(getOrders.Do(status));
 
         [HttpGet("{id}")]

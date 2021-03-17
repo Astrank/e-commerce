@@ -50,7 +50,7 @@ namespace EPE.Database
 
         public Task<int> SaveProjectImages(List<ProjectImage> projectImages)
         {
-            _ctx.ProjectImage.AddRange(projectImages);
+            _ctx.ProjectImages.AddRange(projectImages);
 
             return _ctx.SaveChangesAsync();
         }

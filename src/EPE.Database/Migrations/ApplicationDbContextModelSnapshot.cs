@@ -95,12 +95,32 @@ namespace EPE.Database.Migrations
                     b.Property<string>("PrimaryImage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SubcategoryId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SubcategoryId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.ProductImage", b =>
@@ -120,7 +140,30 @@ namespace EPE.Database.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProductSubcategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductCategoryId");
+
+                    b.ToTable("ProductSubcategories");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>
@@ -167,7 +210,7 @@ namespace EPE.Database.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectImage");
+                    b.ToTable("ProjectImages");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Stock", b =>
@@ -434,6 +477,17 @@ namespace EPE.Database.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("EPE.Domain.Models.Product", b =>
+                {
+                    b.HasOne("EPE.Domain.Models.ProductSubcategory", "Subcategory")
+                        .WithMany("Products")
+                        .HasForeignKey("SubcategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subcategory");
+                });
+
             modelBuilder.Entity("EPE.Domain.Models.ProductImage", b =>
                 {
                     b.HasOne("EPE.Domain.Models.Product", "Product")
@@ -443,6 +497,15 @@ namespace EPE.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProductSubcategory", b =>
+                {
+                    b.HasOne("EPE.Domain.Models.ProductCategory", "ProductCategory")
+                        .WithMany("Subcategories")
+                        .HasForeignKey("ProductCategoryId");
+
+                    b.Navigation("ProductCategory");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.ProjectImage", b =>
@@ -539,6 +602,16 @@ namespace EPE.Database.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProductCategory", b =>
+                {
+                    b.Navigation("Subcategories");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.ProductSubcategory", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>

@@ -23,7 +23,7 @@ namespace EPE.Application.Products
         {
             public string Name { get; set; }
             public string Description { get; set; }
-            public string Value { get; set; }
+            public decimal Value { get; set; }
             public string Image { get; set; }
 
             public int StockCount { get; set; }
@@ -41,7 +41,7 @@ namespace EPE.Application.Products
             {
                 Name = product.Name,
                     Description = product.Description,
-                    Value = product.Value.ValueToString(),
+                    Value = product.Value,
                     Image = product.PrimaryImage,
 
                     StockCount = product.Stock.Sum(y => y.Qty)

@@ -53,7 +53,7 @@ namespace EPE.Database
 
         public Task<int> SaveProductImages(List<ProductImage> productImages)
         {
-            _ctx.ProductImage.AddRange(productImages);
+            _ctx.ProductImages.AddRange(productImages);
 
             return _ctx.SaveChangesAsync();
         }

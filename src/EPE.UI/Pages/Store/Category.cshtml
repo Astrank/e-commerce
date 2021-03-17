@@ -1,0 +1,132 @@
+﻿@page
+@model EPÊ.UI.Pages.Store.CategoryModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="store-container" id="app">
+    <aside class="side-bar">
+        <ul class="menu-list">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search">
+                <span class="icon is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+            </p>
+            <hr class="dropdown-divider">
+            <p class="menu-label">CATEGORIAS</p>
+                <li><a href="">Sillas</a></li>
+                <li><a href="">Mesas</a></li>
+                <li><a href="">Sillones</a></li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li><a @@click="maxValue(0, 1000)">Hasta $1.000</a></li>
+                <li><a @@click="maxValue(1000, 5000)">$1.000 a $5.000</a></li>
+                <li><a @@click="maxValue(5000, 20000)">$5.000 a $20.000</a></li>
+                <li class="custom-price">
+                    <input v-model="inputMinValue" placeholder="Min" class="input minmax">
+                    <input v-model="inputMaxValue" placeholder="Max" class="input minmax">
+                    <a @@click="maxValue(inputMinValue, inputMaxValue)">
+                        <i class="fas fa-chevron-circle-right is-link"></i>
+                    </a>
+                </li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li><a @@click="maxValue(1000)">Hasta $1.000</a></li>
+                <li><a @@click="maxValue(5000)">$1.000 a $5.000</a></li>
+                <li><a @@click="maxValue(20000)">$5.000 a $20.000</a></li>
+                <li class="custom-price">
+                    <input placeholder="Min" class="input minmax">
+                    <input placeholder="Max" class="input minmax">
+                </li>
+        </ul>
+    </aside>
+    <div class="products-main">
+        <div class="controlls">
+            <div class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="#">Bulma</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+                </ul>
+                </div>
+            <div class="sort-container">
+                <select name="sortBy" id="sort-select sortBy" @@change="sortBy(sortType)" v-model="sortType">
+                    <option hidden selected disabled>Ordenar productos</option>
+                    <option v-for="o in sortOptions" :value="o.value">{{ o.text }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="products-container">
+            <div v-for="p in displayProducts">
+                <a asp-page="/Store/Product" asp-route-name="p.name" class="product-card">
+                    <div class="product-img">
+                        @{/*
+                            string cssClass = "";
+                            string message = "";
+
+                            if (p.stockCount == 0)
+                            {
+                                cssClass = "is-danger";
+                                message = "Out of stock";
+                            }
+                            else if (p.StockCount <= 10) 
+                            {
+                                cssClass = "is-warning";
+                                message = "Low stock";
+                            }
+                        }
+                        @{
+                            if (p.StockCount <= 10)
+                            {
+                                <div class="notification @cssClass products-stock-notification">
+                                    @message
+                                </div>
+                            }
+                        */}
+                        <img v-bind:src="'/media/products/' + p.image" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h1 class="product-price">$ {{p.value}}</h1>
+                        <div class="product-title">
+                            <p>{{p.name}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="~/js/admin/store.js"></script>
+}
