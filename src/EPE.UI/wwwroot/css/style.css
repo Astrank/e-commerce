@@ -152,8 +152,18 @@
 }
 
 .admin-side-bar {
-  max-width: 180px;
+  max-width: 250px;
   padding: 20px;
+  background-color: #363636;
+}
+
+.admin-container .menu p,
+.admin-container .menu-list a {
+  color: #fff;
+}
+
+.admin-container .menu-list i {
+  margin-right: 6px;
 }
 
 .admin-list {

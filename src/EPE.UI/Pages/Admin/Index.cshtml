@@ -53,6 +53,14 @@
                 </div>
             </div>
             <div class="field">
+                <label class="label">Subcategoría</label>
+                <div class="control">
+                    <select v-model="productModel.subcategoryId">
+                        <option v-for="sc in subcategories" :value="sc.id">{{sc.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">Primary Image</label>
                 <div class="control">
                     <input type="file" class="input" @@change="getPrimaryImage($event)">

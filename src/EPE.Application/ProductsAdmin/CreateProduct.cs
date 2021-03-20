@@ -20,6 +20,7 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
+            public int SubcategoryId { get; set; }
             public string PrimaryImage { get; set; }
             public List<string> Images { get; set; }
         }
@@ -30,6 +31,7 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
+            public int SubcategoryId { get; set; }
             public string Image { get; set; }
         }
         
@@ -40,7 +42,8 @@ namespace EPE.Application.ProductsAdmin
                 Name = request.Name,
                 Description = request.Description,
                 Value = request.Value,
-                PrimaryImage = request.PrimaryImage
+                PrimaryImage = request.PrimaryImage,
+                SubcategoryId = request.SubcategoryId
             };
             
             if(await _productManager.CreateProduct(product) <= 0)
@@ -50,23 +53,26 @@ namespace EPE.Application.ProductsAdmin
 
             /* IMAGES */
 
-            var productImages = new List<ProductImage>();
-
-            foreach (var image in request.Images)
+            if (request.Images.Count > 0)
             {
-                var productImage = new ProductImage
+                var productImages = new List<ProductImage>();
+
+                foreach (var image in request.Images)
                 {
-                    Path = image,
-                    ProductId = product.Id
+                    var productImage = new ProductImage
+                    {
+                        Path = image,
+                        ProductId = product.Id
+                    };
+
+                    productImages.Add(productImage);
                 };
 
-                productImages.Add(productImage);
-            };
-
-            if(await _productManager.SaveProductImages(productImages) <= 0)
-            {
-                throw new System.Exception("Failed saving images"); //TODO: custom exceptions
-            };
+                if(await _productManager.SaveProductImages(productImages) <= 0)
+                {
+                    throw new System.Exception("Failed saving images"); //TODO: custom exceptions
+                };
+            }
 
             /* --------------- */
 
@@ -76,6 +82,7 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
+                SubcategoryId = product.SubcategoryId
             };
         }
     }

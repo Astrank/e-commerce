@@ -36,6 +36,7 @@ namespace EPE.Database
         {
             return _ctx.Products
                 .Include(x => x.Images)
+                .Include(x => x.Subcategory)
                 .Where(x => x.Id == id)
                 .Select(selector)
                 .FirstOrDefault();

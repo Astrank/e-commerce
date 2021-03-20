@@ -19,6 +19,21 @@ namespace EPE.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
+            modelBuilder.Entity("EPE.Domain.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("EPE.Domain.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -108,21 +123,6 @@ namespace EPE.Database.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("EPE.Domain.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategories");
-                });
-
             modelBuilder.Entity("EPE.Domain.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -141,29 +141,6 @@ namespace EPE.Database.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("EPE.Domain.Models.ProductSubcategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProductCategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductCategoryId");
-
-                    b.ToTable("ProductSubcategories");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>
@@ -260,6 +237,26 @@ namespace EPE.Database.Migrations
                     b.HasIndex("StockId");
 
                     b.ToTable("StockOnHold");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.Subcategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Subcategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -479,7 +476,7 @@ namespace EPE.Database.Migrations
 
             modelBuilder.Entity("EPE.Domain.Models.Product", b =>
                 {
-                    b.HasOne("EPE.Domain.Models.ProductSubcategory", "Subcategory")
+                    b.HasOne("EPE.Domain.Models.Subcategory", "Subcategory")
                         .WithMany("Products")
                         .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -497,15 +494,6 @@ namespace EPE.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("EPE.Domain.Models.ProductSubcategory", b =>
-                {
-                    b.HasOne("EPE.Domain.Models.ProductCategory", "ProductCategory")
-                        .WithMany("Subcategories")
-                        .HasForeignKey("ProductCategoryId");
-
-                    b.Navigation("ProductCategory");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.ProjectImage", b =>
@@ -539,6 +527,17 @@ namespace EPE.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.Subcategory", b =>
+                {
+                    b.HasOne("EPE.Domain.Models.Category", "Category")
+                        .WithMany("Subcategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -592,6 +591,11 @@ namespace EPE.Database.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EPE.Domain.Models.Category", b =>
+                {
+                    b.Navigation("Subcategories");
+                });
+
             modelBuilder.Entity("EPE.Domain.Models.Order", b =>
                 {
                     b.Navigation("OrderStocks");
@@ -604,16 +608,6 @@ namespace EPE.Database.Migrations
                     b.Navigation("Stock");
                 });
 
-            modelBuilder.Entity("EPE.Domain.Models.ProductCategory", b =>
-                {
-                    b.Navigation("Subcategories");
-                });
-
-            modelBuilder.Entity("EPE.Domain.Models.ProductSubcategory", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>
                 {
                     b.Navigation("Images");
@@ -622,6 +616,11 @@ namespace EPE.Database.Migrations
             modelBuilder.Entity("EPE.Domain.Models.Stock", b =>
                 {
                     b.Navigation("OrderStocks");
+                });
+
+            modelBuilder.Entity("EPE.Domain.Models.Subcategory", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

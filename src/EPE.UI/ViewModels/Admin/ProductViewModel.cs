@@ -9,6 +9,7 @@ namespace EPE.UI.ViewModels
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
+            public int SubcategoryId { get; set; }
             public string PrimaryImage { get; set; }
             public List<string> Images { get; set; }
 

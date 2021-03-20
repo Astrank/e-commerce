@@ -60,6 +60,7 @@ namespace EPE.UI.Controllers
                 Name = vm.Name,
                 Description = vm.Description,
                 Value = vm.Value,
+                SubcategoryId = vm.SubcategoryId,
                 PrimaryImage = primaryImage,
                 Images = images
             };

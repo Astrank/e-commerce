@@ -14,6 +14,6 @@ namespace EPE.Domain.Models
         public ICollection<Stock> Stock { get; set; }
 
         public int SubcategoryId { get; set; }
-        public ProductSubcategory Subcategory { get; set; }
+        public Subcategory Subcategory { get; set; }
     }
 }

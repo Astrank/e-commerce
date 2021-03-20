@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using EPE.Application.OrdersAdmin;
+using EPE.Application.CategoriesAdmin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EPE.UI.Controllers
 {
@@ -9,27 +9,24 @@ namespace EPE.UI.Controllers
     [Authorize(Policy = "Manager")]
     public class CategoriesController : Controller
     {
-        [HttpGet("")]
-        public IActionResult GetOrders([FromServices] GetOrders getOrders, int status) => 
-            Ok(getOrders.Do(status));
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(
+            CreateCategory.Request request,
+            [FromServices] CreateCategory createCategory) =>
+                Ok(await createCategory.Do(request));
 
-        [HttpGet("{id}")]
-        public IActionResult GetOrder([FromServices] GetOrder getOrder, int id) => 
-            Ok(getOrder.Do(id));
+        [HttpGet]
+        public IActionResult GetCategories([FromServices] GetCategories getCategories) =>
+            Ok(getCategories.Do());
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder([FromServices] UpdateOrder updateOrder, int id)
-        {
-            var success = await updateOrder.Do(id) > 0;
-                
-            if (success)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategory(
+            UpdateCategory.CategoryViewModel vm,
+            [FromServices] UpdateCategory updateCategory) =>
+                Ok(await updateCategory.Do(vm));
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory([FromServices] DeleteCategory deleteCategory, int id) =>
+            Ok(deleteCategory.Do(id));
     }
 }

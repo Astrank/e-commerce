@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj",
       "projectName": "EPE.Application",
-      "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj",
+      "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\obj\\",
+      "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj": {
-              "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Domain\\EPE.Domain.csproj"
+            "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj": {
+              "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Domain\\EPE.Domain.csproj"
             }
           }
         }

@@ -13,9 +13,10 @@ var app = new Vue({
             name: "",
             description: "",
             value: 0,
+            subcategoryId: null,
             stock: [],
             primaryImage: "",
-            images: null
+            images: null,
         },
         primaryImageFile: null,
         imageFiles: null,
@@ -28,6 +29,8 @@ var app = new Vue({
             description: "",
             qty: ""
         },
+
+        subcategories: []
     },
     mounted(){
         this.getProducts();
@@ -59,6 +62,7 @@ var app = new Vue({
                         name: res.data.name,
                         description: res.data.description,
                         value: res.data.value,
+                        subcategoryId: res.data.subcategoryId,
                         primaryImage: res.data.primaryImage,
                         images: res.data.images
                     };
@@ -78,8 +82,9 @@ var app = new Vue({
               name: "",
               description: "",
               value: 0,
-              stock: []
-            }
+              stock: [],
+              subcategoryId: null
+            };
 
             this.toggleProduct();
         },
@@ -96,6 +101,7 @@ var app = new Vue({
             formData.append("name", this.productModel.name);
             formData.append("description", this.productModel.description);
             formData.append("value", this.productModel.value);
+            formData.append("subcategoryId", this.productModel.subcategoryId);
             formData.append("primaryImageFile", this.primaryImageFile);
 
             if (this.imageFiles != null) {
@@ -112,7 +118,6 @@ var app = new Vue({
                 }
             })
                 .then(res => {
-                    console.log(res.data);
                     this.products.push(res.data);
                 })
                 .catch(err => {
@@ -262,6 +267,19 @@ var app = new Vue({
         },
 
         toggleProduct(){
+            this.loading = true;
+
+            axios.get("/Subcategories")
+                .then(res => {
+                    this.subcategories = res.data
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
+                });
+
             this.showStock = false;
             this.showList = false;
             this.showProduct = true;

@@ -8,9 +8,9 @@
     <button v-if="isSubcategory" class="add-subcategory-btn button is-link" @@click="newSubcategory()">Agregar subcategoría</button>
 
     <div class="tabs is-centered">
-        <ul>
-            <li v-bind:class="{'is-active' : status === 0}"><a @@click="status = 0">Categorias</a></li>
-            <li v-bind:class="{'is-active' : status === 1}"><a @@click="status = 1">Subcategorias</a></li>
+        <ul>    
+            <li v-bind:class="{'is-active' : status === 0}"><a @@click="getCategories()">Categorias</a></li>
+            <li v-bind:class="{'is-active' : status === 1}"><a @@click="getSubcategories()">Subcategorias</a></li>
         </ul>
     </div>
     
@@ -23,11 +23,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="c in categories">
+                <tr v-for="c, index in categories" @@click="getCategory(index)">
+                    <th>{{c.id}}</th>
+                    <th>{{c.name}}</th>
                 </tr>
             </tbody>
         </table>
     </div>
+
     <div class="subcategories-list" v-if="isSubcategory">
         <table class="table orders-table">
             <thead>
@@ -38,19 +41,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="sc in subcategories">
+                <tr v-for="sc, index in subcategories" @@click="getSubcategory(index)">
+                    <th>{{sc.id}}</th>
+                    <th>{{sc.name}}</th>
+                    <th v-for="c in categories" v-if="c.id == sc.categoryId">{{c.name}}</th>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="admin-category" v-if="showElement">
-    <button class="button back-btn" @@click="toggleList()">
+<div class="admin-category" v-if="showElement && isCategory">
+    <button class="button back-btn" @@click="toggleCategoryList()">
         <i class="fas fa-long-arrow-alt-left"></i>
     </button>
-    <button class="button is-danger delete-product-btn" v-if="projectModel.id"
-            @@click="deleteProject(projectModel.id, projectModel.image)">
+    <button class="button is-danger delete-product-btn" v-if="categoryModel.id"
+            @@click="deleteCategory(categoryModel.id)">
         Delete project
     </button>
     <div class="product-form">
@@ -58,41 +64,41 @@
             <div class="field">
                 <label class="label">Nombre</label>
                 <div class="control">
-                    <input class="input" v-model="projectModel.title">
+                    <input class="input" v-model="categoryModel.name">
                 </div>
             </div>
 
-            <button @@click="createProject()" v-if="!projectModel.id" class="button is-link">Create product</button>
-            <button @@click="updateProject()" v-else="" class="button is-link">Update product</button>
+            <button @@click="createCategory()" v-if="!categoryModel.id" class="button is-link">Create category</button>
+            <button @@click="updateCategory()" v-else="" class="button is-link">Update category</button>
         </div>
     </div>
 </div>
 
-<div class="admin-subcategory" v-else="">
-    <button class="button back-btn" @@click="toggleList()">
+<div class="admin-subcategory" v-else-if="showElement && isSubcategory">
+    <button class="button back-btn" @@click="toggleSubcategoryList()">
         <i class="fas fa-long-arrow-alt-left"></i>
     </button>
-    <button class="button is-danger delete-product-btn" v-if="projectModel.id"
-            @@click="deleteProject(projectModel.id, projectModel.image)">
-        Delete project
+    <button class="button is-danger delete-product-btn" v-if="subcategoryModel.id"
+            @@click="deleteSubcategory(subcategoryModel.id)">
+        Delete subcategory
     </button>
     <div class="product-form">
         <div class="admin-data-form">
             <div class="field">
                 <label class="label">Nombre</label>
                 <div class="control">
-                    <input class="input" v-model="">
+                    <input class="input" v-model="subcategoryModel.name">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Categoría</label>
-                <select>
-                    <option v-for="c in categories" value="{{c.id}}">{{c.name}}</option>
+                <select v-model="subcategoryModel.categoryId">
+                    <option v-for="c in categories" :value="c.id">{{c.name}}</option>
                 </select>
             </div>
 
-            <button @@click="createProject()" v-if="!projectModel.id" class="button is-link">Create product</button>
-            <button @@click="updateProject()" v-else="" class="button is-link">Update product</button>
+            <button @@click="createSubcategory()" v-if="!subcategoryModel.id" class="button is-link">Create subcategory</button>
+            <button @@click="updateSubcategory()" v-else="" class="button is-link">Update subcategory</button>
         </div>
     </div>
 </div>
