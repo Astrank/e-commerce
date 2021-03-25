@@ -1,4 +1,6 @@
 using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,13 +24,14 @@ namespace EPE.Application.CategoriesAdmin
 
         public IEnumerable<Response> Do()
         {
-            var categories = _categoryManager.GetCategories();
-
-            return categories.Select(x => new Response
-            {
-                Id = x.Id,
-                Name = x.Name
-            });
+            return _categoryManager.GetCategories(Projection);
         }
+
+        private static Func<Category, Response> Projection = (categories) =>
+            new Response
+            {
+                Id = categories.Id,
+                Name = categories.Name
+            };
     }
 }

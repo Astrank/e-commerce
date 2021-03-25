@@ -1,125 +1,129 @@
 ﻿@page
 @model EPE.UI.Pages.Store.IndexModel
+@inject IAuthorizationService authService;
+
 @{
-    Layout = "_Layout";
+    Layout = "";
 }
 
-
-<div class="store-container">
-    <aside class="side-bar">
-        <ul class="menu-list">
-            <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Search">
-                <span class="icon is-left">
-                <i class="fas fa-search" aria-hidden="true"></i>
-                </span>
-            </p>
-            <hr class="dropdown-divider">
-            <p class="menu-label">CATEGORIAS</p>
-                <li><a href="">Sillas</a></li>
-                <li><a href="">Mesas</a></li>
-                <li><a href="">Sillones</a></li>
-            <hr class="dropdown-divider">
-            <p class="menu-label">PRECIO</p>
-                <li><a href="">Hasta $1.000</a></li>
-                <li><a href="">$1.000 a $5.000</a></li>
-                <li><a href="">$5.000 a $20.000</a></li>
-                <li class="custom-price">
-                    <input placeholder="Min" class="input minmax">
-                    <input placeholder="Max" class="input minmax">
-                </li>
-            <hr class="dropdown-divider">
-            <p class="menu-label">PRECIO</p>
-                <li><a href="">Hasta $1.000</a></li>
-                <li><a href="">$1.000 a $5.000</a></li>
-                <li><a href="">$5.000 a $20.000</a></li>
-                <li class="custom-price">
-                    <input placeholder="Min" class="input minmax">
-                    <input placeholder="Max" class="input minmax">
-                </li>
-            <hr class="dropdown-divider">
-            <p class="menu-label">PRECIO</p>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-        </ul>
-    </aside>
-    <div class="products-main">
-        <div class="controlls">
-            <div class="breadcrumb" aria-label="breadcrumbs">
-                <ul>
-                    <li><a href="#">Bulma</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-                </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store | Espacio por Espacio</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href ="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab|Roboto:300,400,500,700" rel = "stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="~/lib/glide/glide-3.4.1/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="~/lib/glide/glide-3.4.1/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="~/lib/bulma/css/bulma.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="store-index-banner">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a asp-page="/index" id="navbar-logo" class="navbar-item">
+                        <img src="~/media/logo.png" alt="" width="124">
+                    </a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
                 </div>
-            <div class="sort-container">
-                <select id="sort-select">
-                    <option hidden selected disabled>Ordenar productos</option>
-                    <option>Menor precio</option>
-                    <option>Mayor precio</option>
-                </select>
+                <div class="navbar-menu" id="navbarBasicExample">
+                    <div class="navbar-start">
+                        <a asp-page="/projects/projects" class="navbar-item">Proyectos</a>
+                        <a asp-page="/home/about" class="navbar-item">Estudio</a>
+                        <a class="navbar-item">Contacto</a>
+                        <a asp-page="/store/index" class="navbar-item">Tienda</a>
+                    </div>
+                    <div class="navbar-end">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                    @User.Identity.Name
+                                </a>
+                                <div class="navbar-dropdown">
+                                    @if ((await authService.AuthorizeAsync(User, "Manager")).Succeeded)
+                                    {
+                                        <a class="navbar-item" asp-page="/Admin/Index">Admin panel</a>
+                                    }
+                                    <a class="navbar-item">Cuenta</a>
+                                    <a class="navbar-item" asp-controller="Account" asp-action="Logout">Salir</a>
+                                </div>
+                            </div>
+                        }
+                        else{
+                            <a asp-page="/account/signup" class="navbar-item">Crear cuenta</a>
+                            <a asp-page="/account/login" class="navbar-item">Entrar</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="glide" id="slide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <li class="glide__slide">
+                        <img src="~/media/andreas-strandman-82-Zph7BWyY-unsplash.jpg" alt="">
+                        <div>Descubrí</div>
+                    </li>
+                    <li class="glide__slide">
+                        <img src="~/media/andreas-strandman-82-Zph7BWyY-unsplash.jpg" alt="">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="~/media/andreas-strandman-82-Zph7BWyY-unsplash.jpg" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div class="glide__arrows" data-glide-el="controls">
+                <div class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+                <button class="glide__bullet" data-glide-dir="=0"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
-        <div class="products-container">
-            @foreach (var p in @Model.Products)
-            {
-                <a asp-page="/Store/Product" asp-route-name="@p.Name.Replace(' ', '-')" class="product-card">
-                    <div class="product-img">
-                        @{
-                            string cssClass = "";
-                            string message = "";
+        <div class="carousel-gradient"></div>
+    </div>
 
-                            if (p.StockCount == 0)
-                            {
-                                cssClass = "is-danger";
-                                message = "Out of stock";
-                            }
-                            else if (p.StockCount <= 10) 
-                            {
-                                cssClass = "is-warning";
-                                message = "Low stock";
-                            }
-                        }
-                        @{
-                            if (p.StockCount <= 10)
-                            {
-                                <div class="notification @cssClass products-stock-notification">
-                                    @message
-                                </div>
-                            }
-                        }
-                        <img src="~/media/products/@p.Image" alt="">
-                    </div>
-                    <div class="product-info">
-                        <h1 class="product-price">@p.Value</h1>
-                        <div class="product-title">
-                            <p>@p.Name</p>
-                        </div>
-                    </div>
-                </a>
+    <div class="store-index-categories">
+        <div class="store-index-categories-title">
+            <div class="categories-title">
+                Encontrá lo que buscas
+            </div>
+            <div class="categories-title-line"></div>
+        </div>
+        <div class="store-index-categories-grid">
+            @foreach (var c in @Model.Categories)
+            {
+                <div class="store-index-category A">
+                    <a asp-page="Products" asp-route-name="@c.Name">
+                        <img src="~/media/andreas-strandman-82-Zph7BWyY-unsplash.jpg" alt="" >
+                    </a>
+                    <a class="store-index-category-name" 
+                        asp-page="Products" asp-route-name="@c.Name">@c.Name</a>
+                </div>
             }
         </div>
     </div>
-</div>
+
+    <script src="https://unpkg.com/@@glidejs/glide"></script>
+    <script>
+        new Glide('.glide').mount()
+    </script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿@page
+@model EPE.UI.Pages.Store.ProductsModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="store-container">
+    <aside class="side-bar">
+        <ul class="menu-list">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search">
+                <span class="icon is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+            </p>
+            <hr class="dropdown-divider">
+            <!-- View Component -->
+            <p class="menu-label">CATEGORIAS</p>
+                <li><a href="">Sillas</a></li>
+                <li><a href="">Mesas</a></li>
+                <li><a href="">Sillones</a></li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li><a href="">Hasta $1.000</a></li>
+                <li><a href="">$1.000 a $5.000</a></li>
+                <li><a href="">$5.000 a $20.000</a></li>
+                <li class="custom-price">
+                    <input placeholder="Min" class="input minmax">
+                    <input placeholder="Max" class="input minmax">
+                </li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li><a href="">Hasta $1.000</a></li>
+                <li><a href="">$1.000 a $5.000</a></li>
+                <li><a href="">$5.000 a $20.000</a></li>
+                <li class="custom-price">
+                    <input placeholder="Min" class="input minmax">
+                    <input placeholder="Max" class="input minmax">
+                </li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+        </ul>
+    </aside>
+    <div class="products-main">
+        <div class="controlls">
+            <div class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="#">Bulma</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+                </ul>
+                </div>
+            <div class="sort-container">
+                <select id="sort-select">
+                    <option hidden selected disabled>Ordenar productos</option>
+                    <option>Menor precio</option>
+                    <option>Mayor precio</option>
+                </select>
+            </div>
+        </div>
+        <div class="products-container">
+            @foreach (var sc in @Model.Category.Subcategories)
+            {
+                foreach (var p in sc.Products)
+                {
+                    <a asp-page="/Store/Product" asp-route-name="@p.Name.Replace(' ', '-')" class="product-card">
+                        <div class="product-img">
+                            @{
+                                string cssClass = "";
+                                string message = "";
+
+                                if (p.StockCount == 0)
+                                {
+                                    cssClass = "is-danger";
+                                    message = "Out of stock";
+                                }
+                                else if (p.StockCount <= 10) 
+                                {
+                                    cssClass = "is-warning";
+                                    message = "Low stock";
+                                }
+                            }
+                            @{
+                                if (p.StockCount <= 10)
+                                {
+                                    <div class="notification @cssClass products-stock-notification">
+                                        @message
+                                    </div>
+                                }
+                            }
+                            <img src="~/media/products/@p.PrimaryImage" alt="">
+                        </div>
+                        <div class="product-info">
+                            <h1 class="product-price">@p.Value</h1>
+                            <div class="product-title">
+                                <p>@p.Name</p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+</div>

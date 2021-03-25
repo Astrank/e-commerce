@@ -15660,6 +15660,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Products.cshtml",
+      "TargetPath": "Pages\\Store\\Products.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\Pages\\Store\\Product.cshtml",
       "TargetPath": "Pages\\Store\\Product.cshtml",
       "FileKind": "mvc"

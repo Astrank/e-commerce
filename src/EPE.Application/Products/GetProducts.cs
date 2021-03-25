@@ -40,11 +40,11 @@ namespace EPE.Application.Products
             new ProductViewModel
             {
                 Name = product.Name,
-                    Description = product.Description,
-                    Value = product.Value,
-                    Image = product.PrimaryImage,
+                Description = product.Description,
+                Value = product.Value,
+                Image = product.PrimaryImage,
 
-                    StockCount = product.Stock.Sum(y => y.Qty)
+                StockCount = product.Stock.Sum(y => y.Qty)
             };
     }
 }

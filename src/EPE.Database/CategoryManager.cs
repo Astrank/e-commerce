@@ -1,5 +1,7 @@
 ﻿using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,9 +26,30 @@ namespace EPE.Database
             return _ctx.SaveChangesAsync();
         }
 
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<TResult> GetCategories<TResult>(Func<Category, TResult> selector)
         {
-            return _ctx.Categories;
+            return _ctx.Categories.Select(selector);
+        }
+
+        public TResult GetCategoryWithProducts<TResult>(string name, Func<Category, TResult> selector)
+        {
+            return _ctx.Categories
+                .Include(x => x.Subcategories)
+                    .ThenInclude(y => y.Products)
+                        .ThenInclude(z => z.Stock)
+                .Where(x => x.Name == name)
+                .Select(selector)
+                .FirstOrDefault();
+        }
+
+        public TResult GetSubcategoryWithProducts<TResult>(string name, Func<Subcategory, TResult> selector)
+        {
+            return _ctx.Subcategories
+                .Include(x => x.Category)
+                .Include(x => x.Products)
+                .Where(x => x.Name == name)
+                .Select(selector)
+                .FirstOrDefault();
         }
 
         public Task<int> UpdateCategory(Category productCategory)
@@ -54,9 +77,9 @@ namespace EPE.Database
             return _ctx.SaveChangesAsync();
         }
 
-        public IEnumerable<Subcategory> GetSubcategories()
+        public IEnumerable<TResult> GetSubcategories<TResult>(Func<Subcategory, TResult> selector)
         {
-            return _ctx.Subcategories;
+            return _ctx.Subcategories.Select(selector);
         }
 
         public Task<int> UpdateSubcategory(Subcategory productSubcategory)

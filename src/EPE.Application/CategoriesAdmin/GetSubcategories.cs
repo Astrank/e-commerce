@@ -1,4 +1,6 @@
 using EPE.Domain.Infrastructure;
+using EPE.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,14 +25,15 @@ namespace EPE.Application.CategoriesAdmin
 
         public IEnumerable<Response> Do()
         {
-            var subcategories = _categoryManager.GetSubcategories();
-
-            return subcategories.Select(x => new Response
-            {
-                Id = x.Id,
-                Name = x.Name,
-                CategoryId = x.CategoryId
-            });
+            return _categoryManager.GetSubcategories(Projection);
         }
+
+        private static Func<Subcategory, Response> Projection = (sc) =>
+            new Response
+            {
+                Id = sc.Id,
+                Name = sc.Name,
+                CategoryId = sc.CategoryId
+            };
     }
 }
