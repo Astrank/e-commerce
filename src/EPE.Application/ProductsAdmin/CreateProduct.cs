@@ -20,9 +20,9 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public int SubcategoryId { get; set; }
             public string PrimaryImage { get; set; }
             public List<string> Images { get; set; }
+            public int CategoryId { get; set; }
         }
 
         public class Response
@@ -31,8 +31,8 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public int SubcategoryId { get; set; }
             public string Image { get; set; }
+            public int CategoryId { get; set; }
         }
         
         public async Task<Response> Do(Request request)
@@ -43,7 +43,7 @@ namespace EPE.Application.ProductsAdmin
                 Description = request.Description,
                 Value = request.Value,
                 PrimaryImage = request.PrimaryImage,
-                SubcategoryId = request.SubcategoryId
+                CategoryId = request.CategoryId
             };
             
             if(await _productManager.CreateProduct(product) <= 0)
@@ -82,7 +82,7 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
-                SubcategoryId = product.SubcategoryId
+                CategoryId = product.CategoryId
             };
         }
     }

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPE.UI.ViewComponenets
 {
-    public class ProductsViewComponent : ViewComponent
+    /*public class ProductsViewComponent : ViewComponent
     {
         public ProductsViewComponent([FromServices])
         {
@@ -11,5 +11,5 @@ namespace EPE.UI.ViewComponenets
         {
             return View(view, _getCart.Do());
         }
-    }
+    }*/
 }

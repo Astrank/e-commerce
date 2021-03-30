@@ -17,7 +17,7 @@ namespace EPE.Application.CategoriesAdmin
         {
             if (await _categoryManager.DeleteCategory(id) <= 0)
             {
-                throw new System.Exception("ERROR DELETING CATEGORY");
+                throw new System.Exception("ERROR DELETING CATEGORY"); 
             };
         }
     }

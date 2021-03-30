@@ -7080,11 +7080,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj",
       "projectName": "EPE.UI",
-      "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
+      "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\EPE.UI.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\obj\\",
+      "outputPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7101,11 +7101,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj": {
-              "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj"
+            "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj": {
+              "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Application\\EPE.Application.csproj"
             },
-            "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj": {
-              "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.Database\\EPE.Database.csproj"
+            "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj": {
+              "projectPath": "C:\\Users\\marti\\projects\\EPE\\src\\EPE.Database\\EPE.Database.csproj"
             }
           }
         }

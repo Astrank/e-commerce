@@ -1,21 +1,26 @@
-var app = new Vue({
+    var app = new Vue({
     el: '#app',
     data: {
         loading: false,
+        adding: true,
+        updating: false,
         isCategory: true,
         isSubcategory: false,
         showList: true,
         showElement: false,
+        
+        parentIds: [],
 
-        status: 0,
         objectIndex: 0,
 
         categories: [],
         subcategories: [],
+        categoryList: [],
 
         categoryModel: {
             id: null,
-            name: ""
+            name: "",
+            parentId: null
         },
         subcategoryModel: {
             id: null,
@@ -27,21 +32,79 @@ var app = new Vue({
         this.getCategories();
     },
     methods: {
+        getCategories() {
+            this.loading = true;
 
-        // CATEGORIES
+            axios.get("/Categories")
+                .then(res => {
+                    this.categories = res.data.sort(function (a, b) { return a.parent.id - b.parent.id });
+                    this.getChildren(0);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
+                });
+
+            this.toggleCategoryList();
+        },
+        getChildren(parentId){
+            var newList = [];
             
+            this.categories.forEach(c => {
+                if (c.parent.id == parentId) {
+                    newList.push(c);
+                }
+            });
+            
+            this.getParents(parentId);
+
+            this.categoryList = newList;
+        },
+        getParents(id){
+            this.parentIds = [];
+            if(id <= 0) { return };
+
+            var i = id;
+            var array = []
+
+            while (i > 0){
+                var category = this.findCategory(i);
+                i = category.parent.id;
+                array.unshift(i);
+            };
+
+            this.parentIds = array;
+        },
+        getParentName(id){
+            for (let i = 0; i < this.categories.length; i++) {
+                if (this.categories[i].parent.id == id) {
+                    return this.categories[i].parent.name;
+                };
+            }
+        },
+        findCategory(id){
+            if (id == 0) { return }
+
+            for (let i = 0; i < this.categories.length; i++) {
+                if (this.categories[i].id == id) {
+                    return this.categories[i];
+                };
+            }
+        },
+
         newCategory() {
             this.categoryModel = {
                 name: ""
             }
-
-            this.toggleCategoryElement();
         },
         createCategory() {
             this.loading = true;
 
             var request = new FormData();
             request.append("name", this.categoryModel.name);
+            request.append("parentId", this.categoryModel.parentId);
 
             axios.post("/Categories", request)
                 .then(res => {
@@ -54,29 +117,23 @@ var app = new Vue({
                     this.loading = false;
                 });
             
-            this.toggleCategoryList();
+            this.getCategories();
+            this.categoryModel = {
+                id: null,
+                name: "",
+                parentId: null
+            };
         },
-        getCategories() {
-            this.loading = true;
+        
+        getCategory(id){
+            var category = this.findCategory(id);
 
-            axios.get("/Categories")
-                .then(res => {
-                    this.categories = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                .then(() => {
-                    this.loading = false;
-                });
+            this.categoryModel.id = category.id;
+            this.categoryModel.name = category.name;
+            this.categoryModel.parentId = category.parent.id;
 
-            this.toggleCategoryList();
-        },
-        getCategory(index){
-            this.categoryModel.id = this.categories[index].id;
-            this.categoryModel.name = this.categories[index].name;
-
-            this.toggleCategoryElement();
+            this.adding = false;
+            this.updating = true;
         },
         updateCategory() {
             this.loading = true;
@@ -84,6 +141,7 @@ var app = new Vue({
             var request = new FormData();
             request.append("id", this.categoryModel.id);
             request.append("name", this.categoryModel.name);
+            request.append("parentId", this.categoryModel.parentId);
 
             axios.put("/Categories", request)
                 .then(res => {
@@ -96,7 +154,8 @@ var app = new Vue({
                     this.loading = false;
                 });
             
-            this.toggleCategoryList();
+            this.updating = false;
+            this.adding = true;
         },
         deleteCategory(id) {
             this.loading = true;
@@ -112,131 +171,6 @@ var app = new Vue({
                     this.loading = false;
                 });
 
-            this.toggleCategoryList();
-        },
-
-        // SUBCATEGORIES
-
-        newSubcategory() {
-            this.subcategoryModel = {
-                name: "",
-                categoryId: null
-            };
-
-            this.toggleSubcategoryElement();
-        },
-        createSubcategory() {
-            this.loading = true;
-
-            var request = new FormData();
-            request.append("name", this.subcategoryModel.name);
-            request.append("categoryId", this.subcategoryModel.categoryId);
-
-            axios.post("/Subcategories/", request)
-                .then(res => {
-                    this.subcategories.push(res.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                .then(() => {
-                    this.loading = false;
-                });
-            
-            this.toggleSubcategoryList();
-        },
-        getSubcategories() {
-            this.loading = true;
-
-            axios.get("/Subcategories")
-                .then(res => {
-                    this.subcategories = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                .then(() => {
-                    this.loading = false;
-                });
-
-            this.toggleSubcategoryList();
-        },
-        getSubcategory(index){
-            this.subcategoryModel.id = this.subcategories[index].id;
-            this.subcategoryModel.name = this.subcategories[index].name;
-            this.subcategoryModel.categoryId = this.subcategories[index].categoryId;
-
-            this.toggleSubcategoryElement();
-        },
-        updateSubcategory() {
-            this.loading = true;
-
-            var request = new FormData();
-            request.append("id", this.subcategoryModel.id);
-            request.append("name", this.subcategoryModel.name);
-            request.append("categoryId", this.subcategoryModel.categoryId);
-
-            axios.put("/Subcategories", request)
-                .then(res => {
-                    this.subcategories.splice(this.objectIndex, 1, res.data);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                .then(() => {
-                    this.loading = false;
-                });
-
-            this.toggleSubcategoryList();
-        },
-        deleteSubcategory(id) {
-            this.loading = true;
-
-            axios.delete("/Subcategories/" + id)
-                .then(res => {
-                    this.subcategories.splice(this.objectIndex, 1);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-                .then(() => {
-                    this.loading = false;
-                });
-
-            this.toggleSubcategoryList();
-        },
-
-        toggleCategoryList(){
-            this.status = 0;
-
-            this.isCategory = true;
-            this.isSubcategory = false;
-
-            this.showList = true;
-            this.showElement = false;
-        },
-        toggleCategoryElement(){
-            this.isCategory = true;
-            this.isSubcategory = false;
-
-            this.showList = false;
-            this.showElement = true;
-        },
-        toggleSubcategoryList(){
-            this.status = 1;
-
-            this.isCategory = false;
-            this.isSubcategory = true;
-
-            this.showList = true;
-            this.showElement = false;
-        },
-        toggleSubcategoryElement(){
-            this.isCategory = false;
-            this.isSubcategory = true;
-
-            this.showList = false;
-            this.showElement = true;
         },
     }
 })

@@ -22,7 +22,6 @@ namespace EPE.Application.ProductsAdmin
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
-            public int SubcategoryId { get; set; }
             public string PrimaryImage { get; set; }
             public IEnumerable<string> Images { get; set; }
         }
@@ -37,7 +36,6 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
-                SubcategoryId = product.SubcategoryId,
                 PrimaryImage = product.PrimaryImage,
                 Images = product.Images.Select(x => x.Path),
             };

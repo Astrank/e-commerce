@@ -29,9 +29,19 @@ namespace EPE.UI.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{name}")]
+        public IActionResult GetProductsByCategory(
+            [FromServices] GetProductsByCategory getProductsByCategory,
+            string name)
+        {
+            var products = getProductsByCategory.Do(name);
+            
+            return Ok(products);
+        }
+
+        /*[HttpGet("{id}")]
         public IActionResult GetProduct([FromServices] GetProduct getProduct, int id) => 
-            Ok(getProduct.Do(id));
+            Ok(getProduct.Do(id));*/
 
         [HttpPost("")]
         public async Task<IActionResult> CreateProduct(
@@ -60,9 +70,9 @@ namespace EPE.UI.Controllers
                 Name = vm.Name,
                 Description = vm.Description,
                 Value = vm.Value,
-                SubcategoryId = vm.SubcategoryId,
                 PrimaryImage = primaryImage,
-                Images = images
+                Images = images,
+                CategoryId = vm.CategoryId
             };
 
             return Ok(await createProduct.Do(request));

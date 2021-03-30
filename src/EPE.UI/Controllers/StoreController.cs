@@ -14,7 +14,7 @@ namespace EPE.UI.Controllers
             var products = await getProducts.Do();
 
             return Ok(products);
-        }*/
+        }
 
         [HttpGet("")]
         public IActionResult GetCategoryWithProducts(
@@ -24,16 +24,6 @@ namespace EPE.UI.Controllers
             var response = getCategoryWithProducts.Do(category);
 
             return Ok(response);
-        }
-
-        [HttpGet("")]
-        public IActionResult GetCategoryWithProducts(
-            [FromServices] GetSubcategoryWithProducts getSubcategoryWithProducts,
-            string subcategory)
-        {
-            var response = getSubcategoryWithProducts.Do(subcategory);
-
-            return Ok(response);
-        }
+        }*/
     }
 }

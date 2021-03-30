@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
-using EPE.Application.Categories;
+using System.Collections.Generic;
+using EPE.Application.Products;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,11 +7,11 @@ namespace EPE.UI.Pages.Store
 {
     public class ProductsModel : PageModel
     {
-        public GetCategoryWithProducts.Response Category { get; set; }
+        public IEnumerable<GetProductsByCategoryName.ProductViewModel> Products { get; set; }
 
-        public void OnGet([FromServices] GetCategoryWithProducts getCategoryWithProducts, string name)
+        public void OnGet([FromServices] GetProductsByCategoryName getProductsByCategoryName, string name)
         {
-            Category = getCategoryWithProducts.Do(name);
+            Products = getProductsByCategoryName.Do(name);
         }
     }
 }

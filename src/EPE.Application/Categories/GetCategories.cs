@@ -22,7 +22,7 @@ namespace EPE.Application.Categories
 
         public IEnumerable<Response> Do()
         {
-            return _categoryManager.GetCategories(Projection);
+            return _categoryManager.GetMainCategories(Projection);
         }
 
         private static Func<Category, Response> Projection = (category) =>

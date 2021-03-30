@@ -17,85 +17,61 @@ namespace EPE.Database
             _ctx = ctx;
         }
 
-        // CATEGORIES
-
-        public Task<int> CreateCategory(Category productCategory)
+        public Task<int> CreateCategory(Category category)
         {
-            _ctx.Categories.Add(productCategory);
+            _ctx.Categories.Add(category);
 
             return _ctx.SaveChangesAsync();
         }
 
         public IEnumerable<TResult> GetCategories<TResult>(Func<Category, TResult> selector)
         {
-            return _ctx.Categories.Select(selector);
-        }
-
-        public TResult GetCategoryWithProducts<TResult>(string name, Func<Category, TResult> selector)
-        {
-            return _ctx.Categories
-                .Include(x => x.Subcategories)
-                    .ThenInclude(y => y.Products)
-                        .ThenInclude(z => z.Stock)
-                .Where(x => x.Name == name)
+            var categories = _ctx.Categories
                 .Select(selector)
-                .FirstOrDefault();
+                .ToList();
+
+            return categories;
         }
 
-        public TResult GetSubcategoryWithProducts<TResult>(string name, Func<Subcategory, TResult> selector)
+        public IEnumerable<TResult> GetMainCategories<TResult>(Func<Category, TResult> selector)
         {
-            return _ctx.Subcategories
-                .Include(x => x.Category)
-                .Include(x => x.Products)
-                .Where(x => x.Name == name)
+            var categories = _ctx.Categories
+                .Where(x => x.ParentId == null)
                 .Select(selector)
-                .FirstOrDefault();
+                .ToList();
+
+            return categories;
         }
 
-        public Task<int> UpdateCategory(Category productCategory)
+        public Task<int> UpdateCategory(Category category)
         {
-            _ctx.Categories.Update(productCategory);
+            _ctx.Categories.Update(category);
 
             return _ctx.SaveChangesAsync();
         }
 
-        public Task<int> DeleteCategory(int id)
+        public async Task<int> DeleteCategory(int id)
         {
             var category = _ctx.Categories.FirstOrDefault(x => x.Id == id);
 
-            _ctx.Categories.Remove(category);
+            if (category != null)
+            {
+                await DeleteChildren(id);
+                _ctx.Categories.Remove(category);
+            }
 
-            return _ctx.SaveChangesAsync();
+            return await _ctx.SaveChangesAsync();
         }
 
-        // SUBCATEGORIES
-
-        public Task<int> CreateSubcategory(Subcategory productSubcategory)
+        async Task DeleteChildren(int id)
         {
-            _ctx.Subcategories.Add(productSubcategory);
-
-            return _ctx.SaveChangesAsync();
-        }
-
-        public IEnumerable<TResult> GetSubcategories<TResult>(Func<Subcategory, TResult> selector)
-        {
-            return _ctx.Subcategories.Select(selector);
-        }
-
-        public Task<int> UpdateSubcategory(Subcategory productSubcategory)
-        {
-            _ctx.Subcategories.Update(productSubcategory);
-
-            return _ctx.SaveChangesAsync();
-        }
-
-        public Task<int> DeleteSubcategory(int id)
-        {
-            var subcategory = _ctx.Subcategories.FirstOrDefault(x => x.Id == id);
-
-            _ctx.Subcategories.Remove(subcategory);
-
-            return _ctx.SaveChangesAsync();
+            var children =  _ctx.Categories.Where(c => c.ParentId == id);
+            
+            foreach (var child in children)
+            {
+                await DeleteChildren(child.Id);
+                _ctx.Categories.Remove(child);
+            }
         }
     }
 }

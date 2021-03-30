@@ -1,6 +1,6 @@
 ﻿@page
 @model EPE.UI.Pages.Store.ProductsModel
-@{
+@{ 
     Layout = "_Layout";
 }
 
@@ -83,44 +83,42 @@
             </div>
         </div>
         <div class="products-container">
-            @foreach (var sc in @Model.Category.Subcategories)
+            @{foreach (var p in @Model.Products)
             {
-                foreach (var p in sc.Products)
-                {
-                    <a asp-page="/Store/Product" asp-route-name="@p.Name.Replace(' ', '-')" class="product-card">
-                        <div class="product-img">
-                            @{
-                                string cssClass = "";
-                                string message = "";
+                  <a asp-page="/Store/Product" asp-route-name="@p.Name.Replace(' ', '-')" class="product-card">
+                  <div class="product-img">
+                    @{/*
+                  string cssClass = "";
+                  string message = "";
 
-                                if (p.StockCount == 0)
-                                {
-                                    cssClass = "is-danger";
-                                    message = "Out of stock";
-                                }
-                                else if (p.StockCount <= 10) 
-                                {
-                                    cssClass = "is-warning";
-                                    message = "Low stock";
-                                }
+                            if (p.StockCount == 0)
+                            {
+                                cssClass = "is-danger";
+                                message = "Out of stock";
                             }
-                            @{
-                                if (p.StockCount <= 10)
-                                {
-                                    <div class="notification @cssClass products-stock-notification">
-                                        @message
-                                    </div>
-                                }
+                            else if (p.StockCount <= 10) 
+                            {
+                                cssClass = "is-warning";
+                                message = "Low stock";
                             }
-                            <img src="~/media/products/@p.PrimaryImage" alt="">
+                        }
+                        @{
+                            if (p.StockCount <= 10)
+                            {
+                                <div class="notification @cssClass products-stock-notification">
+                                    @message
+                                </div>
+                            }
+                        */}
+                        <img src="~/media/products/@p.PrimaryImage" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h1 class="product-price">@p.Value</h1>
+                        <div class="product-title">
+                            <p>@p.Name</p>
                         </div>
-                        <div class="product-info">
-                            <h1 class="product-price">@p.Value</h1>
-                            <div class="product-title">
-                                <p>@p.Name</p>
-                            </div>
-                        </div>
-                    </a>
+                    </div>
+                </a>
                 }
             }
         </div>

@@ -13,7 +13,7 @@ var app = new Vue({
             name: "",
             description: "",
             value: 0,
-            subcategoryId: null,
+            categoryId: null,
             stock: [],
             primaryImage: "",
             images: null,
@@ -36,8 +36,25 @@ var app = new Vue({
         this.getProducts();
     },
     methods: {
+        getProductsByCategory(id){
+            this.loading = true;
+
+            axios.get('/Products/' + id)
+                .then(res => {
+                    //this.products = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
+                });
+
+            this.toggleList();
+        },
         getProducts(){
             this.loading = true;
+
             axios.get('/Products')
                 .then(res => {
                     this.products = res.data;
@@ -48,6 +65,7 @@ var app = new Vue({
                 .then(() => {
                     this.loading = false;
                 });
+
             this.toggleList();
         },
         getProduct(id, index){
@@ -101,7 +119,7 @@ var app = new Vue({
             formData.append("name", this.productModel.name);
             formData.append("description", this.productModel.description);
             formData.append("value", this.productModel.value);
-            formData.append("subcategoryId", this.productModel.subcategoryId);
+            formData.append("categoryId", this.productModel.categoryId);
             formData.append("primaryImageFile", this.primaryImageFile);
 
             if (this.imageFiles != null) {

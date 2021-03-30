@@ -18,6 +18,7 @@ namespace EPE.Application.CategoriesAdmin
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public int? ParentId { get; set; }
         }
 
         public async Task<CategoryViewModel> Do(CategoryViewModel vm)
@@ -25,7 +26,8 @@ namespace EPE.Application.CategoriesAdmin
             var category = new Category
             {
                 Id = vm.Id,
-                Name = vm.Name
+                Name = vm.Name,
+                ParentId = vm.ParentId
             };
 
             if (await _categoryManager.UpdateCategory(category) <= 0)
@@ -36,7 +38,8 @@ namespace EPE.Application.CategoriesAdmin
             return new CategoryViewModel
             {
                 Id = category.Id,
-                Name = category.Name
+                Name = category.Name,
+                ParentId = category.ParentId
             };
         }
     }

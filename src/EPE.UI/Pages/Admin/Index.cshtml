@@ -4,6 +4,7 @@
 }
 
 <div class="admin-list" v-if="showList">    
+    <button @@click="getProductsByCategory(5)">test</button>
     <button class="add-product-btn button is-link" @@click="newProduct">Add product</button>
     <table class="table products-table">
         <thead>
@@ -52,12 +53,11 @@
                     <input class="input" v-model="productModel.value">
                 </div>
             </div>
+            
             <div class="field">
-                <label class="label">Subcategoría</label>
+                <label class="label">Categoria</label>
                 <div class="control">
-                    <select v-model="productModel.subcategoryId">
-                        <option v-for="sc in subcategories" :value="sc.id">{{sc.name}}</option>
-                    </select>
+                    <input class="input" v-model="productModel.categoryId">
                 </div>
             </div>
             <div class="field">

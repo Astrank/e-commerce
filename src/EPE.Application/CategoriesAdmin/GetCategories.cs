@@ -2,7 +2,6 @@ using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EPE.Application.CategoriesAdmin
 {
@@ -20,6 +19,14 @@ namespace EPE.Application.CategoriesAdmin
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public CategoryViewModel Parent { get; set; }
+            public IEnumerable<Product> Products { get; set; }
+        }
+
+        public class CategoryViewModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
         }
 
         public IEnumerable<Response> Do()
@@ -31,7 +38,17 @@ namespace EPE.Application.CategoriesAdmin
             new Response
             {
                 Id = categories.Id,
-                Name = categories.Name
+                Name = categories.Name,
+                Parent = categories.Parent != null ? new CategoryViewModel
+                {
+                    Id = categories.Parent.Id,
+                    Name = categories.Parent.Name
+                } : new CategoryViewModel
+                {
+                    Id = 0,
+                    Name = "Inicio"
+                },
+                Products = categories.Products
             };
     }
 }

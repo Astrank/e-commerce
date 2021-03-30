@@ -17,19 +17,22 @@ namespace EPE.Application.CategoriesAdmin
         public class Request
         {
             public string Name { get; set; }
+            public int? ParentId { get; set; }
         }
 
         public class Response
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public int? ParentId { get; set; }
         }
 
         public async Task<Response> Do(Request request)
         {
             var category = new Category
             {
-                Name = request.Name
+                Name = request.Name,
+                ParentId = request.ParentId
             };
 
             if(await _categoryManager.CreateCategory(category) <= 0)
@@ -40,7 +43,8 @@ namespace EPE.Application.CategoriesAdmin
             return new Response
             {
                 Id = category.Id,
-                Name = category.Name
+                Name = category.Name,
+                ParentId = category.ParentId
             };
         }
     }

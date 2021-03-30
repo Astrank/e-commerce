@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using EPE.UI.Infrastructure;
 using EPE.Database;
 using Microsoft.EntityFrameworkCore;
-using FluentValidation.AspNetCore;
+using Newtonsoft.Json;
 
 namespace EPE.UI
 {
@@ -38,9 +38,8 @@ namespace EPE.UI
                 {
                     options.Conventions.AuthorizeFolder("/Admin", "Manager");
                     //options.Conventions.AuthorizePage("/Admin");
-                })
-                .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(typeof(Startup).Assembly));
-            
+                });
+
             /* Defines the db for the app */
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(_config["DefaultConnection"]));

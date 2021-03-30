@@ -32,11 +32,19 @@ namespace EPE.Database
                 .ToList();
         }
 
+        public IEnumerable<TResult> GetProductsByCategoryName<TResult>(string name, Func<Product, TResult> selector)
+        {
+            var products = _ctx.Products
+                .FromSqlRaw("spGetProductsByCategoryName {0}", name)
+                .Select(selector);
+
+            return products;
+        }
+
         public TResult GetProductById<TResult>(int id, Func<Product, TResult> selector)
         {
             return _ctx.Products
                 .Include(x => x.Images)
-                .Include(x => x.Subcategory)
                 .Where(x => x.Id == id)
                 .Select(selector)
                 .FirstOrDefault();

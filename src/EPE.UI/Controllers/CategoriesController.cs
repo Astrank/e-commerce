@@ -16,8 +16,12 @@ namespace EPE.UI.Controllers
                 Ok(await createCategory.Do(request));
 
         [HttpGet]
-        public IActionResult GetCategories([FromServices] GetCategories getCategories) =>
-            Ok(getCategories.Do());
+        public IActionResult GetCategories([FromServices] GetCategories getCategories)
+        {
+            var categories = getCategories.Do();
+
+            return Ok(categories);
+        }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(
