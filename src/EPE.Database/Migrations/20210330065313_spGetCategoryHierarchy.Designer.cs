@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EPE.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210329082513_ProductWithStock")]
-    partial class ProductWithStock
+    [Migration("20210330065313_spGetCategoryHierarchy")]
+    partial class spGetCategoryHierarchy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -148,33 +148,6 @@ namespace EPE.Database.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("EPE.Domain.Models.ProductWithStock", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimaryImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalQty")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductWithStock");
                 });
 
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>

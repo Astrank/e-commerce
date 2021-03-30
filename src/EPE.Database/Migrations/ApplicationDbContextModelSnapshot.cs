@@ -148,33 +148,6 @@ namespace EPE.Database.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("EPE.Domain.Models.ProductWithStock", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimaryImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalQty")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductWithStock");
-                });
-
             modelBuilder.Entity("EPE.Domain.Models.Project", b =>
                 {
                     b.Property<int>("Id")

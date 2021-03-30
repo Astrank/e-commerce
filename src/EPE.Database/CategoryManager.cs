@@ -24,6 +24,16 @@ namespace EPE.Database
             return _ctx.SaveChangesAsync();
         }
 
+        public IEnumerable<TResult> GetMainCategories<TResult>(Func<Category, TResult> selector)
+        {
+            var categories = _ctx.Categories
+                .Where(x => x.ParentId == null)
+                .Select(selector)
+                .ToList();
+
+            return categories;
+        }
+
         public IEnumerable<TResult> GetCategories<TResult>(Func<Category, TResult> selector)
         {
             var categories = _ctx.Categories
@@ -33,14 +43,14 @@ namespace EPE.Database
             return categories;
         }
 
-        public IEnumerable<TResult> GetMainCategories<TResult>(Func<Category, TResult> selector)
+        public List<TResult> GetCategory<TResult>(Func<Category, TResult> selector, string name)
         {
-            var categories = _ctx.Categories
-                .Where(x => x.ParentId == null)
+            var hierarchy = _ctx.Categories
+                .FromSqlRaw("spGetCategoryHierarchy {0}", name)
                 .Select(selector)
                 .ToList();
 
-            return categories;
+            return hierarchy;
         }
 
         public Task<int> UpdateCategory(Category category)

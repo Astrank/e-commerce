@@ -40,3 +40,25 @@ namespace EPE.Database
         }
     }
 }
+
+/*
+WITH ret AS
+(
+    SELECT * FROM dbo.Categories
+    WHERE Id = 6
+    UNION ALL
+    SELECT t.* FROM dbo.Categories t 
+    INNER JOIN ret r ON r.ParentId = t.Id
+),
+ter AS
+(
+	SELECT * FROM dbo.Categories
+    WHERE Id = 6
+    UNION ALL
+    SELECT t.* FROM dbo.Categories t 
+    INNER JOIN ter r ON r.Id = t.ParentId
+)
+
+SELECT * FROM ret
+UNION SELECT * FROM ter;
+*/

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using EPE.Domain.Infrastructure;
 using EPE.Domain.Models;
 
@@ -22,6 +23,7 @@ namespace EPE.Application.ProductsAdmin
             public string Description { get; set; }
             public decimal Value { get; set; }
             public string PrimaryImage { get; set; }
+            public IEnumerable<string> CategoryHierarchy { get; set; }
         }
 
         public IEnumerable<ProductViewModel> Do(string name){
@@ -35,7 +37,7 @@ namespace EPE.Application.ProductsAdmin
                 Name = product.Name,
                 Description = product.Description,
                 Value = product.Value,
-                PrimaryImage = product.PrimaryImage
+                PrimaryImage = product.PrimaryImage,
             };
     }
 }   

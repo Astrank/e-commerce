@@ -16,9 +16,10 @@
             <hr class="dropdown-divider">
             <!-- View Component -->
             <p class="menu-label">CATEGORIAS</p>
-                <li><a href="">Sillas</a></li>
-                <li><a href="">Mesas</a></li>
-                <li><a href="">Sillones</a></li>
+                @foreach (var sc in Model.Category.Subcategories)
+                {
+                    <li><a asp-page="/Store/Products" asp-route-name="@sc">@sc</a></li>
+                }
             <hr class="dropdown-divider">
             <p class="menu-label">PRECIO</p>
                 <li><a href="">Hasta $1.000</a></li>
@@ -69,9 +70,12 @@
         <div class="controlls">
             <div class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="#">Bulma</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+                    <li><a asp-page="/Store/Index">Inicio</a></li>
+                    @foreach(var p in Model.Category.Parents)
+                    {
+                        <li><a asp-page="/Store/Products" asp-route-name="@p">@p</a></li>
+                    }
+                    <li class="is-active"><a href="#" aria-current="page">@Model.Category.Name</a></li>
                 </ul>
                 </div>
             <div class="sort-container">
@@ -113,7 +117,7 @@
                         <img src="~/media/products/@p.PrimaryImage" alt="">
                     </div>
                     <div class="product-info">
-                        <h1 class="product-price">@p.Value</h1>
+                        <h1 class="product-price">$ @p.Value</h1>
                         <div class="product-title">
                             <p>@p.Name</p>
                         </div>

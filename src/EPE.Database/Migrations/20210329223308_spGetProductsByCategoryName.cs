@@ -6,7 +6,6 @@ namespace EPE.Database.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
             string procedure =
             @"CREATE PROCEDURE spGetProductsByCategoryName
                 @Name nvarchar(100)
