@@ -7080,11 +7080,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
       "projectName": "EPE.UI",
-      "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj",
+      "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\obj\\",
+      "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",

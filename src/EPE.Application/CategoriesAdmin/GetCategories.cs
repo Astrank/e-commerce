@@ -46,7 +46,6 @@ namespace EPE.Application.CategoriesAdmin
                 } : new CategoryViewModel
                 {
                     Id = 0,
-                    Name = "Index"
                 },
                 Products = categories.Products
             };

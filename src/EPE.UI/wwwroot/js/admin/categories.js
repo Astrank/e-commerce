@@ -1,20 +1,17 @@
-    var app = new Vue({
+Vue.component('treeselect', VueTreeselect.Treeselect);    
+    
+var app = new Vue({
     el: '#app',
     data: {
         loading: false,
         adding: true,
         updating: false,
-        isCategory: true,
-        isSubcategory: false,
-        showList: true,
-        showElement: false,
         
         parentIds: [],
 
         objectIndex: 0,
 
         categories: [],
-        subcategories: [],
         categoryList: [],
 
         categoryModel: {
@@ -22,23 +19,60 @@
             name: "",
             parentId: null
         },
-        subcategoryModel: {
-            id: null,
-            name: "",
-            categoryId: null
-        },
+
+        // vue-treeselect
+        value: null,
+        options: [],
     },
     mounted() {
         this.getCategories();
     },
     methods: {
+        buildTreeselect() {
+            for (let i = 0; i < this.categories.length; i++) {
+                // Adds main categories
+                if (this.categories[i].parent.id == 0) {
+                    this.options.push({
+                        id: this.categories[i].id,
+                        label: this.categories[i].name
+                    });
+                } 
+                // Loops through categories to find its parent
+                else {
+                    this.options.forEach(category => {
+                        this.findParent(category, this.categories[i]);
+                    });
+                }
+
+            }
+        },
+        findParent(category, subcategory){
+            if(category.id == subcategory.parent.id) {
+                if (category.children == null) {
+                    category.children = [{
+                        id: subcategory.id,
+                        label: subcategory.name
+                    }]
+                } else{
+                    category.children.push({
+                        id: subcategory.id,
+                        label: subcategory.name
+                    })
+                }
+            }
+            else if(category.children != null){
+                category.children.forEach(child => {
+                    this.findParent(child, subcategory);
+                });
+            }
+        },
         getCategories() {
             this.loading = true;
 
             axios.get("/Categories")
                 .then(res => {
                     this.categories = res.data.sort(function (a, b) { return a.parent.id - b.parent.id });
-                    this.getChildren(0);
+                    this.buildTreeselect();
                 })
                 .catch(err => {
                     console.log(err);
@@ -46,8 +80,6 @@
                 .then(() => {
                     this.loading = false;
                 });
-
-            this.toggleCategoryList();
         },
         getChildren(parentId){
             var newList = [];
@@ -104,7 +136,7 @@
 
             var request = new FormData();
             request.append("name", this.categoryModel.name);
-            request.append("parentId", this.categoryModel.parentId);
+            request.append("parentId", this.value);
 
             axios.post("/Categories", request)
                 .then(res => {
@@ -117,12 +149,11 @@
                     this.loading = false;
                 });
             
-            this.getCategories();
             this.categoryModel = {
                 id: null,
                 name: "",
-                parentId: null
             };
+            this.value = null;
         },
         
         getCategory(id){
@@ -131,6 +162,11 @@
             this.categoryModel.id = category.id;
             this.categoryModel.name = category.name;
             this.categoryModel.parentId = category.parent.id;
+            if(category.parent.id) {
+                this.value = category.parent.id;
+            } else {
+                this.value = null;
+            }
 
             this.adding = false;
             this.updating = true;
@@ -141,7 +177,7 @@
             var request = new FormData();
             request.append("id", this.categoryModel.id);
             request.append("name", this.categoryModel.name);
-            request.append("parentId", this.categoryModel.parentId);
+            request.append("parentId", this.value);
 
             axios.put("/Categories", request)
                 .then(res => {
@@ -170,7 +206,15 @@
                 .then(() => {
                     this.loading = false;
                 });
-
         },
+        cancel() {
+            this.categoryModel.id = null;
+            this.categoryModel.name = "";
+            this.categoryModel.parentId = null;
+            this.value = null;
+
+            this.updating = false;
+            this.adding = true;
+        }
     }
 })

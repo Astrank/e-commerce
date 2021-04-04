@@ -4,6 +4,7 @@ var app = new Vue({
         loading: false,
         products: [],
         displayProducts: null,
+        category: "",
 
         inputMinValue: "",
         inputMaxValue: "",
@@ -19,16 +20,35 @@ var app = new Vue({
             { text: ''}
         ]
     },
-    mounted() {
-        this.getProducts();
+    created() {
+        let urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('name')) {
+            this.category = urlParams.get('name');
+        }
+
+        this.getProducts(this.category);
+        this.getCategory(this.category);
     },
     methods: {
-        getProducts() {
+        getProducts(name) {
             this.loading = true;
-            axios.get("/Store")
+            axios.get("/Store/vue/products/" + name)
                 .then(res => {
                     this.products = res.data;
                     this.displayProducts = (res.data).sort((a, b) => a.name > b.name);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(() => {
+                    this.loading = false;
+                });
+        },
+        getCategory(name) {
+            this.loading = true;
+            axios.get("/Store/vue/categories/" + name)
+                .then(res => {
+                    this.category = res.data;
                 })
                 .catch(err => {
                     console.log(err);
@@ -62,9 +82,12 @@ var app = new Vue({
 
         // ------------------- //
 
-        dashed(name) {
-            return name.replaceAll(" ", "-");
-        }
+        getCategoryUrl(name){
+            return "/Store/Products?name=" + name;
+        },
+        getProductUrl(name){
+            return "/Store/Product/" + name.replaceAll(" ", "-");
+        },
     },
     computed: {
         

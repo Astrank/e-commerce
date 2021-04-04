@@ -5,25 +5,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EPE.UI.Controllers
 {
-    [Route("[controller]/category")]
+    [Route("[controller]")]
     public class StoreController : Controller
     {
-        /*[HttpGet("")]
-        public async Task<IActionResult> GetProducts([FromServices] GetProducts getProducts)
+        [HttpGet("vue/products/{name}")]
+        public IActionResult GetProducts(
+            [FromServices] GetProductsByCategoryName getProductsByCategoryName,
+            string name)
         {
-            var products = await getProducts.Do();
+            var products = getProductsByCategoryName.Do(name);
 
             return Ok(products);
         }
 
-        [HttpGet("")]
-        public IActionResult GetCategoryWithProducts(
-            [FromServices] GetCategoryWithProducts getCategoryWithProducts,
-            string category)
+        [HttpGet("vue/categories/{name}")]
+        public IActionResult GetCategory([FromServices] GetCategory getCategory, string name)
         {
-            var response = getCategoryWithProducts.Do(category);
+            var categories = getCategory.Do(name);
 
-            return Ok(response);
-        }*/
+            return Ok(categories);
+        }
     }
 }

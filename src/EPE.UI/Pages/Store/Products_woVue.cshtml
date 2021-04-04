@@ -1,11 +1,10 @@
 ﻿@page
-@model EPÊ.UI.Pages.Store.CategoryModel
-
-@{
+@model EPE.UI.Pages.Store.ProductsModel
+@{ 
     Layout = "_Layout";
 }
 
-<div class="store-container" id="app">
+<div class="store-container">
     <aside class="side-bar">
         <ul class="menu-list">
             <p class="control has-icons-left">
@@ -15,56 +14,55 @@
                 </span>
             </p>
             <hr class="dropdown-divider">
+            <!-- View Component -->
             <p class="menu-label">CATEGORIAS</p>
-                <li><a href="">Sillas</a></li>
-                <li><a href="">Mesas</a></li>
-                <li><a href="">Sillones</a></li>
+                @foreach (var sc in Model.Category.Subcategories)
+                {
+                    <li><a asp-page="/Store/Products" asp-route-name="@sc">@sc</a></li>
+                }
             <hr class="dropdown-divider">
             <p class="menu-label">PRECIO</p>
-                <li><a @@click="maxValue(0, 1000)">Hasta $1.000</a></li>
-                <li><a @@click="maxValue(1000, 5000)">$1.000 a $5.000</a></li>
-                <li><a @@click="maxValue(5000, 20000)">$5.000 a $20.000</a></li>
-                <li class="custom-price">
-                    <input v-model="inputMinValue" placeholder="Min" class="input minmax">
-                    <input v-model="inputMaxValue" placeholder="Max" class="input minmax">
-                    <a @@click="maxValue(inputMinValue, inputMaxValue)">
-                        <i class="fas fa-chevron-circle-right is-link"></i>
-                    </a>
-                </li>
-            <hr class="dropdown-divider">
-            <p class="menu-label">PRECIO</p>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-                <li>
-                    <label class="checkbox">
-                    <input type="checkbox">
-                        Rasdasdsdda
-                    </label>
-                </li>
-            <hr class="dropdown-divider">
-            <p class="menu-label">PRECIO</p>
-                <li><a @@click="maxValue(1000)">Hasta $1.000</a></li>
-                <li><a @@click="maxValue(5000)">$1.000 a $5.000</a></li>
-                <li><a @@click="maxValue(20000)">$5.000 a $20.000</a></li>
+                <li><a href="">Hasta $1.000</a></li>
+                <li><a href="">$1.000 a $5.000</a></li>
+                <li><a href="">$5.000 a $20.000</a></li>
                 <li class="custom-price">
                     <input placeholder="Min" class="input minmax">
                     <input placeholder="Max" class="input minmax">
+                </li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li><a href="">Hasta $1.000</a></li>
+                <li><a href="">$1.000 a $5.000</a></li>
+                <li><a href="">$5.000 a $20.000</a></li>
+                <li class="custom-price">
+                    <input placeholder="Min" class="input minmax">
+                    <input placeholder="Max" class="input minmax">
+                </li>
+            <hr class="dropdown-divider">
+            <p class="menu-label">PRECIO</p>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                    <input type="checkbox">
+                        Rasdasdsdda
+                    </label>
                 </li>
         </ul>
     </aside>
@@ -72,27 +70,32 @@
         <div class="controlls">
             <div class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="#">Bulma</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+                    <li><a asp-page="/Store/Index">Inicio</a></li>
+                    @foreach(var p in Model.Category.Parents)
+                    {
+                        <li><a asp-page="/Store/Products" asp-route-name="@p">@p</a></li>
+                    }
+                    <li class="is-active"><a href="#" aria-current="page">@Model.Category.Name</a></li>
                 </ul>
                 </div>
             <div class="sort-container">
-                <select name="sortBy" id="sort-select sortBy" @@change="sortBy(sortType)" v-model="sortType">
+                <select id="sort-select">
                     <option hidden selected disabled>Ordenar productos</option>
-                    <option v-for="o in sortOptions" :value="o.value">{{ o.text }}</option>
+                    <option>Menor precio</option>
+                    <option>Mayor precio</option>
                 </select>
             </div>
         </div>
         <div class="products-container">
-            <div v-for="p in displayProducts">
-                <a asp-page="/Store/Product" asp-route-name="p.name" class="product-card">
-                    <div class="product-img">
-                        @{/*
-                            string cssClass = "";
-                            string message = "";
+            @{foreach (var p in @Model.Products)
+            {
+                  <a asp-page="/Store/Product" asp-route-name="@p.Name.Replace(' ', '-')" class="product-card">
+                  <div class="product-img">
+                    @{/*
+                  string cssClass = "";
+                  string message = "";
 
-                            if (p.stockCount == 0)
+                            if (p.StockCount == 0)
                             {
                                 cssClass = "is-danger";
                                 message = "Out of stock";
@@ -111,22 +114,17 @@
                                 </div>
                             }
                         */}
-                        <img v-bind:src="'/media/products/' + p.image" alt="">
+                        <img src="~/media/products/@p.PrimaryImage" alt="">
                     </div>
                     <div class="product-info">
-                        <h1 class="product-price">$ {{p.value}}</h1>
+                        <h1 class="product-price">$ @p.Value</h1>
                         <div class="product-title">
-                            <p>{{p.name}}</p>
+                            <p>@p.Name</p>
                         </div>
                     </div>
                 </a>
-            </div>
+                }
+            }
         </div>
     </div>
 </div>
-
-@section scripts {
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="~/js/admin/store.js"></script>
-}

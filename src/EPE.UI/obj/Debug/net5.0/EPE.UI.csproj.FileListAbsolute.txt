@@ -840,6 +840,6 @@ C:\Users\marti\projects\EPE\src\EPE.UI\obj\Debug\net5.0\EPE.UI.dll
 C:\Users\marti\projects\EPE\src\EPE.UI\obj\Debug\net5.0\ref\EPE.UI.dll
 C:\Users\marti\projects\EPE\src\EPE.UI\obj\Debug\net5.0\EPE.UI.pdb
 C:\Users\marti\projects\EPE\src\EPE.UI\obj\Debug\net5.0\EPE.UI.genruntimeconfig.cache
-C:\Users\marti\projects\epe\src\EPE.UI\obj\Debug\net5.0\Razor\Pages\Store\Category.cshtml.g.cs
 C:\Users\marti\projects\epe\src\EPE.UI\obj\Debug\net5.0\Razor\Pages\Admin\Categories.cshtml.g.cs
 C:\Users\marti\projects\EPE\src\EPE.UI\obj\Debug\net5.0\Razor\Pages\Store\Products.cshtml.g.cs
+C:\Users\marti\projects\epe\src\EPE.UI\obj\Debug\net5.0\Razor\Pages\Store\Products_woVue.cshtml.g.cs

@@ -178,7 +178,8 @@ body {
 .admin-container {
   display: flex;
   flex-direction: row;
-  min-height: 60vh;
+  min-height: 90vh;
+  background-color: #dddddd;
 }
 
 .admin-side-bar {
@@ -214,7 +215,7 @@ body {
 
 .admin-category-list {
   width: 70%;
-  padding: 20px;
+  padding: 20px 20px 20px 0px;
 }
 
 .admin-category-list .categories-table {
@@ -237,8 +238,6 @@ body {
 #modify-column .fa-times-circle {
   color: rgb(236, 49, 49);
 }
-
-/* 3.5 Projects */
 
 .admin-container .menu p,
 .admin-container .menu-list a {
@@ -291,6 +290,8 @@ body {
 .delete-product-btn {
   float: right;
 }
+
+/* 3.5 Projects */
 
 .back-btn,
 .delete-product-btn {
@@ -688,9 +689,11 @@ body {
   display: flex;
 }
 
-.controlls #sort-select {
+.sort-container select {
   margin: 0 10px auto 10px;
   padding: 5px;
+  text-align: center;
+  min-width: 150px;
 }
 
 .products-container {
@@ -752,6 +755,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0 15px;
+  width: 100%;
 }
 
 .product-options-container .product-name {

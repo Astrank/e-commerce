@@ -80,7 +80,7 @@ var app = new Vue({
                         name: res.data.name,
                         description: res.data.description,
                         value: res.data.value,
-                        subcategoryId: res.data.subcategoryId,
+                        categoryId: res.data.categoryId,
                         primaryImage: res.data.primaryImage,
                         images: res.data.images
                     };
