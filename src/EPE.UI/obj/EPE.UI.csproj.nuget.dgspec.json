@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj": {}
+    "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj": {}
   },
   "projects": {
     "C:\\Users\\marti\\projects\\epe\\src\\EPE.Application\\EPE.Application.csproj": {
@@ -131,6 +131,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -206,14 +210,14 @@
         }
       }
     },
-    "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj": {
+    "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
+        "projectUniqueName": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj",
         "projectName": "EPE.UI",
-        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
+        "projectPath": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj",
         "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\obj\\",
+        "outputPath": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",

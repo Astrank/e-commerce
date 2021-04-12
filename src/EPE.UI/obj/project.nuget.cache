@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "70ZdIpZCN/JW8TCnkVB8+jjjeN4GhkY0fpTKElCA06IYP3fJPQtZICng5GIkQNOaQQyPAF6p7Db23dUBRhxt+A==",
+  "dgSpecHash": "iQGFSlcjMCGOiYsY2uEg/VUR4XMj6LHt9Jx9ANPZ7UMEASpHytbWKvy1niAnWq1b+VDp9qjPyP7dIZ2U8z2PxQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marti\\projects\\epe\\src\\EPE.UI\\EPE.UI.csproj",
+  "projectFilePath": "C:\\Users\\marti\\projects\\epe\\src\\epe.ui\\EPE.UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marti\\.nuget\\packages\\fluentvalidation\\9.5.2\\fluentvalidation.9.5.2.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.5.2\\fluentvalidation.aspnetcore.9.5.2.nupkg.sha512",
@@ -64,6 +64,8 @@
     "C:\\Users\\marti\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\marti\\.nuget\\packages\\npgsql\\5.0.2\\npgsql.5.0.2.nupkg.sha512",
+    "C:\\Users\\marti\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.2\\npgsql.entityframeworkcore.postgresql.5.0.2.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

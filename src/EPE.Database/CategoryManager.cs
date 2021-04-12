@@ -46,7 +46,7 @@ namespace EPE.Database
         public List<TResult> GetCategory<TResult>(Func<Category, TResult> selector, string name)
         {
             var hierarchy = _ctx.Categories
-                .FromSqlRaw("spGetCategoryHierarchy {0}", name)
+                .FromSqlInterpolated($"SELECT * FROM sp_getcategoryhierarchy({name})")
                 .Select(selector)
                 .ToList();
 

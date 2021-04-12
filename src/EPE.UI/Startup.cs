@@ -40,10 +40,14 @@ namespace EPE.UI
                     //options.Conventions.AuthorizePage("/Admin");
                 });
 
-            /* Defines the db for the app */
-            services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlServer(_config["DefaultConnection"]));
+            /* SQLServer */
+            /*services.AddDbContext<ApplicationDbContext>(options => 
+                options.UseSqlServer(_config["ConnectionStrings:SQLServer"]));*/
             
+            /* PostgreSQL */
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(_config["PostgreSQL"]));
+
             /* Adds identity and password config */
             services.AddIdentity<IdentityUser, IdentityRole>(options => 
             {

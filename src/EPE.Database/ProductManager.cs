@@ -35,7 +35,7 @@ namespace EPE.Database
         public IEnumerable<TResult> GetProductsByCategoryName<TResult>(string name, Func<Product, TResult> selector)
         {
             var products = _ctx.Products
-                .FromSqlRaw("spGetProductsByCategoryName {0}", name)
+                .FromSqlInterpolated($"SELECT * FROM sp_getproductsbycategoryname({name})")
                 .Select(selector);
 
             return products;
